@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AppTasks.Resources
+namespace AppTasks.Controller
 {
     public static class AppLayers
     {

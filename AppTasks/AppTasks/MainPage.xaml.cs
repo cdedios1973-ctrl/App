@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
 using AppTasks.Views;
-using AppTasks.Resources;
+using AppTasks.Controller;
 using App.Models;
 using App.Enums;
 using App.Logic;
@@ -17,23 +17,24 @@ namespace AppTasks
 
         private const string MESSAGE_SENDER     = "MainPage";
 
-        private const string APP_LOGIN          = "Log in";
-        private const string APP_LOGOUT         = "Logout";
-        private const string APP_EXIT           = "Are you sure to close the Application ?";
-        //private const string APP_BTN_INSTALL    = "Install";
-        //private const string APP_BTN_REINSTALL  = "Re Install";
-        //private const string APP_OVERWRITE      = "Are you sure to Re-install the Application ? all data will be lost!!";
-        private const string APP_INSTALL        = "Not available Database to log in, install it.";
-        private const string APP_INSTALL_ERROR  = "Unable to initialize Database.";
-        private const string APP_LOGIN_ERROR    = "Incorrect Credentials...";
+        public const string APP_LOGIN          = "Log in";
+        public const string APP_LOGOUT         = "Logout";
+        public const string APP_EXIT           = "Are you sure to close the Application ?";
+        //public const string APP_BTN_INSTALL    = "Install";
+        //public const string APP_BTN_REINSTALL  = "Re Install";
+        //public const string APP_OVERWRITE      = "Are you sure to Re-install the Application ? all data will be lost!!";
+        public const string APP_INSTALL        = "Not available Database to log in, install it.";
+        public const string APP_INSTALL_ERROR  = "Unable to initialize Database.";
+        public const string APP_LOGIN_ERROR    = "Incorrect Credentials...";
 
         // Layers navigation.
-        private static string _prevLayerMaster = "";
-        private static string _prevLayerDetail = "";
-        private static string _prevLayerSubMenu = "";
+        public static string _prevLayerMaster = "";
+        public static string _prevLayerDetail = "";
+        public static string _prevLayerSubMenu = "";
 
         public ObservableCollection<MessageEvent> MessageEvents { get; set; } = new ObservableCollection<MessageEvent>();
         private AppInitialize init;
+        private AppTaskButtonH appBtnHandler;
         private static AppMenuHandler _appMenuHandler;
         private static DataBaseType type = DataBaseType.SqLite;
 
@@ -48,6 +49,8 @@ namespace AppTasks
             DisplayMessage.messageHandler.UpdateStatus += MessageHandler_UpdateStatus;
 
             this.init = new AppInitialize(type, DisplaType.Mobile);
+            this.appBtnHandler = new AppTaskButtonH(this, OnButtonClicked);
+
             this._appDbExist = init.DDBBisInstalled;
 
             this.btnOptions.IsEnabled = btnLogin.IsEnabled;
@@ -65,8 +68,8 @@ namespace AppTasks
 
         #region Action : Install Application Database
 
-        //private async Task<bool> InitializeApplication(bool reInstall)
-        private void InitializeApplication(bool reInstall)
+        private async Task<bool> InitializeApplication(bool reInstall)
+        //private void InitializeApplication(bool reInstall)
         {
             try
             {
@@ -97,7 +100,7 @@ namespace AppTasks
                 this.activityIndicator(false);
                 this._appDbExist = init.DDBBisInstalled;
             }
-            //return reInstall;
+            return reInstall;
         }
 
         #endregion
@@ -191,103 +194,32 @@ namespace AppTasks
             }
             else
             {
+                AppLayers.RemoveComponent(this, "layerButtons", "layerButtons", OnButtonClicked);
                 AppLayers.RemoveComponent(this, "layerSubmenu", "layerSubmenu", OnButtonClicked);
-                AppLayers.AddComponent(this, "layerMaster", new AppSearchBar(), OnButtonClicked);
-                this.layerDetail.HeightRequest = 200;
+                AppLayers.RemoveComponent(this, "layerMaster", "layerMaster", OnButtonClicked);
+                AppLayers.RemoveComponent(this, "layerDetail", "layerDetail", OnButtonClicked);
                 
-                AppBasicGrid grid = new AppBasicGrid();
-
-                this.layerDetail.Add(grid);
+                AppLayers.AddComponent(this, "layerMaster", new AppSearchBar(), OnButtonClicked);
+                //this.doUsers();
                 // TODO: show task menu.
+
             }
 
             this.btnLogin.Text = logged ? APP_LOGOUT : APP_LOGIN;
             this.btnLogin.IsEnabled = true;
-
+            this.btnOptions.IsEnabled = btnLogin.Text == APP_LOGIN ? true : false;
         }
 
         #region Buttons Handler
 
-        private void caseNo()
+        private void doUsers()
         {
-            AppLayers.AddComponent(this, "layerMaster", new Welcome(), OnButtonClicked);
-            AppLayers.RemoveComponent(this, "layerSubmenu", "layerSubmenu", OnButtonClicked);
-            this.btnLogin.IsEnabled = true;
-            this.btnOptions.IsEnabled = true;
-        }
-
-        private void caseLogAs(string input)
-        {
-            if(_appMenuHandler == null)
-                _appMenuHandler = new AppMenuHandler(new UserAccess(DataBaseType.SqLite, DisplaType.Mobile));
-
-            bool log = _appMenuHandler.DoLogin((input == "btnLog01" ? "admin" : "user 2") + ",123");
-            if (log == true)
-                loginCorrect();
-        }
-
-        private async void caseInstall()
-        {
-            if (this._appDbExist == true)
-                AppLayers.AddComponent(this, "layerMaster", new AppConfirmation(), OnButtonClicked);
-
-            AppLayers.AddComponent(this, "layerDetail", new AppInstall(), OnButtonClicked);
-            AppLayers.RemoveComponent(this, "layerButtons", "layerButtons", OnButtonClicked);
-
-            //bool install = false;
-            if (this._appDbExist == false)
-                this.InitializeApplication(true);
-                //install = await this.InitializeApplication(true);
-            /*
-            // TODO: sort of issue when user tried to log in, maybe file is in use.
-            btn.IsEnabled = false;
-            bool done = await InitializeApplication(true).ConfigureAwait(false);
-            btn.IsEnabled = true;
-            this.lblStatus.Text = "Process finished.";
-            */
-        }
-
-        private void caseLogin(Button btn)
-        {
-            this.btnOptions.IsEnabled = false;
-            if (btn.Text == APP_LOGIN)
-            {
-                btn.IsEnabled = false;
-                AppLayers.RemoveComponent(this, "layerButtons", "layerButtons", OnButtonClicked);
-                AppLayers.RemoveComponent(this, "layerDetail", "layerDetail", OnButtonClicked);
-                AppLayers.AddComponent(this, "layerMaster", new AppLogin(), OnButtonClicked);
-            }
-            else
-            {
-                _appMenuHandler.Input("L");
-                this.ControlStatus();
-            }
-        }
-
-        private void caseBack()
-        {
-            AppLayers.AddComponent(this, "layerMaster", new Welcome(), OnButtonClicked);
-            AppLayers.RemoveComponent(this, "layerSubmenu", "layerSubmenu", OnButtonClicked);
-            this.btnLogin.IsEnabled = true;
-            this.btnOptions.IsEnabled = true;
-        }
-
-        private void caseOptions()
-        {
-            bool hasItem = AppLayers.SearchVLayoutChildrenByName(this, "layerSubmenu");
-            if (hasItem == false)
-                AppLayers.AddComponent(this, "layerSubmenu", new AppMenu(), OnButtonClicked);
-            else
-                AppLayers.RemoveComponent(this, "layerSubmenu", "layerSubmenu", OnButtonClicked);
-            this.btnLogin.IsEnabled = hasItem;
-        }
-
-        private void caseUsers()
-        {
-            AppLayers.RemoveComponent(this, "layerButtons", "layerButtons", OnButtonClicked);
-            AppLayers.RemoveComponent(this, "layerMaster", "layerMaster", OnButtonClicked);
-            AppLayers.RemoveComponent(this, "layerDetail", "layerDetail", OnButtonClicked);
-            AppLayers.AddComponent(this, "layerMaster", new AppUsers(), OnButtonClicked);
+            this.layerMaster.HeightRequest = 10;
+            AppUsersGrid basic = new AppUsersGrid();
+            basic.AddRow("Log as Admin (Test)", "->", "btnLog01", "Login", OnButtonClicked);
+            basic.AddRow("Log as User  (Test)", "->", "btnLog02", "Login", OnButtonClicked);
+            this.layerDetail.Children.Add(basic);
+            basic.BindingContext = this;
         }
 
         private async Task DoAction(object sender, EventArgs e)
@@ -298,28 +230,36 @@ namespace AppTasks
                 case "btnYes":
                     // TODO : check child sender to do action
                     btn.IsEnabled = false;
-                    this.InitializeApplication(true);
-
-                    //bool done = await this.InitializeApplication(true);
+                    //this.InitializeApplication(true);
+                    bool done = await this.InitializeApplication(true);
                     //bool done = await InitializeApplication(true).ConfigureAwait(false);
                     //this.btnOptions.IsEnabled = true;
+                    this.lblStatus.Text = done.ToString();
                     break;
                 case "btnNo":
-                    this.caseNo();
+                    this.appBtnHandler.ActionResponseNo();
+                    this.btnLogin.IsEnabled = true;
+                    this.btnOptions.IsEnabled = true;
+                    break;
+                case "btnLogin":
+                    this.btnOptions.IsEnabled = false;
+                    this.appBtnHandler.ActionLogin(ref _appMenuHandler, btn);
+                    if (btn.Text != APP_LOGIN)
+                        this.ControlStatus();
                     break;
                 case "btnLog01":
                 case "btnLog02":
-                    this.caseLogAs(btn.StyleId);
+                    if (this.appBtnHandler.ActionLoginAs(ref _appMenuHandler, btn.StyleId) == true)
+                        this.loginCorrect();
                     break;
                 case "btnInstall":
-                    this.caseInstall();
+                    this.appBtnHandler.ActionInstall(this._appDbExist);
+                    if (this._appDbExist == false)
+                        this.InitializeApplication(true);
                     break;
                 case "btnQuit":
                     if (await displayMessage("Quit", APP_EXIT) == true)
                         Environment.Exit(0);
-                    break;
-                case "btnLogin":
-                    this.caseLogin(btn);
                     break;
                 case "btnSigIn":
                     btn.IsEnabled = false;
@@ -327,13 +267,16 @@ namespace AppTasks
                     btn.IsEnabled = true;
                     break;
                 case "btnBack":
-                    this.caseBack();
+                    this.appBtnHandler.ActionBack();
+                    this.btnLogin.IsEnabled = true;
+                    this.btnOptions.IsEnabled = true;
                     break;
                 case "btnOptions":
-                    this.caseOptions();
+                    this.appBtnHandler.ActionOptions(ref btnLogin);
                     break;
                 case "btnUsers":
-                    this.caseUsers();
+                    this.appBtnHandler.ActionUsers();
+                    this.doUsers();
                     break;
                 default: this.lblStatus.Text = btn.Text; break;
 
