@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTasks.MainPage"
+             xmlns:models="clr-namespace:App.Models;assembly=AppModel"
+             x:Name="AppIni" >
+    <ScrollView x:Name="mainScreen">
+
+        <VerticalStackLayout x:Name="lPage" Padding="20,0">
+
+            <Grid x:Name="layerUser" HeightRequest="120">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.ColumnSpan="5" Grid.Row="0" 
+                        x:Name="lblUserName" Text="-Log In-" VerticalOptions="Center" />
+                <VerticalStackLayout Grid.ColumnSpan="2" Grid.Row="1" 
+                        x:Name="layerSubmenu">
+                </VerticalStackLayout>
+                <Button Grid.Column="2" Grid.Row="1"
+                        x:Name="btnLogin" Text="Login" Clicked="OnButtonClicked"
+                        SemanticProperties.Hint="Log into the application." />
+                <Button Grid.Column="3" Grid.Row="1"
+                        x:Name="btnOptions" Text="(+)" Clicked="OnButtonClicked"
+                        SemanticProperties.Hint="Show additional options." HorizontalOptions="End" />
+                <Button Grid.Column="4" Grid.Row="1"
+                        x:Name="btnQuit" Text="X" Clicked="OnButtonClicked"
+                        SemanticProperties.Hint="Quit the application." HorizontalOptions="End" />
+                <Label Grid.ColumnSpan="4" Grid.Row="2" 
+                        x:Name="lblStatus" Text="Log in or install the application." 
+                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                        TextColor="Red" />
+            </Grid>
+            
+            <VerticalStackLayout x:Name="layerButtons" HeightRequest="40" Spacing="5">
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="layerMaster" HeightRequest="0" Spacing="5">
+            </VerticalStackLayout>
+
+            <ActivityIndicator x:Name="Activity" IsRunning="False" IsVisible="False"/>
+
+            <VerticalStackLayout x:Name="layerDetail" Spacing="5">
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

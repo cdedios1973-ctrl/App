@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="b4b7baa6-8f97-4f15-98c5-67413da4d767" ChangeDateTime="02/23/2025 08:52:07">
+    <Property Name="ElementName" Value="[dbo].[UsersLogin].[fk_Users]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="fk_User" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6cf794ca-8c16-4b65-b10e-5e0d9ebfdf08" ChangeDateTime="02/23/2025 11:11:41">
+    <Property Name="ElementName" Value="[dbo].[UserName]" />
+    <Property Name="ElementType" Value="SqlUniqueConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Username]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fca1c15f-557e-4099-b644-cb59a3f74a66" ChangeDateTime="02/23/2025 11:11:49">
+    <Property Name="ElementName" Value="[dbo].[Username]" />
+    <Property Name="ElementType" Value="SqlUniqueConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[UserName]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1f5ba30f-c15b-45de-8f7b-be922b4a6de1" ChangeDateTime="02/23/2025 12:04:43">
+    <Property Name="ElementName" Value="[dbo].[UsersPermission].[AccessType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersPermission]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userAccessType" />
+  </Operation>
+</Operations>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTasks.Views.AppUsers"
+             HeightRequest="90">
+    <VerticalStackLayout x:Name="layerUser">
+        <Grid x:Name="layerUserList" HeightRequest="80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" 
+                   Text="Log as Admin (Test)" />
+            <Button Grid.Column="1" Grid.Row="0" 
+                    x:Name="btnLog01" Text="Login" 
+                    BackgroundColor="DarkGreen"
+                    SemanticProperties.Hint="Back to main window." />
+            <Label Grid.Column="0" Grid.Row="2"
+                   Text="Log as User (Test)" />
+            <Button Grid.Column="1" Grid.Row="2"
+                    x:Name="btnLog02" Text="Login" 
+                    BackgroundColor="Green"
+                    SemanticProperties.Hint="Log In into the application." />
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>

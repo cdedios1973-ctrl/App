@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTasks.Views.Welcome"
+             x:Name="cvWelcome"
+             HeightRequest="260" >
+    <VerticalStackLayout x:Name="welcome">
+        <Image
+                Source="dotnet_bot.png"
+                HeightRequest="140"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+        <Label
+                x:Name="lblMaster"
+                Text="Hello, User!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+        <Label
+                x:Name="lblDetail"
+                Text="Welcome to &#10;Personal data task application"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to Personal data task application" />
+
+    </VerticalStackLayout>
+</ContentView>

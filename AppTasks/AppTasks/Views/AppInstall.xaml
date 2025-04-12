@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTasks.Views.AppInstall"
+             xmlns:models="clr-namespace:App.Models;assembly=AppModel"
+             HeightRequest="270"
+             x:Name="Install">
+    <VerticalStackLayout x:Name="layoutInstall">
+        <Label Text="Installation Tasks:" HorizontalOptions="Center"/>
+        <ListView x:Name="dataRow" 
+                  HeightRequest="260" 
+                  MaximumHeightRequest="260" 
+                  ItemsSource="{Binding MessageEvents}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:MessageEvent">
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Message}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Status}"
+                                   FontAttributes="Bold" 
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2"
+                                   Text="{Binding Time.Date}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentView>

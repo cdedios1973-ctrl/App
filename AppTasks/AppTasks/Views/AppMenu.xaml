@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTasks.Resources.AppMenu"
+             x:Name="cvAppMenu"
+             HeightRequest="40" >
+        <HorizontalStackLayout x:Name="layerBtnSubMenu" Spacing="5" HeightRequest="40" VerticalOptions="Center">
+            <Button x:Name="btnInstall"
+                    Text="Install" 
+                    SemanticProperties.Hint="Install the application"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Background="DarkGreen"
+                    MaximumHeightRequest="35"
+                    WidthRequest="60" />
+            <Button x:Name="btnSource"
+                    Text="Source" 
+                    SemanticProperties.Hint="Change the application Database Source"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Background="DarkGreen"
+                    MaximumHeightRequest="35"
+                    WidthRequest="60" />
+            <Button x:Name="btnUsers"
+                    Text="Users" 
+                    SemanticProperties.Hint="Users list (demo)"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Background="DarkGreen"
+                    MaximumHeightRequest="35"
+                    WidthRequest="60" />
+        </HorizontalStackLayout>
+</ContentView>
