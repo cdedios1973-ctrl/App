@@ -1,11 +1,67 @@
-﻿using Microsoft.Maui.Handlers;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using AppTasks.Views.Menu;
+using Microsoft.Maui.Handlers;
 
-namespace AppTasks.Controller
+namespace AppTasks.Controller.Layers
 {
     public static class AppLayers
     {
+
+        #region XAML Page (2.0) : Main menu button status
+
+        public static void HandleMenuButtonStatus(ContentView cView, object sender)
+        {
+            Button btn = (Button)sender;
+            if (btn != null)
+            {
+                btn.IsEnabled = !btn.IsEnabled;
+                List <IVisualTreeElement> lItems = (List<IVisualTreeElement>)cView.GetVisualTreeDescendants();
+                foreach (IVisualTreeElement item in lItems)
+                    if (item is Button)
+                    {
+                        Button b = (Button)item;
+                        if (b.StyleId != btn.StyleId)
+                            b.IsEnabled = !btn.IsEnabled;
+                    }
+            }
+        }
+
+
+        #endregion
+
+        #region XAML Page (2.0) : Get Objects (Horizontal / Vertical / Grid)
+
+        public static VerticalStackLayout GetVerticalLayoutByName(ContentPage page, string layoutName)
+        {
+            return (VerticalStackLayout)page.FindByName(layoutName);
+        }
+        
+        public static HorizontalStackLayout GetHorizonalLayoutByName(ContentPage page, string layoutName)
+        {
+            return (HorizontalStackLayout)page.FindByName(layoutName);
+        }
+
+        public static ListView GetListViewByName(ContentView cView, string layout, string iName)
+        {
+            VerticalStackLayout vLayout = (VerticalStackLayout)cView.FindByName(layout);
+            if (vLayout != null)
+            {
+                List<IVisualTreeElement> lItems = (List<IVisualTreeElement>)vLayout.GetVisualTreeDescendants();
+                foreach (IVisualTreeElement item in lItems)
+                {
+                    if (item is ListView)
+                    {
+                        ListView obj = (ListView)item;
+                        if (obj.StyleId == iName)
+                            return obj;
+                    }
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
 
         #region XAML Page : Add content to page
 
@@ -19,29 +75,62 @@ namespace AppTasks.Controller
                 layout.HeightRequest = view.HeightRequest;
 
                 // delete prevoius handlers
-                if (layout.Children.Count > 0)
+                if (layout.Children.Count > 0 && addChildren == false)
+                {
                     ManageLayoutEvents(layout, true, ev);
+                    layout.Children.Clear();
+                }
+                // add the new item.
+                //AddContentViewToPage(page, vlDestination, view, view.HeightRequest, addChildren);
 
-                // add new item.
-                AddContentViewToPage(page, vlDestination, view, view.HeightRequest, addChildren);
-                ManageLayoutEvents(layout, false, ev);
+                //view.HeightRequest = view.HeightRequest;
+                layout.BatchBegin();
+                layout.Children.Add(view);
+                layout.IsEnabled = true;
+                layout.BatchCommit();
+
+                ManageLayoutEvents(view, false, ev);
             }
         }
 
-        private static void AddContentViewToPage(ContentPage page, string xName, ContentView item, double heightRequest = 50, bool addChildren = false)
+        public static void AddComponentB(ContentPage page, string stack, ContentView view, EventHandler ev)
         {
-            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(xName);
+            //search layer to add items.
+            StackLayout layout = (StackLayout)page.FindByName(stack);
             if (layout != null)
             {
-                if (addChildren == false)
+                layout.HeightRequest = view.HeightRequest;
+
+                // delete prevoius handlers
+                if (layout.Children.Count > 0)
+                {
+                    ManageLayoutEvents(view, true, ev);
                     layout.Children.Clear();
+                }
+                // add the new item.
+                //AddContentViewToPage(page, vlDestination, view, view.HeightRequest, addChildren);
 
-                item.HeightRequest = heightRequest;
-
+                //view.HeightRequest = view.HeightRequest;
                 layout.BatchBegin();
-                layout.Children.Add(item);
+                layout.Children.Add(view);
                 layout.IsEnabled = true;
                 layout.BatchCommit();
+
+                ManageLayoutEvents(view, false, ev);
+            }
+        }
+
+        #endregion
+
+        #region XAML Page : Enable / Disable component
+
+        public static void DisableComponent(ContentPage page, string vlSource, bool enable = false)
+        {
+            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(vlSource);
+            if (layout != null)
+            {
+                if (layout.Children.Count > 0)
+                    layout.IsEnabled = enable;
             }
         }
 
@@ -65,15 +154,15 @@ namespace AppTasks.Controller
 
         #region XAML Page : Manage buttons event to added or removed XAML
 
-        public static void ManageLayoutEvents(VerticalStackLayout layout, bool hasElements, EventHandler eh)
+        public static void ManageLayoutEvents(ContentView view, bool removeHandler, EventHandler eh)
         {
-            List<IVisualTreeElement> listButton = (List<IVisualTreeElement>)layout.GetVisualTreeDescendants();
+            List<IVisualTreeElement> listButton = (List<IVisualTreeElement>)view.GetVisualTreeDescendants();
             foreach (IVisualTreeElement button in listButton)
             {
                 if (button is Button)
                 {
                     Button bt = (Button)button;
-                    if (hasElements == false && eh != null)
+                    if (removeHandler == false && eh != null)
                         bt.Clicked += eh; //OnButtonClicked;
                     else
                         bt.Clicked -= eh; //OnButtonClicked;
@@ -81,24 +170,37 @@ namespace AppTasks.Controller
             }
         }
 
+        public static void ManageLayoutEvents(VerticalStackLayout layout, bool removeHandler, EventHandler eh)
+        {
+            List<IVisualTreeElement> listButton = (List<IVisualTreeElement>)layout.GetVisualTreeDescendants();
+            foreach (IVisualTreeElement button in listButton)
+            {
+                if (button is Button)
+                {
+                    Button bt = (Button)button;
+                    if (removeHandler == false && eh != null)
+                        bt.Clicked += eh; //OnButtonClicked;
+                    else
+                        bt.Clicked -= eh; //OnButtonClicked;
+                }
+            }
+        }
+
+
         #endregion
 
         #region XAML Page : Get/Set values from 'Entry' fields
 
-        public static string GetLayoutEntryValue(ContentPage page, string layoutName, string eName)
+        public static string GetEntryValue(VerticalStackLayout vLayout, string eName)
         {
-            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(layoutName);
-            if (layout != null)
+            List<IVisualTreeElement> lTextbox = (List<IVisualTreeElement>)vLayout.GetVisualTreeDescendants();
+            foreach (IVisualTreeElement textbox in lTextbox)
             {
-                List<IVisualTreeElement> lTextbox = (List<IVisualTreeElement>)layout.GetVisualTreeDescendants();
-                foreach (IVisualTreeElement textbox in lTextbox)
+                if (textbox is Entry)
                 {
-                    if (textbox is Entry)
-                    {
-                        Entry txt = (Entry)textbox;
-                        if (txt.StyleId == eName)
-                            return txt.Text;
-                    }
+                    Entry txt = (Entry)textbox;
+                    if (txt.StyleId == eName)
+                        return txt.Text;
                 }
             }
             return "";
@@ -122,6 +224,27 @@ namespace AppTasks.Controller
             }
         }
 
+        #endregion
+
+        #region XAML Page : Set values from 'Label'
+
+        public static void SetLayoutLabelValue(ContentPage page, string layoutName, string eName, string value)
+        {
+            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(layoutName);
+            if (layout != null)
+            {
+                List<IVisualTreeElement> lLabel = (List<IVisualTreeElement>)layout.GetVisualTreeDescendants();
+                foreach (IVisualTreeElement label in lLabel)
+                {
+                    if (label is Label)
+                    {
+                        Label lbl = (Label)label;
+                        if (lbl.StyleId == eName)
+                            lbl.Text = value;
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -152,19 +275,6 @@ namespace AppTasks.Controller
             VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(xName);
             return (layout.Children.Count > 0) ? true : false;
         }
-
-        #endregion
-
-        #region Deprecated
-
-        /*
-        public static void RemoveElementFromPage(ContentPage page, string xName)
-        {
-            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(xName);
-            if (layout != null)
-                layout.Children.Clear();
-        }
-        */
 
         #endregion
 

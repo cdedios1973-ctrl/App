@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Actions\**" />
+    <Compile Remove="Enums\**" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="DTO\DataFilters\**" />
+    <Compile Remove="Predicates\**" />
+    <EmbeddedResource Remove="Actions\**" />
+    <EmbeddedResource Remove="Enums\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="DTO\DataFilters\**" />
+    <EmbeddedResource Remove="Predicates\**" />
+    <None Remove="Actions\**" />
+    <None Remove="Enums\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="DTO\DataFilters\**" />
+    <None Remove="Predicates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="DTO\AppMenu.cs" />
+    <Compile Remove="DTO\BasicMenu.cs" />
+    <Compile Remove="DTO\UserAccess.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DTO\UserLoginInputDTO.cs" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:AppTasks.Models"
+             xmlns:view="clr-namespace:AppTasks.ViewModels"
+             xmlns:controls="clr-namespace:AppTasks.Controls"
+             x:Class="AppTasks.ButtonControl.BindToViewModelPage"
+             Title="Bind to a ViewModel"
+             x:DataType="view:MenuViewModel">
+    
+    <ContentPage.BindingContext>
+        <view:MenuViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="MenuViewTemplate"
+                         x:DataType="controls:MenuView">
+            <Border BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                    Background="{Binding MenuColor}"
+                    Stroke="{Binding BorderColor}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12,12,12,12"
+                    Padding="8"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="10,10"
+                            Radius="14"
+                            Opacity="0.8" />
+                </Border.Shadow>
+                <Grid RowDefinitions="75,4,Auto"
+                      ColumnDefinitions="275">
+                    <Label Text="{Binding LId}"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start" />
+                    <BoxView Grid.Row="1"
+                             BackgroundColor="{Binding BorderColor}"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+                    <Label Grid.Row="2"
+                           Text="{Binding MenuText}"
+                           VerticalTextAlignment="Start"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill" />
+                    <Button Text="{Binding Text}"
+                            x:Name="{Binding lId}"
+                            Command="{Binding x:DataType='view:MenuViewModel', Source={RelativeSource AncestorType={x:Type view:MenuViewModel}}, Path=DeletePersonCommand}"
+                            CommandParameter="{Binding lId}"
+                            HorizontalOptions="End" />
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="MenuTemplate"
+                      x:DataType="model:MainMenu">
+            <controls:MenuView BorderColor="DarkGray"
+                               LId="{Binding Id}"
+                               Text="{Binding Text}"
+                               ControlTemplate="{StaticResource MenuViewTemplate}" />
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Margin="30"
+                         Spacing="30"
+                         BindableLayout.ItemsSource="{Binding AppMenus}"
+                         BindableLayout.ItemTemplate="{StaticResource MenuTemplate}" />
+</ContentPage>

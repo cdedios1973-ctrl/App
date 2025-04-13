@@ -1,149 +1,122 @@
-﻿using System.Collections.ObjectModel;
+﻿//using System.Collections.ObjectModel;
+using System;
 
-using AppTasks.Views;
-using AppTasks.Controller;
-using App.Models;
+using AppTasks.Controller.Layers;
 using App.Enums;
+using App.Models;
 using App.Logic;
 using App.Events;
-using App.Config;
+using App.Config.DDBB;
 using App.Logic.IO.Handler;
+using System.Windows.Input;
 
 namespace AppTasks
 {
     public partial class MainPage : ContentPage
     {
-        //public delegate void ButtonClicked(object sender, EventArgs e);
+        //public delegate void ButtonClicked(object? sender, EventArgs e);
 
-        private const string MESSAGE_SENDER    = "MainPage";
+        internal const string MESSAGE_SENDER    = "MainPage";
+        internal const string APP_LOGIN         = "Login";
+        internal const string APP_LOGOUT        = "Logout";
+        internal const string APP_EXIT          = "Are you sure to close the Application ?";
+        internal const string APP_INSTALL       = "Not available Database to log in, install it.";
+        internal const string APP_INSTALL_ERROR = "Unable to initialize Database.";
+        internal const string APP_LOGIN_ERROR   = "Incorrect Credentials...";
+        internal const string APP_NO_USER       = "No user.";
 
-        public const string APP_LOGIN          = "Login";
-        public const string APP_LOGOUT         = "Logout";
-        public const string APP_EXIT           = "Are you sure to close the Application ?";
-        public const string APP_INSTALL        = "Not available Database to log in, install it.";
-        public const string APP_INSTALL_ERROR  = "Unable to initialize Database.";
-        public const string APP_LOGIN_ERROR    = "Incorrect Credentials...";
-        public const string APP_NO_USER        = "No user.";
         //public const string APP_BTN_INSTALL    = "Install";
         //public const string APP_BTN_REINSTALL  = "Re Install";
         //public const string APP_OVERWRITE      = "Are you sure to Re-install the Application ? all data will be lost!!";
-
-        //private static string _currentMenu = "";
-
         //public ObservableCollection<MessageEvent> MessageEvents { get; set; } = new ObservableCollection<MessageEvent>();
-        
-        private AppTaskMainHandler _appHandler;
-        private static AppMenuHandler _appMenuHandler;
-
-        private AppInitialize init;
-        private AppInstallGrid installGrid;
+        //private static UserAccess   _user;
 
         private static DataBaseType type = DataBaseType.SqLite;
-        private bool _appDbExist = false;
+        private static bool _appDbExist = false;
+
+        private static string _currentTitle = "Main screen";
+
+        private static LayerMenu _layerMenu;
+
+        //TODO: change AppInitialize to Singleton pattern.
+        private AppInitialize _appInit;
+        //TODO: change LayerInstall to Singleton pattern.
+        private static LayerInstall _lInstall;
+        //TODO: change AppMenuHandler to Singleton pattern.
+        internal static AppMenuHandler _appMenuHandler;
+
+        //private static LayerTestUsers _lTestUser;
+        
+        public ICommand NavigateCommand { get; private set; }
 
         public MainPage()
         {
             InitializeComponent();
+            this.Start();
+            //this.scrollDetail.MaximumHeightRequest = 360;
 
+        }
+
+        #region Action : Initialize App vars.
+
+        private void Start()
+        {
             DisplayMessage.Displaytype = DisplaType.Mobile;
             DisplayMessage.messageHandler.UpdateStatus += MessageHandler_UpdateStatus;
 
-            this.init = new AppInitialize(type, DisplaType.Mobile);
-            this._appHandler = new AppTaskMainHandler(this, OnButtonClicked);
-            this._appDbExist = init.DDBBisInstalled;
+            _appDbExist = new AppInitialize(type, DisplaType.Mobile).DDBBisInstalled;
 
-            this.PageStatus();
+            _layerMenu = LayerMenu.GetInstance(this);
+            //this.CurrentUser.OnUserViewButtonClicked += OnButtonClicked;
+            //this.CurrentUser.OnViewUserButtonClicked += OnButtonClicked;
+            //this.CurrentMenu.OnMenuViewButtonClicked += OnButtonClicked;
+
+            this.mainMenu.OnMenuViewButtonClicked += OnButtonClicked;
+
+            //this.mainMenu.OnMenuViewButtonClicked += OnButtonClicked;
+
+            _layerMenu.ActionBack();
+
+
+            NavigateCommand = new Command<Type>(
+            async (Type pageType) =>
+            {
+                Page page = (Page)Activator.CreateInstance(pageType);
+                await Navigation.PushAsync(page);
+            });
+
+            BindingContext = this;
+
+
         }
 
-        private void PageStatus()
-        {
-            bool logged = UserAuthenticated;
-            if (logged == false)
-                this.lblUserName.Text = APP_NO_USER;
+        #endregion
 
-            this._appHandler.Status(logged, this._appDbExist);
-            // TODO: if logged => show task menu.
-        }
+        #region Properties
 
         public static bool UserAuthenticated
         { 
             get { return AppMenuHandler.UserAuthenticated; }
         }
-
-        private void activityIndicator(bool isRunning)
+        public static bool AppDbExist
         {
-            this.Activity.IsEnabled = isRunning;
-            this.Activity.IsRunning = isRunning;
-            this.Activity.IsVisible = isRunning;
+            get { return _appDbExist; }
+            set { _appDbExist = value; }
+        }
+        public bool IsBusy
+        { 
+            get { return this.Activity.IsRunning; }
+            set { this.Activity.IsRunning = value; }
         }
 
-        #region Action : Install Application Database
-
-        private bool InitializeApplication(bool reInstall)
+        public static string GetUserName
         {
-            try
-            {
-                if (reInstall == true || this._appDbExist == false)
-                {
-                    // TODO: error creating activity
-                    this.activityIndicator(true);
-                    this.scrollDetail.HeightRequest = 250;
-                    this.installGrid = new AppInstallGrid();
-                    this.layerDetail.Children.Add(installGrid);
-
-                    AppInitialize.messageHandler.UpdateStatus += MessageHandler_UpdateStatus;
-                    DataBaseType tmp = this.init.Initialize();
-                    if (tmp != DataBaseType.SqLite)
-                        DisplayMessage.Show(MESSAGE_SENDER, APP_INSTALL_ERROR);
-                }
-            }
-            catch(Exception ex)
-            {
-                DisplayMessage.Show(MESSAGE_SENDER, ex.Message);
-            }
-            finally
-            {
-                AppInitialize.messageHandler.UpdateStatus -= MessageHandler_UpdateStatus;
-                this.activityIndicator(false);
-                this._appDbExist = init.DDBBisInstalled;
-                this.installGrid = null;
-            }
-            return reInstall;
+            get { return AppMenuHandler.GetCurrentUser.GetUserFullName; }
         }
 
-        #endregion
-
-        #region Action : Login
-
-        private void loginAction()
+        public static string GetTitle
         {
-            string msg = "";
-            try
-            {
-                if (this._appDbExist == false)
-                    throw new Exception(APP_INSTALL);
-
-                string input = "";
-                input = AppLayers.GetLayoutEntryValue(this, "layerMaster", "txtUser") + ",";
-                input += AppLayers.GetLayoutEntryValue(this, "layerMaster", "txtPass");
-
-                if (this._appHandler.ActionLoginAs(ref _appMenuHandler, input))
-                {
-                    this.lblUserName.Text = AppMenuHandler.GetCurrentUser.GetUserFullName;
-                    this.PageStatus();
-                }
-                else
-                {
-                    _appMenuHandler = null;
-                    throw new Exception(APP_LOGIN_ERROR);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                msg = ex.Message;
-            }
-            DisplayMessage.Show(MESSAGE_SENDER, msg);
+            get { return _currentTitle; }
         }
 
         #endregion
@@ -157,7 +130,7 @@ namespace AppTasks
 
         #endregion
 
-        #region Message Handler from classes
+        #region Action : Message Handler from classes
 
         private void MessageHandler_UpdateStatus(object? sender, EventArgs e)
         {
@@ -167,101 +140,87 @@ namespace AppTasks
             {
                 case "AppMenuHandler":
                 case "MainPage":
-                    this.lblStatus.Text = use.Message + " " + use.Status;
+                    //this.lblStatus.Text = use.Message + " " + use.Status;
                     break;
                 case "AppInitialize":
-                    this.RefreshMessage(new MessageEvent(use.Message, use.Status, DateTime.Now));
+                    //this.lblStatus.Text = use.Message + " " + use.Status;
+                    if (_lInstall == null)
+                        throw new Exception("Install manager instance failed.");
+                    _lInstall.Action(new MessageEvent(use.Message, use.Status, DateTime.Now));
                     break;
                 default:
                     break;
             }
         }
 
-        private void RefreshMessage(MessageEvent msg)
-        {
-            if (this.installGrid == null)
-                throw new Exception("Install Grid instance failed.");
-
-            installGrid.AddRow(msg);
-            //this.layerDetail.Add(installGrid);
-            installGrid.BindingContext = this;
-
-        }
-
         #endregion
 
-        #region Buttons Handler
+        #region Action : Buttons Handler
 
         private async Task DoAction(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            bool logged = UserAuthenticated;
+            // TODO : disable current button, foreach enable others.
 
-            switch (btn.StyleId)
+            //switch (btn.StyleId)
+            switch (btn.CommandParameter)
             {
-                #if DEBUG == true
-                // START: Test Users (DELETE WHEN RELEASE)
+#if DEBUG == true // START: Test Users (DELETE WHEN RELEASE)
                 case "btnUsers":
-                    this._appHandler.ActionLogin(ref _appMenuHandler);
-                    AppUsersGrid basic = new AppUsersGrid();
-                    basic.AddRow("Log as Admin (Test)", " -> ", "btnLog01", "admin,123", OnButtonClicked);
-                    basic.AddRow("Log as User  (Test)", " -> ", "btnLog02", "user 2,123", OnButtonClicked);
-                    this.layerButtons.Children.Add(basic);
-                    basic.BindingContext = this;
+                    new LayerTestUsers(this, OnButtonClicked).Show("a");
                     break;
                 case "btnLog01":
                 case "btnLog02":
-                    string[] str = btn.Text.Split(",");
-                    AppLayers.SetLayoutEntryValue(this, "layerMaster", "txtUser", str[0]);
-                    AppLayers.SetLayoutEntryValue(this, "layerMaster", "txtPass", str[1]);
-                    loginAction();
+                    if (new LayerTestUsers(this, OnButtonClicked).Action(ref btn, ref _appMenuHandler) == true)
+                        _layerMenu.Show();
                     break;
-                // END : Test Users
-                #endif
-                case "btnYes":
-                    // TODO : check child sender to do action
-                    btn.IsEnabled = false;
-                    //bool done = await this.InitializeApplication(true).ConfigureAwait(false);
-                    bool done = InitializeApplication(true);
-                    this.lblStatus.Text = done.ToString();
-                    break;
-                case "btnNo":
-                case "btnBack":
-                    this.PageStatus();
-                    break;
+#endif // END : Test Users
                 case "btnLogin":
-                    this._appHandler.ActionLogin(ref _appMenuHandler);
-                    if (btn.Text != APP_LOGIN)
-                    {
-                        _appMenuHandler.Input("L");
-                        this.PageStatus();
-                    }
+                    if (btn.Text == APP_LOGIN)
+                        new LayerLogin(this, OnButtonClicked).Show();
+                    else
+                        _layerMenu.Show(false);
                     break;
                 case "btnSigIn":
                     btn.IsEnabled = false;
-                    loginAction();
-                    btn.IsEnabled = true;
+                    if (new LayerLogin(this).Action(ref _appMenuHandler) == true)
+                        _layerMenu.Show();
+                    else
+                        //lblStatus.Text = APP_LOGIN_ERROR;
+                        btn.IsEnabled = true;
+                    break;
+                case "btnYes":
+                    // TODO : check child sender to do action
+                    this.scrollDetail.MaximumHeightRequest = 360;
+                    bool install = _lInstall.Action(ref this._appInit, MessageHandler_UpdateStatus, true);
+                    if (install == true)
+                        _lInstall = null;
+                    break;
+                case "btnNo":
+                case "btnBack":
+                    _layerMenu.ActionBack();
                     break;
                 case "btnInstall":
-                    this._appHandler.ActionInstall(ref this._appDbExist, lblStatus);
-                    if (this._appDbExist == false)
-                        this.InitializeApplication(true);
+                    if (_lInstall != null)
+                        _lInstall = null;
+                    _lInstall = new LayerInstall(this, OnButtonClicked);
+                    _lInstall.Show();
                     break;
                 case "btnQuit":
                     if (await displayMessage("Quit", APP_EXIT) == true)
                         Environment.Exit(0);
                     break;
                 case "btnOptions":
-                    this._appHandler.ActionOptions();
+                    //this.CurrentMenu.IsVisible = !this.CurrentMenu.IsVisible;
+                    //_layerMenu.Show();
                     break;
 
-                default: this.lblStatus.Text = btn.Text; break;
+                default:  break; //this.lblStatus.Text = "Action: " + btn.Text;
 
             }
-
         }
 
-        private void OnButtonClicked(object sender, EventArgs e)
+        public void OnButtonClicked(object? sender, EventArgs e)
         {
             try
             {
@@ -273,7 +232,12 @@ namespace AppTasks
             }
         }
 
+        public void ViewUserButtonClick(object sender, EventArgs e)
+        {
+            string asd = e.ToString();
+        }
+
         #endregion
 
-    }
+        }
 }

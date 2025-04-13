@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:controls="clr-namespace:AppTasks.Controls"
+             
+             xmlns:model="clr-namespace:AppTasks.Models"
+             
+             xmlns:vmodel="clr-namespace:AppTasks.ViewModels"
+             
+             x:Class="AppTasks.Views.MenuView"
+             
+             x:Name="menu"
+             
+             x:DataType="vmodel:MenuViewModel" >
+
+    <ContentView.BindingContext>
+        <vmodel:MenuViewModel />
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ControlTemplate x:Key="MenuButtons"
+                         x:DataType="controls:MenuView">
+
+                <Button BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                        CommandParameter="{Binding LId}"
+                        Text="{Binding Text}"
+                        SemanticProperties.Hint="{Binding Hint}"
+                        Clicked="MenuViewButtonClicked"
+                        HorizontalOptions="End" />
+            <!--
+                         Command="{Binding x:DataType='vmodel:MenuViewModel', Source={RelativeSource AncestorType={x:Type vmodel:MenuViewModel}}, Path=ExecuteCommand }"
+                        CommandParameter="{Binding MenuId}"           
+            -->
+        </ControlTemplate>
+
+        <DataTemplate x:Key="CurrentMenu"
+                      x:DataType="model:MainMenu">
+            <controls:MenuView BorderColor="DarkGray"
+                               LId="{Binding LId}"
+                               Text="{Binding Text}"
+                               Hint="{Binding Hint}"
+                               ControlTemplate="{StaticResource MenuButtons}" />
+        </DataTemplate>
+    </ContentView.Resources>
+
+    <Border Background="AliceBlue"
+            Stroke="Aqua"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 12, 12, 12, 12"
+            Padding="2"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+        <Border.Shadow>
+            <Shadow Brush="Black"
+                    Offset="6,6"
+                    Radius="14"
+                    Opacity="0.8" />
+            </Border.Shadow>
+        <HorizontalStackLayout Margin="2"
+                               Spacing="4"
+                               MaximumHeightRequest="42"
+                               BindableLayout.ItemsSource="{Binding AppMenus}"
+                               BindableLayout.ItemTemplate="{StaticResource CurrentMenu}" >
+        </HorizontalStackLayout>
+    </Border>
+</ContentView>

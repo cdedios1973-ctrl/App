@@ -25,12 +25,14 @@
 	  <Compile Remove="Views\AppInstall.xaml.cs" />
 	  <Compile Remove="Views\AppMenu.xaml.cs" />
 	  <Compile Remove="Views\AppMenu_old.xaml.cs" />
+	  <Compile Remove="Views\Login\AppLogin.xaml.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Remove="Views\AppInstall.xaml" />
 	  <MauiXaml Remove="Views\AppMenu.xaml" />
 	  <MauiXaml Remove="Views\AppMenu_old.xaml" />
+	  <MauiXaml Remove="Views\Login\AppLogin.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,13 +44,46 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Resources\AppConfirmation.xaml">
+	  <Compile Update="Views\Menu\MenuView.xaml.cs">
+	    <DependentUpon>MenuView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Menu\UserView.xaml.cs">
+	    <DependentUpon>UserView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Menu\_old_\ViewUser.xaml.cs">
+	    <DependentUpon>ViewUser.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Menu\AppMain.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AppLogin.xaml">
+	  <MauiXaml Update="Controls\AppConfirmation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AppSearchBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Login\ViewLogin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Menu\MenuView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Menu\UserView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Menu\_old_\BindToViewModelPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Menu\_old_\ViewUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Menu\_old_\ViewMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Models\TestUsers\ViewTUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Welcome.xaml">

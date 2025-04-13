@@ -29,6 +29,10 @@
     <None Include="E:\source\codes\App\AppConsole\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
+
 
 
 </Project>

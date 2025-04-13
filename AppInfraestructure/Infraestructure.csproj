@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CORE\DDBB\**" />
+    <Compile Remove="Install - Refactoring\DbType\**" />
+    <Compile Remove="OLD\**" />
+    <Compile Remove="Services\DAO\**" />
+    <EmbeddedResource Remove="CORE\DDBB\**" />
+    <EmbeddedResource Remove="Install - Refactoring\DbType\**" />
+    <EmbeddedResource Remove="OLD\**" />
+    <EmbeddedResource Remove="Services\DAO\**" />
+    <None Remove="CORE\DDBB\**" />
+    <None Remove="Install - Refactoring\DbType\**" />
+    <None Remove="OLD\**" />
+    <None Remove="Services\DAO\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="CORE\Configuration\AppConnectionString.cs" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Definitions\Definitions.csproj" />
+  </ItemGroup>
+
+</Project>

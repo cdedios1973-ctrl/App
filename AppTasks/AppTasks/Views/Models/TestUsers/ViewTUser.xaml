@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppTasks.Views"
+             xmlns:models="clr-namespace:App.Models;assembly=AppModel"
+             x:DataType="models:TestUser"
+             x:Class="AppTasks.Views.TestUsers.ViewTUser">
+
+    <VerticalStackLayout x:Name="vTestUser">
+        <ListView ItemsSource="{Binding testUsers}" 
+                  x:Name="lTestUsers"
+                  Header="Test users list"
+                  Footer="End list" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="grdItems" RowDefinitions="1*" ColumnDefinitions="2*, 60, 60, 80">
+                            <BoxView Grid.Column="0" Color="AliceBlue" />
+                            <Label Grid.Column="0" Text="{Binding Description}" HorizontalOptions="Start" VerticalOptions="Center" />
+
+                            <BoxView Grid.Column="1" Color="AliceBlue" />
+                            <Label Grid.Column="1" Text="{Binding UserName}" HorizontalOptions="Start" VerticalOptions="Center" />
+
+                            <BoxView Grid.Column="2" Color="AliceBlue" />
+                            <Label Grid.Column="2" Text="{Binding Password}" HorizontalOptions="Start" VerticalOptions="Center" />
+
+                            <BoxView Grid.Column="3" Color="AliceBlue" />
+                            <Button Grid.Column="3" x:Name="{Binding UserName}" Text="{Binding UserName}"
+                                HorizontalOptions="End" VerticalOptions="Center"
+                                MaximumHeightRequest="35" MaximumWidthRequest="60"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentView>

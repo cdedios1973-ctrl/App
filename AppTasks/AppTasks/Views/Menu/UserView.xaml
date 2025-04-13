@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:App.Models;assembly=AppModel"
+             xmlns:view="clr-namespace:AppTasks.ViewModels"
+             xmlns:controls="clr-namespace:AppTasks.Controls"
+             
+             x:Class="AppTasks.Controls.UserView"
+             Title="User bind to a ViewModel"
+             x:DataType="view:AppUserVM">
+    
+    <ContentPage.BindingContext>
+        <view:AppUserVM />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="AppUserControlTemplate"
+                         x:DataType="controls:AppUserView">
+            <Border BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                    Background="{Binding UserColor}"
+                    Stroke="{Binding BorderColor}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12, 12, 12, 12"
+                    Padding="8"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="380">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="10,10"
+                            Radius="14"
+                            Opacity="0.8" />
+                </Border.Shadow>
+                <Grid RowDefinitions="20, 20"
+                      ColumnDefinitions="1*, Auto, 50, 50" >
+                    <Label Grid.ColumnSpan="2" Grid.Row="0"
+                           x:Name="lblUserName"
+                           Text="{Binding Name, FallbackValue='No user.'}"
+                           VerticalOptions="Center" TextColor="DarkGreen" />
+                    <Label Grid.ColumnSpan="2" Grid.Row="1"
+                           x:Name="lblTitle"
+                           Text="{Binding Id, FallbackValue='None selected.'}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           TextColor="DarkGreen" />
+                    <Button Grid.Column="2" Grid.RowSpan="2"
+                            Command="{Binding x:DataType='view:AppUserVM', Source={RelativeSource AncestorType={x:Type view:AppUserVM}}, Path=DeletePersonCommand}"
+                            CommandParameter="{Binding Id}"
+                            x:Name="btnOptions" Text="(+)"
+                            Clicked="UserViewButtonClicked"
+                            SemanticProperties.Hint="Show additional options."
+                            HorizontalOptions="End" />
+                    <Button Grid.Column="3" Grid.RowSpan="2"
+                            Command="{Binding x:DataType='view:AppUserVM', Source={RelativeSource AncestorType={x:Type view:AppUserVM}}, Path=ApplicationQuit}"
+                            CommandParameter="{Binding Id}"
+                            x:Name="btnQuit" Text="X"
+                            Clicked="UserViewButtonClicked"
+                            SemanticProperties.Hint="Quit the application."
+                            HorizontalOptions="End" />
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="AppUserTemplate"
+                      x:DataType="model:Users">
+            <controls:AppUserView BorderColor="DarkGray"
+                                  Id="{Binding Id}"
+                                  Name="{Binding Name}"
+                                  Surname="{Binding Surname}"
+                                  ControlTemplate="{StaticResource AppUserControlTemplate}" />
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Margin="30"
+                         Spacing="30"
+                         BindableLayout.ItemsSource="{Binding AppUsers}"
+                         BindableLayout.ItemTemplate="{StaticResource AppUserTemplate}" />
+</ContentPage>

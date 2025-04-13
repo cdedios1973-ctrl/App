@@ -1,57 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+             xmlns:local="clr-namespace:AppTasks"
+             xmlns:views="clr-namespace:AppTasks.Views"
+             
              x:Class="AppTasks.MainPage"
-             xmlns:models="clr-namespace:App.Models;assembly=AppModel"
-             x:Name="AppIni" >
+             x:DataType="local:MainPage" >
+
     <ScrollView x:Name="mainScreen">
 
-        <VerticalStackLayout x:Name="lPage" Padding="20,0" Spacing="10">
+        <VerticalStackLayout x:Name="lPage" Padding="20,0" Spacing="5">
 
-            <Grid x:Name="layerUser" HeightRequest="120">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="70" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.ColumnSpan="3" Grid.Row="0" 
-                        x:Name="lblUserName" Text="-Log In-" VerticalOptions="Center" />
-                <Button Grid.Column="3" Grid.Row="0"
-                        x:Name="btnOptions" Text="(+)" Clicked="OnButtonClicked"
-                        SemanticProperties.Hint="Show additional options." HorizontalOptions="End" />
-                <Button Grid.Column="4" Grid.Row="0"
-                        x:Name="btnQuit" Text="X" Clicked="OnButtonClicked"
-                        SemanticProperties.Hint="Quit the application." HorizontalOptions="End" />
-                <VerticalStackLayout Grid.ColumnSpan="5" Grid.Row="1" 
-                        x:Name="layerSubmenu">
-                </VerticalStackLayout>
-                <Label Grid.ColumnSpan="4" Grid.Row="2" 
-                        x:Name="lblStatus" Text="Log in or install the application." 
-                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-                        TextColor="Red" />
+<!--
+            <TableView Intent="Menu">
+                <TableRoot>
+                    <TableSection Title="ControlTemplate Demos">
+                        <TextCell Text="Bind a ControlTemplate to a ViewModel"
+                            Detail="Using RelativeSource TemplatedParent"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="{x:Type views:MenuView}" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
 
-            </Grid>
+            <views:AppMain x:Name="mainMenu" />
+            !-->
+
             
-            <VerticalStackLayout x:Name="layerButtons" Spacing="5">
-            </VerticalStackLayout>
 
-            <VerticalStackLayout x:Name="layerMaster" HeightRequest="10" Spacing="5">
-            </VerticalStackLayout>
+            <views:MenuView x:Name="mainMenu" />
 
-            <ActivityIndicator x:Name="Activity" IsRunning="False" IsVisible="False"/>
+
+            <ActivityIndicator x:Name="Activity" IsRunning="{Binding IsBusy}" IsVisible="False"/>
+            
+            <VerticalStackLayout x:Name="layerMaster" HeightRequest="5" Spacing="5">
+            </VerticalStackLayout>
             
             <ScrollView x:Name="scrollDetail">
                 <VerticalStackLayout x:Name="layerDetail" Spacing="5">
                 </VerticalStackLayout>
             </ScrollView>
 
+            <!-- 
+            <appMain:AppMain x:Name="ApplicationMain"/>          
+            !-->
         </VerticalStackLayout>
 
     </ScrollView>

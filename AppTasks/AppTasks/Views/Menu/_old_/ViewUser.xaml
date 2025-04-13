@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppTasks.Views.Menu"
+             x:Name="this"
+             x:Class="AppTasks.Views.Menu.ViewUser"
+             x:DataType="local:ViewUser">
+
+    <VerticalStackLayout x:Name="LViewUser">
+        <Grid RowDefinitions="20, 20" 
+              ColumnDefinitions="1*, Auto, 50, 50" >
+            <Label Grid.ColumnSpan="2" Grid.Row="0" 
+                    x:Name="lblUserName" 
+                    Text="{Binding UserLogged, FallbackValue='No user.'}" 
+                    VerticalOptions="Center" TextColor="DarkGreen" />
+            <Label Grid.ColumnSpan="2" Grid.Row="1"
+                    x:Name="lblTitle"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    Text="{Binding ModuleTitle, FallbackValue='None selected.'}"
+                    TextColor="DarkGreen" />
+            <Button Grid.Column="2" Grid.RowSpan="2"
+                    x:Name="btnOptions" Text="(+)"
+                    SemanticProperties.Hint="Show additional options." 
+                    HorizontalOptions="End" />
+            <Button Grid.Column="3" Grid.RowSpan="2"
+                    x:Name="btnQuit" Text="X" 
+                    SemanticProperties.Hint="Quit the application." 
+                    HorizontalOptions="End" />
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentView>

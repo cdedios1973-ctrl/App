@@ -7,16 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="AppIO\InputHandler\AppInput_old.cs" />
-    <Compile Remove="DAO\DAOApp.cs" />
-    <Compile Remove="DAO\DAOLogic.cs" />
-    <Compile Remove="DAO\DAOTask.cs" />
-    <Compile Remove="DAO\DAOUser.cs" />
-    <Compile Remove="DAO\DAOUserPermission.cs" />
-    <Compile Remove="DAO\Source\DBConn.cs" />
-    <Compile Remove="DAO\Source\DBConnectorBK.cs" />
-    <Compile Remove="Menu\AppMenuData.cs" />
-    <Compile Remove="Menu\DisplayMessage_old.cs" />
+    <Compile Remove="DDBB\**" />
+    <Compile Remove="Entity\**" />
+    <Compile Remove="Events\**" />
+    <EmbeddedResource Remove="DDBB\**" />
+    <EmbeddedResource Remove="Entity\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="DDBB\**" />
+    <None Remove="Entity\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Refactorice\AppIO\InputHandler\AppInput_old.cs" />
+    <Compile Remove="Refactorice\Menu\AppMenuData.cs" />
+    <Compile Remove="Refactorice\Menu\DisplayMessage_old.cs" />
     <Compile Remove="PermissionsLogic.cs" />
     <Compile Remove="TaskLogic.cs" />
     <Compile Remove="UserLogic.cs" />
@@ -24,15 +29,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Model\AppModel.csproj" />
+    <ProjectReference Include="..\AppInfraestructure\Infraestructure.csproj" />
+    <ProjectReference Include="..\Definitions\Definitions.csproj" />
+    <ProjectReference Include="..\Model\ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="bin\Debug\net8.0\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.3" />
   </ItemGroup>
 
 </Project>

@@ -1,45 +1,43 @@
-﻿namespace App.Logic
-{
-    using System;
-    using App.Models;
-    using App.Enums;
-    using App.Predicate;
-    using App.DAO;
+﻿using System;
 
-    // Class: Verifiy user permission over the application. Filled when DAOLogin
-    public sealed class UserAccess
+using App.Definitions.Enums;
+using App.Definitions.Interfaces;
+using App.Logic.Entity;
+using App.Logic.Predicate;
+
+namespace App.Logic.Security
+{
+    // TODO : move this class to CORE (Infra)
+    // TODO : need a valid token from Servicelogin to fill this class... need to implement inteface
+    // TODO : pass this class by ref to LoginService (if ok fill)
+    // Class: Verifiy user permission over the application. Filled when ServiceLogin
+    public sealed class UserAccess : ITokenCredential, ISecurityPermissions
     {
         private const string PERMISSION_NOT_GRANTED = "Current user has no access to this module.";
 
-        private static Users _user;
-        private static List<Permissions> _permissions;
-        private static List<UsersPermission> _userPermissions = new List<UsersPermission>();
-        private static string _userFullName;
-        private static DataBaseType _dbType;
-        private static DisplaType _display;
+        // User related : User and UserPermissions Info
+        private User _user;
+        private List<UsersPermission> _userPermissions = new List<UsersPermission>();
+
+        // Module Permissions related: List of module permissions.
+        private List<Permissions> _permissions;
 
         #region Constructors
 
-        public UserAccess(DataBaseType DataBaseType, DisplaType display) 
-        {
-            _dbType = DataBaseType;
-            _display = display;
-            DataFilter filter = new DataFilter();
-            if (_permissions == null)
-            {
-                UserAccess tmpuser = this;
-                _permissions = new DAOData<Permissions>(tmpuser, ref filter).GetData;
-            }
+        internal UserAccess() 
+        { 
+            // TODO : Need to read from permissions table
+            // call PermissionsService() to fill list, and only once, if any permise is revoke, user must logout -> isssue: user will have permissions extra time.. mistake..
+            // looking for alternatives....
         }
 
-        public UserAccess(ref Users user, ref List<UsersPermission> userPermissions)
+        internal UserAccess(ITokenCredential token, User user, List<UsersPermission> userPermissions)
         {
-            if(_user == null)
-                _user = user;
-
-            if (_userPermissions.Count == 0)
-                _userPermissions = userPermissions;
-
+            if (!token.TokenExists())
+                throw new ArgumentException("Invalid User");
+            
+            this._user = user;
+            this._userPermissions = userPermissions;
         }
 
         #endregion
@@ -48,71 +46,19 @@
 
         public bool IsUserAuthenticated
         {
-            get { return (_user != null && _userPermissions != null) ? true : false; }
-            private set { }
+            get { return (this._user.Id > 0 && _userPermissions.Count > 0) ? true : false; }
         }
 
-        public Users GetUser
+        public long UserId
         {
-            get { return _user; }
-        }
-
-        public long GetUserId
-        {
-            get { return _user.Id; }
-        }
-
-        public List<Permissions> GetPermissions
-        {
-            get { return _permissions; }
-        }
-
-        public List<UsersPermission> GetUserPermissions
-        { 
-            get { return _userPermissions; }
-        }
-
-        public DisplaType Display
-        {
-            get { return _display; }
-            set { _display = value; }
-        }
-
-        public DataBaseType DDBBType
-        { 
-            get { return _dbType; }
-            set { _dbType = value; }
-        }
-
-        public string GetUserFullName
-        {
-            get
-            {
-                if (_userFullName == null && _user != null)
-                    _userFullName = "{" + _user.Id + "|" +
-                            _user.Surname + ", " + _user.Name + "}";
-
-                return _userFullName;
-            }
-        }
-
-        public bool Logout
-        {
-            get 
-            {
-                _user = null;
-                _permissions = null;
-                _userFullName = null;
-                _userPermissions = new List<UsersPermission>();
-                return true;
-            }
+            get { return this._user.Id; }
         }
 
         #endregion
 
         #region Function to return what sort of access has to the input module
 
-        public UserAccessType checkUserPermission(string moduleName)
+        public UserAccessType CheckUserPermission(string moduleName)
         {
             // Temporal permissions needed to login (no permissions at start).
             UserAccessType ua = UserAccessType.None;
@@ -130,13 +76,17 @@
                 }
                 else 
                 {
-                    Permissions per = _permissions.Find(Predicates.ByPermissionName(moduleName));
+                    Permissions per = this._permissions.Find(Predicates.ByPermissionName(moduleName));
                     if (per != null)
                     {
                         try
-                        { ua = (UserAccessType)(int)_userPermissions.Find(Predicates.ByUserPermissionId(per.Id)).userAccessType; }
+                        { 
+                            ua = (UserAccessType)(int)_userPermissions.Find(Predicates.ByUserPermissionId(per.Id)).userAccessType; 
+                        }
                         catch 
-                        { ua = UserAccessType.None; }
+                        { 
+                            ua = UserAccessType.None; 
+                        }
                     }
                 }
             }
@@ -147,12 +97,12 @@
             return ua;
         }
 
-        public UserAccessType checkUserPermissionById(long id)
+        public UserAccessType CheckUserPermissionById(long id)
         {
             UserAccessType ua = UserAccessType.None;
             try
             {
-                if (_user.Id > 0)
+                if (this.UserId > 0)
                     ua = (UserAccessType)(int)_userPermissions.Find(Predicates.ByUserPermissionId(id)).userAccessType;
                 else
                     throw new Exception();
@@ -162,6 +112,11 @@
                 throw new Exception(PERMISSION_NOT_GRANTED);
             }
             return ua;
+        }
+
+        public bool TokenExists()
+        {
+            return (this._user.Id > 0 && _userPermissions.Count > 0) ? true : false;
         }
 
         #endregion
