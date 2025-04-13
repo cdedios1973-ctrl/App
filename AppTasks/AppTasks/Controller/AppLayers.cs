@@ -83,7 +83,7 @@ namespace AppTasks.Controller
 
         #endregion
 
-        #region XAML Page : Return values from 'Entry' fields
+        #region XAML Page : Get/Set values from 'Entry' fields
 
         public static string GetLayoutEntryValue(ContentPage page, string layoutName, string eName)
         {
@@ -103,6 +103,25 @@ namespace AppTasks.Controller
             }
             return "";
         }
+
+        public static void SetLayoutEntryValue(ContentPage page, string layoutName, string eName, string value)
+        {
+            VerticalStackLayout layout = (VerticalStackLayout)page.FindByName(layoutName);
+            if (layout != null)
+            {
+                List<IVisualTreeElement> lTextbox = (List<IVisualTreeElement>)layout.GetVisualTreeDescendants();
+                foreach (IVisualTreeElement textbox in lTextbox)
+                {
+                    if (textbox is Entry)
+                    {
+                        Entry txt = (Entry)textbox;
+                        if (txt.StyleId == eName)
+                            txt.Text = value;
+                    }
+                }
+            }
+        }
+
 
         #endregion
 

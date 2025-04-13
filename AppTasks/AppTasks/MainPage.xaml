@@ -6,7 +6,7 @@
              x:Name="AppIni" >
     <ScrollView x:Name="mainScreen">
 
-        <VerticalStackLayout x:Name="lPage" Padding="20,0">
+        <VerticalStackLayout x:Name="lPage" Padding="20,0" Spacing="10">
 
             <Grid x:Name="layerUser" HeightRequest="120">
                 <Grid.RowDefinitions>
@@ -21,36 +21,36 @@
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.ColumnSpan="5" Grid.Row="0" 
+                <Label Grid.ColumnSpan="3" Grid.Row="0" 
                         x:Name="lblUserName" Text="-Log In-" VerticalOptions="Center" />
-                <VerticalStackLayout Grid.ColumnSpan="2" Grid.Row="1" 
-                        x:Name="layerSubmenu">
-                </VerticalStackLayout>
-                <Button Grid.Column="2" Grid.Row="1"
-                        x:Name="btnLogin" Text="Login" Clicked="OnButtonClicked"
-                        SemanticProperties.Hint="Log into the application." />
-                <Button Grid.Column="3" Grid.Row="1"
+                <Button Grid.Column="3" Grid.Row="0"
                         x:Name="btnOptions" Text="(+)" Clicked="OnButtonClicked"
                         SemanticProperties.Hint="Show additional options." HorizontalOptions="End" />
-                <Button Grid.Column="4" Grid.Row="1"
+                <Button Grid.Column="4" Grid.Row="0"
                         x:Name="btnQuit" Text="X" Clicked="OnButtonClicked"
                         SemanticProperties.Hint="Quit the application." HorizontalOptions="End" />
+                <VerticalStackLayout Grid.ColumnSpan="5" Grid.Row="1" 
+                        x:Name="layerSubmenu">
+                </VerticalStackLayout>
                 <Label Grid.ColumnSpan="4" Grid.Row="2" 
                         x:Name="lblStatus" Text="Log in or install the application." 
                         VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                         TextColor="Red" />
+
             </Grid>
             
-            <VerticalStackLayout x:Name="layerButtons" HeightRequest="40" Spacing="5">
+            <VerticalStackLayout x:Name="layerButtons" Spacing="5">
             </VerticalStackLayout>
 
-            <VerticalStackLayout x:Name="layerMaster" HeightRequest="0" Spacing="5">
+            <VerticalStackLayout x:Name="layerMaster" HeightRequest="10" Spacing="5">
             </VerticalStackLayout>
 
             <ActivityIndicator x:Name="Activity" IsRunning="False" IsVisible="False"/>
-
-            <VerticalStackLayout x:Name="layerDetail" Spacing="5">
-            </VerticalStackLayout>
+            
+            <ScrollView x:Name="scrollDetail">
+                <VerticalStackLayout x:Name="layerDetail" Spacing="5">
+                </VerticalStackLayout>
+            </ScrollView>
 
         </VerticalStackLayout>
 

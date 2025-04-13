@@ -22,6 +22,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\AppInstall.xaml.cs" />
+	  <Compile Remove="Views\AppMenu.xaml.cs" />
+	  <Compile Remove="Views\AppMenu_old.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Views\AppInstall.xaml" />
+	  <MauiXaml Remove="Views\AppMenu.xaml" />
+	  <MauiXaml Remove="Views\AppMenu_old.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 	</ItemGroup>
 
@@ -33,22 +45,10 @@
 	  <MauiXaml Update="Resources\AppConfirmation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AppInstall.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AppMenu.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\AppLogin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AppSearchBar.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AppUsers.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\BasicGridPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Welcome.xaml">

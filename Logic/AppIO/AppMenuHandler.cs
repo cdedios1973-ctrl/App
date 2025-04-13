@@ -83,7 +83,7 @@
             catch { }
             try
             {
-                if (InputString.CheckInput(ref input, _userAccess.IsUserAuthenticated) == true)
+                if (InputString.CheckInput(ref input) == true)
                     executeCommand(input, permission);
                 else
                     throw new Exception("Incorrect syntax / command.");

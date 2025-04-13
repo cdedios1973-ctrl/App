@@ -91,11 +91,11 @@
         private bool confirmAction(string message)
         {
             bool next = true;
-            messageHandler.updateStatus(MESSAGE_SENDER, message, "?");
 
             switch (this._displayType)
             {
                 case DisplaType.Console:
+                    messageHandler.updateStatus(MESSAGE_SENDER, message, "?");
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     next = (key.Key == ConsoleKey.Y) ? true : false;
                     break;

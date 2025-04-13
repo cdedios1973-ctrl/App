@@ -12,13 +12,13 @@
                 SemanticProperties.Hint="Accept"
                 HorizontalOptions="Center"
                 Background="DarkGreen"
-                WidthRequest="70" />
+                WidthRequest="80" />
             <Button x:Name="btnNo"
                 Text="Cancel" 
                 SemanticProperties.Hint="Cancel"
                 HorizontalOptions="Center"
                 Background="DarkGreen"
-                WidthRequest="70" />
+                WidthRequest="80" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
 

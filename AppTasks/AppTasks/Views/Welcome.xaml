@@ -6,10 +6,10 @@
              HeightRequest="260" >
     <VerticalStackLayout x:Name="welcome">
         <Image
-                Source="dotnet_bot.png"
+                Source="filefolder.jpg"
                 HeightRequest="140"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
+                SemanticProperties.Description="filefolder" />
         <Label
                 x:Name="lblMaster"
                 Text="Hello, User!"

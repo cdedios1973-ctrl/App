@@ -1,6 +1,3 @@
-using App.Interfaces;
-using Microsoft.Identity.Client;
-
 namespace AppTasks.Views;
 
 public class AppUsersGrid : ContentView

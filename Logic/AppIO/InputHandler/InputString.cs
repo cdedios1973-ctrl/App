@@ -27,7 +27,7 @@
             return ok;
         }
 
-        public static bool CheckInput(ref string input, bool BeforeLogin, bool test = true)
+        public static bool CheckInput(ref string input)
         {
             bool ok = true;
             if (CheckInyection(ref input) == false)
@@ -35,10 +35,6 @@
 
             if(input.Length == 1 && input == "," )
                 throw new Exception(INPUT_USER_NOT_FOUND);
-
-            if (BeforeLogin == true)
-                if ((input == "00" && test == true) || (input == "01" && test == true))
-                    return true;
 
             return ok;
         }
