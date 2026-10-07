@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-using Infraestructure.CORE.Interfaces.Path;
+using App.Infraestructure.CORE.Interfaces.Path;
 
 namespace App.Infraestructure.CORE
 {

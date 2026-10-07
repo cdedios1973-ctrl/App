@@ -5,15 +5,15 @@ VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLogic", "Logic\AppLogic.csproj", "{3A62E6D5-AA52-48E3-A451-757A4716290D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "Model\ViewModel.csproj", "{B4923625-668A-95CB-F92E-EAD08FFFA065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppViewModel", "Model\AppViewModel.csproj", "{B4923625-668A-95CB-F92E-EAD08FFFA065}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Data", "DB\Data\Data.sqlproj", "{19129C93-38A0-4264-B02B-334CCD8BDA91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConsole", "AppConsole\AppConsole.csproj", "{CE112AB6-0A89-4771-AB53-EB616EB53561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "AppInfraestructure\Infraestructure.csproj", "{D9EA624E-499E-41CF-91B3-EAF1BAD070B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppInfraestructure", "AppInfraestructure\AppInfraestructure.csproj", "{D9EA624E-499E-41CF-91B3-EAF1BAD070B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Definitions", "Definitions\Definitions.csproj", "{D7379E60-1E3D-41FF-9796-068D5803AA89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppDefinitions", "Definitions\AppDefinitions.csproj", "{D7379E60-1E3D-41FF-9796-068D5803AA89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOSqLiteBase", "DAOSqLiteBase\DAOSqLiteBase.csproj", "{D3B986E2-AF04-4345-97BF-52C03D3A8814}"
 	ProjectSection(ProjectDependencies) = postProject

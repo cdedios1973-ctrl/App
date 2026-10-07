@@ -24,9 +24,10 @@
   <ItemGroup>
     <Compile Remove="CORE\Configuration\AppConnectionString.cs" />
   </ItemGroup>
-	
+
   <ItemGroup>
-    <ProjectReference Include="..\Definitions\Definitions.csproj" />
+    <ProjectReference Include="..\Definitions\AppDefinitions.csproj" />
   </ItemGroup>
+	
 
 </Project>

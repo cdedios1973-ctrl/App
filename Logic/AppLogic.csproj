@@ -29,9 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppInfraestructure\Infraestructure.csproj" />
-    <ProjectReference Include="..\Definitions\Definitions.csproj" />
-    <ProjectReference Include="..\Model\ViewModel.csproj" />
+    <ProjectReference Include="..\AppInfraestructure\AppInfraestructure.csproj" />
+    <ProjectReference Include="..\Definitions\AppDefinitions.csproj" />
+    <ProjectReference Include="..\Model\AppViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

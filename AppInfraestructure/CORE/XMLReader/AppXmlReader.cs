@@ -3,6 +3,7 @@ using System.Xml;
 
 using App.Definitions.Enums;
 using App.Infraestructure.CORE.Interfaces.Reader;
+using App.Infraestructure.CORE.Interfaces.Path;
 
 namespace App.Infraestructure.CORE.Reader
 {
@@ -21,12 +22,12 @@ namespace App.Infraestructure.CORE.Reader
         //private const string MISSING_KEY    = "Key to search cannot be empty";
         private const string MISSING_VALUE  = "Key value is empty, verify config file";
 
-        private readonly IAppConfigPathProvider _pathProvider;
+        private readonly IAppPathProvider _pathProvider;
         private string _key;
 
         #region Constructors
 
-        internal AppXmlReader(IAppConfigPathProvider pathProvider, DataBaseType dbType) 
+        internal AppXmlReader(IAppPathProvider pathProvider, DataBaseType dbType) 
         {
             if (pathProvider == null)
             {
