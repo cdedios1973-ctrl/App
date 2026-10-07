@@ -1,6 +1,10 @@
-﻿// TODO / NOTA DE ARQUITECTURA (SOLID - ISP / DIP):
-// Los DTO deben tener las excepciones en constructor para avisar antes a la vista de los errores (solid?)
-// Para futuras refactorizaciones, se puede eliminar los POCO/DTO de escritura intermedios.
-// En su lugar, se puede definir interfaces (ej. IUsuarioRegistroData) que las propias 
-// entidades de negocio o commands implementen directamente. 
-// Esto reducirá el código repetitivo (boilerplate) y desacoplará el DAO de clases concretas.
+﻿// AppDefinitions : Contiene los elementos comunes de la Aplicación.
+// (los elementos específicos de momento los tengo en cada proyecto, para ver si puedo contener las referencias using).
+
+// Los DTO deben tener las excepciones en constructor para avisar antes a la vista de los errores
+
+// Contenido "AppDefinitions"
+// Entity		-> Modelos POCO
+// Enums		-> Enumerados de Aplicacion
+// Events		-> Manejar interno de Aplicacion (Se puede implementar para lanzar mensajes a la vista.)
+// Interfaces	-> Contiene los Interfaces generales de la Aplicación. 
