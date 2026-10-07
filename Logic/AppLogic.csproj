@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Compile Remove="Refactorice\AppIO\InputHandler\AppInput_old.cs" />
-    <Compile Remove="Refactorice\Menu\AppMenuData.cs" />
     <Compile Remove="Refactorice\Menu\DisplayMessage_old.cs" />
     <Compile Remove="PermissionsLogic.cs" />
     <Compile Remove="TaskLogic.cs" />

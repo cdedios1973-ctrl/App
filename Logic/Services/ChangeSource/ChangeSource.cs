@@ -5,16 +5,16 @@ using App.Definitions.Interfaces;
 namespace App.Logic.Services
 {
 
-    // Change Source from user Input => From Services/Input/AppCommandChangeSource.cs
+    // Change Source from user Input => Create Services/Input/ChangeSourceService.cs
 
     internal static class ChangeSource
     {
 
         #region Change Source => Return DataBaseType (by User Input Action)
 
-        internal static DataBaseType SetSource(ICommandChangeDB command)
+        internal static DataBaseType SetSource(IChangeSourceCommand command)
         {
-            DataBaseType _type = DataBaseType.Class;
+            DataBaseType _type = DataBaseType.SqLite;
             if (command != null)
             {
                 switch (command.GetTargetDatabase())
@@ -27,10 +27,10 @@ namespace App.Logic.Services
                     case ConsoleKey.NumPad2:
                         type = DataBaseType.SqLite;
                         break;
-                    case ConsoleKey.D3:
-                    case ConsoleKey.NumPad3:
-                        type = DataBaseType.XML;
-                        break;
+                    //case ConsoleKey.D3:
+                    //case ConsoleKey.NumPad3:
+                    //    type = DataBaseType.XML;
+                    //    break;
                 }
             }
             return _type;
