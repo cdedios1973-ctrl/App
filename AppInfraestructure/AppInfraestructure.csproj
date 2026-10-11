@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="CORE\Configuration\AppConnectionString.cs" />
+    <Compile Remove="CORE\Path\AppConnectionString.cs" />
   </ItemGroup>
 
   <ItemGroup>

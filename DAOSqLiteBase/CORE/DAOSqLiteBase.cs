@@ -14,6 +14,10 @@ namespace App.Infraestructure.Services.DAO.SqLite
         private SqliteCommand _command;
 
         // TODO : Can modify Constructor to receive a List of commands and use the foreach at the transaction.
+        // TODO : I had solved this before, Bill and Bill<Detail> in the same transaction.
+        //          Save Bill, get last id (searching by billNumber) and ...
+        //          at the same IDAOCommand foreach filling billDetail with last it.
+        //          so, if transaction fail at detail lines, must delete bill table with bill.lastid or with bill.billnumber, and change the bill counter also
         #region Constructors
 
         internal DAOSqLiteBase(SqliteCommand command, IConnectionStringService connectionString)

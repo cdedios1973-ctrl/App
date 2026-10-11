@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 
-using App.Models;
+using App.View.Models;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.DAOCommands;
 using App.Logic.Security;
@@ -22,6 +22,9 @@ namespace App.Logic.Services.Entities
             // al framework nativo mediante un Middleware, Claims y un IHttpContextAccessor (Inyección de Dependencias) (falta por aprender).
             if (user.CheckUserPermission("ModuleService") <= 0)
                 throw new UnauthorizedAccessException("User has no permissions to this module.");
+
+            //if(user == null) 
+            //    throw new ArgumentNullException("NUser");
 
             _token = user.UserId.ToString(); // temporal token, just for testing pourposes.
 

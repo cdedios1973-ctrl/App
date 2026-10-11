@@ -9,7 +9,7 @@ namespace App.Infraestructure.Installation.Database
 { 
     /// <summary>
     /// Refactoring poo+solid+cc. 
-    /// a) Service to delete file.
+    /// a) Service to delete file. (Remove this option before production)
     /// b) Service to initialize Demo Database
     /// c) Service to create relational tables into Database
     /// </summary>

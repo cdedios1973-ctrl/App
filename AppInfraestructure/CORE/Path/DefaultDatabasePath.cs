@@ -11,7 +11,7 @@ namespace App.Infraestructure.CORE
     /// Return 'Application path directory'
     /// </summary>
 
-    // TODO : Create service to determine "extension"
+    // TODO : Create service to determine "extension" <- 
 
     internal sealed class DefaultDatabasePath : IAppPathProvider
     {
@@ -21,12 +21,15 @@ namespace App.Infraestructure.CORE
 
         #region Constructors
 
-        internal DefaultDatabasePath(DataBaseType dbType)
+        internal DefaultDatabasePath(DataBaseType dbType = DataBaseType.SqLite)
         { 
             if (!Enum.IsDefined(typeof(DataBaseType), dbType))
                 throw new ArgumentNullException("Extension must be filled.", nameof(dbType));
 
-            this._extension = "";
+            if (dbType == DataBaseType.SqlServer)
+                this._extension = "";
+
+            this._extension = (dbType == DataBaseType.SqLite ? "" : "");
         }
 
         #endregion

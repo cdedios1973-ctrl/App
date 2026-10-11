@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Infraestructure.CORE.Interfaces.Path;
+using App.Infraestructure.CORE.Interfaces.Path;
 
 namespace App.Infraestructure.Installation.Database
 {

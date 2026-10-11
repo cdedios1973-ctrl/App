@@ -1,23 +1,21 @@
 ﻿using System;
 using App.Definitions.Enums;
-using App.Definitions.Interfaces;
+using App.Definitions.Interfaces.Commands;
 
 namespace App.Logic.Services
 {
 
-    // Change Source from user Input => Create Services/Input/ChangeSourceService.cs
-
-    internal static class ChangeSource
+    internal sealed class ChangeSource
     {
 
         #region Change Source => Return DataBaseType (by User Input Action)
 
-        internal static DataBaseType SetSource(IChangeSourceCommand command)
+        internal DataBaseType SetSource(IChangeSourceCommand command)
         {
             DataBaseType _type = DataBaseType.SqLite;
             if (command != null)
             {
-                switch (command.GetTargetDatabase())
+                switch (command.GetDatabaseType())
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:

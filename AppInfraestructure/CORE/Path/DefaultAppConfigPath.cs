@@ -8,8 +8,7 @@ namespace App.Infraestructure.CORE
 
     /// <summary>
     /// Return 'base' directory of the Application configuration file
-    /// This class has its own pourpose, look at this directory.
-    /// Open to modification, If i need to search elsewhere i can make new class and use this interface.
+    /// Open to modification : This class has its own pourpose, look at this directory.
     /// </summary>
 
     internal sealed class DefaultAppConfigPath : IAppPathProvider

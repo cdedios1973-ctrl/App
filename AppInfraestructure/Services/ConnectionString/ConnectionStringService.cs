@@ -1,9 +1,10 @@
 ﻿using System;
 
-using App.Infraestructure.CORE;
-using App.Infraestructure.CORE.Reader;
-using App.Infraestructure.CORE.Interfaces.Reader;
 using App.Definitions.Enums;
+using App.Infraestructure.CORE;
+using App.Infraestructure.CORE.Interfaces.Path;
+using App.Infraestructure.CORE.Interfaces.Reader;
+using App.Infraestructure.CORE.Reader;
 
 namespace App.Infraestructure.Services
 {
@@ -20,7 +21,7 @@ namespace App.Infraestructure.Services
             }
 
             // Fixed Path, application configuration files must be there.
-            IAppConfigPathProvider pathProvider = new DefaultAppConfigPath();
+            IAppPathProvider pathProvider = new DefaultAppConfigPath();
 
             // Fixed to xmlreader, if later add filestream, add to ConnectionStringService constructor
             IAppXmlReader xmlReader = new AppXmlReader(pathProvider, dbType);

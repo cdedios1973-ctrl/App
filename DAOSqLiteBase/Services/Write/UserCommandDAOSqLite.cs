@@ -29,6 +29,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
         #region Constructor
 
+        // TODO : I can change constructor to admit List<Items> not in this class (EX.: List<BillDetails>)
         public UserCommandDAOSqLite(User user)
         {
             if (user == null) 
@@ -41,7 +42,10 @@ namespace App.Infraestructure.Services.DAO.SqLite
         #endregion
 
         // TODO : I can make a List<SqliteCommand> here and send to database class.
-        // TODO : Fix return (if lastId > 0) then true.
+        // TODO : List<SqliteCommand>[0] master data.
+        // TODO : List<SqliteCommand>[1] detail data. linked by master_data_id
+        // TODO : Both List<SqliteCommand>[x] to DAOSqliteBase -> directly to transaction (2 foreach, check if second list has items)
+        // TODO : Fix return for lastId.
         // TODO : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
         #region Interface Implementation
 
