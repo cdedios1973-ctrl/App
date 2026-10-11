@@ -8,7 +8,7 @@ using App.Infraestructure.CORE.Interfaces.Database;
 using App.Infraestructure.CORE.Interfaces.Reader;
 
 // TODO : Write DAO -> diferent folder than Select DAO (File System access permission)
-// TODO : Bulk -> in other tables. (List<POCO>) transaction, foreach, commit, rollback, finally->close.
+// TODO : NO, remove ------>Bulk -> in other tables. (List<POCO>) transaction, foreach, commit, rollback, finally->close.
 // TODO : Send List<Items> to SqLiteBase (change constructor).
 // TODO : This sort of class can be the orquestator, and call the database for the foreach.
 
@@ -29,7 +29,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
         #region Constructor
 
-        // TODO : I can change constructor to admit List<Items> not in this class (EX.: List<BillDetails>)
+        // TODO : I can change constructor to admit List<Items> not in this class (EX.: List<BillDetails> )
         public UserCommandDAOSqLite(User user)
         {
             if (user == null) 
