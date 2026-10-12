@@ -16,7 +16,6 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\AppInfraestructure\AppInfraestructure.csproj" />
-    <ProjectReference Include="..\Definitions\AppDefinitions.csproj" />
   </ItemGroup>
 
 </Project>
