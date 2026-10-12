@@ -1,12 +1,13 @@
-# Demo Técnica Backend - .NET Core & APIs
+Estado actual del repositorio: Work in Progress
 
-Este repositorio es mi entorno de práctica activa para la transición y actualización hacia .NET moderno.
+Fase de Refactorización Activa: Este laboratorio se encuentra actualmente en proceso de reestructuración.
+Encontrarás módulos con arquitectura moderna conviviendo con secciones de código origen pendientes de migrar.
+Si ves interfaces donde no toca, no es por desconocimiento.
 
-## 🛠️ Estado Actual del Proyecto
-* **En Proceso (WIP):** El proyecto cuenta con APIs y acceso a datos SQLite
-* **En Proceso (WIP):** Actualmente aplicando estándares SOLID y desacoplamiento de capas.
+Estado de Ejecución: El código se expone con fines puramente de evaluación arquitectónica y diseño de capas. 
+Aún no se ha realizado la primera pasada de compilación ni pruebas de ejecución, 
+por lo que el foco actual está en la reescritura lógica y aplicación de patrones, no en la estabilidad del binario.
 
-## 🔄 Próximos Pasos (Roadmap de Refactorización)
-1. Migrar controladores hacia un patrón limpio (Clean Architecture).
-2. Optimizar consultas e implementar Inyección de Dependencias avanzada.
-3. Separar completamente la lógica de negocio de los endpoints expuestos.
+Objetivo del Proyecto
+El proyecto simula un escenario de mantenimiento de software: una aplicación que originalmente dependía de estructuras acopladas y 
+que está siendo migrada progresivamente hacia una Arquitectura Limpia, aplicando principios SOLID y patrones de diseño modernos.
