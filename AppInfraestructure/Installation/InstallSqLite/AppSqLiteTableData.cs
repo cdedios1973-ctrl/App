@@ -2,6 +2,11 @@
 
 namespace App.Definitions.Entity.Database
 {
+
+    // Deprecated class
+
+    /*
+
     internal sealed class AppSqLiteTableData
     {
         /// <summary>
@@ -50,4 +55,7 @@ namespace App.Definitions.Entity.Database
         #endregion
 
     }
+
+    */
+
 }

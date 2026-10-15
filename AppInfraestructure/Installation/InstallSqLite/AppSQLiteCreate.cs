@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Data;
 
-//using Microsoft.Data.Sqlite;
 //using App.Enums;
 
+//using Microsoft.Data.Sqlite;
 
 namespace App.Infraestructure.Installation.Database
 { 
     /// <summary>
     /// Refactoring poo+solid+cc. 
     /// a) Service to delete file. (Remove this option before production)
-    /// b) Service to initialize Demo Database
-    /// c) Service to create relational tables into Database
+    /// b) Service / class to initialize Demo Database
+    /// c) Service / class to create relational tables into Database
     /// </summary>
+
+    // TODO : Convert this class to Sqlite db installer.
 
     internal class AppSQLiteCreate //: AppInitialize
     {
         internal AppSQLiteCreate() { }
 
-
-        // TODO : Create service to delete file.
+        // TODO : delete this, search db at app/db folder manually and delete it by hand.
+        /*
         #region SqLite : Delete database related files.
 
         internal bool SQLiteDeleteFiles(string databaseFile)
@@ -37,8 +39,10 @@ namespace App.Infraestructure.Installation.Database
         }
 
         #endregion
+        */
 
-        // TODO : Create service to create database.
+
+        // TODO : Create service to create database only if doesn't exist (already got service to find file). filename is static AppDb
         #region SQLite : Create Database
 
         internal bool SQLiteCreate(string fileName)
@@ -48,7 +52,7 @@ namespace App.Infraestructure.Installation.Database
             try
             {
                 File.WriteAllBytes(fileName, new byte[0]);
-                conn.ConnectionString = _appDDBBConfig.GetConnectionString;
+                conn.ConnectionString = _appDDBBConfig.GetConnectionString; // already got service for cnnstring...
                 conn.Open();
             }
             catch
@@ -61,7 +65,7 @@ namespace App.Infraestructure.Installation.Database
                     conn.Close();
 
                 if(ok == false)
-                    throw new Exception(CREATE_DDBB_ERROR + _dbName);
+                    throw new Exception(CREATE_DDBB_ERROR + " AppDb"); // create const
             }
             return ok;
         }
@@ -69,7 +73,7 @@ namespace App.Infraestructure.Installation.Database
         #endregion
 
 
-        // TODO : Create service to create tables.
+        // TODO : Create service / class to create tables.
         #region SQLite : Create tables and populate it
 
         internal bool SQLiteCreateTables()
