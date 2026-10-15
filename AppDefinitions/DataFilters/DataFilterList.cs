@@ -8,9 +8,12 @@ namespace App.Definitions.Filters
     // first filter = WHERE - HAVING (two classes)
     // second filter = AND - OR
 
-    // TODO : Se debe tener una plantilla "WHERE LIKE/=" si o si.
-    // TODO : plantilla 0  = obligatorio WHERE
-    // TODO : plantilla 1 = AND OR 
+    // TODO : Must have "WHERE LIKE/=" mandatory.
+    // TODO : filter[0] = must have WHERE
+    // TODO : filter[1] = AND/OR 
+
+    // TODO : Maybe i dont need to apply this approach,
+        // if app is based master / detail, show list with applied where from view -> click on one detail -> there comes the where.
 
 
     public sealed class DataFilterList

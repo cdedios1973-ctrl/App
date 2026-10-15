@@ -2,6 +2,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     public sealed class ModuleDTO
     {
         private readonly long _id = 0;

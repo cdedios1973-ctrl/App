@@ -2,6 +2,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     internal sealed class TestUserDTO
     {
         private readonly string _description;

@@ -2,6 +2,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     public sealed class UserDTO
     {
         private readonly long _id = 0;

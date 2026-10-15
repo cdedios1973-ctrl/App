@@ -4,6 +4,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     internal sealed class UserPermissionsDTO
     {
         private readonly long _id = 0;

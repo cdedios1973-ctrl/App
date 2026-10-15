@@ -2,6 +2,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     internal sealed class UserLoginInputDTO
     {
         private readonly string _userName;

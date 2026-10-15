@@ -1,6 +1,6 @@
 ﻿Project AppInfraestructure
 
-The main goal of this DLL is to have a collection of small tools to use with Logic and DAO.
+The test of this assembly is to have a collection of small tools to use with Logic and DAO.
 
 CORE Folder
 	- Interfaces folder : Internal interfaces definitions.

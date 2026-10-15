@@ -2,6 +2,7 @@
 
 namespace App.View.Models
 {
+    [Serializable()]
     internal sealed class UserTasksDTO
     {
         private readonly long _id = 0;

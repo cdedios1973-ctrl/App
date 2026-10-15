@@ -1,0 +1,1 @@
+﻿Add serialize attribute to dto if im going to parse the output for any view.
