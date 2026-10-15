@@ -1,11 +1,24 @@
 ﻿using System;
 
-/// Summary : Layer responsible for communicating view requests to logic calls
+using App.View.Models;
+
+/// <summary>
+/// Layer responsible for communicating view requests to logic calls
+/// </summary>
 
 namespace App.Controller.Login
 {
-    public class LoginController
+    public class LoginController //: IController
     {
+
+        public LoginController(UserLoginInputDTO user) 
+        {
+            if(user == null) 
+                throw new ArgumentNullException("User and pass must be filled");
+        }
+
+
+
         // TODO : Call LoginService interface from AppLogic.
         // TODO : Need to implement ILoginService just because its a different layer (decouples DB/Logic).
 

@@ -2,21 +2,29 @@
 
 namespace App.View.Models
 {
-    [Serializable()]
-    internal sealed class UserLoginInputDTO
+    //[Serializable()]
+    public sealed class UserLoginInputDTO
     {
         private readonly string _userName;
         private readonly string _password;
 
-        #region Constructors
-        internal UserLoginInputDTO(ref string inputdata) 
-        {
-            if(!inputdata.Contains(","))
-                throw new ArgumentException("Incorrect parameters");
+        // TODO : prevous version, need to change to match controller input
+        // TODO : Apply service IPreventStringInyection
 
-            string[] data = inputdata.Split(',');
-            this._userName = data[0];
-            this._password = data[1];
+        #region Constructors
+        internal UserLoginInputDTO(string userName, string passsWord) 
+        {
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentException("User Name must be filled");
+            }
+            if (string.IsNullOrWhiteSpace(passsWord))
+            {
+                throw new ArgumentException("Password must be filled");
+            }
+
+            this._userName = userName;
+            this._password = passsWord;
         }
 
         #endregion
