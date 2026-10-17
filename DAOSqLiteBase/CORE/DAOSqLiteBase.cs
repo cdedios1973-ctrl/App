@@ -5,20 +5,20 @@ using System.Data;
 using System.IO;
 
 /// <summary>
-/// what this class does.......
+/// 
 /// </summary>
-/// <param name="example">what this does.</param>
-/// <returns>what this class/method return.</returns>
+/// <param name="example"></param>
+/// <returns></returns>
 
-// TODO : confianza entre ensamblado para ponerlo en Internal
+// TODO : confianza entre ensamblados AppLogic-Infrastructure para ponerlo en Internal
 
 namespace App.Infraestructure.Services.DAO.SqLite
 {
-    public sealed class DAOSqLiteBase : IDbExecutor //, IDisposable
+    public sealed class DAOSqLiteBase : IDbExecutor, IDisposable
     {
         private const string INCORRECT_PARAMS = "DAOSqLiteBase: Incorrect parameters: ";
         private readonly string _connectionString;
-        private bool _disposed = false;
+        //private bool _disposed = false;
 
         public DAOSqLiteBase(string connectionString)
         {
@@ -49,14 +49,13 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
                 command.ExecuteNonQuery();
                 transaction.Commit();
-                return true;
+                //return true;
             }
             catch (SqliteException ex)
             {
                 try { transaction?.Rollback(); }
                 catch (Exception ex2) { msg = "Rollback Exception Type: " + ex2.GetType() + " "; }
                 msg += ex.Message;
-                return false;
             }
             finally
             {
@@ -66,8 +65,8 @@ namespace App.Infraestructure.Services.DAO.SqLite
                 if (msg != string.Empty)
                     throw new Exception(msg);
             }
-
-            //return string.IsNullOrEmpty(msg) ? true : false;
+            //return false;
+            return string.IsNullOrEmpty(msg) ? true : false;
         }
 
         public void Dispose()

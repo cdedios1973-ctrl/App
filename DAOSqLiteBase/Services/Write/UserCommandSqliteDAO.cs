@@ -40,7 +40,6 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// </summary>
         /// <param name="user">La entidad de usuario que contiene los datos para las operaciones.</param>
         /// <exception cref="ArgumentNullException">Se lanza cuando el parámetro <paramref name="user"/> es nulo.</exception>
-        
         public UserCommandSqliteDAO(User user)
         {
             if (user == null) 
@@ -61,19 +60,16 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// <remarks>
         /// **Seguridad:** Requiere nivel de permiso 2 o superior.
         /// </remarks>
-        public bool Insert(IDbExecutor db) // Permission needed >= 2
+        public bool Insert(IDbExecutor db)
         {
-
             if (db == null) 
                 throw new ArgumentNullException(nameof(db));
 
             bool result = false;
-
-            // Preparamos el comando nativo de SQLite
             using (var cmd = new SqliteCommand(SQL_INSERT))
             {
                 cmd.Parameters.AddWithValue("@Name", _user.Name);
-                cmd.Parameters.AddWithValue("@Surname", _user.Surname); // hashnoseque
+                cmd.Parameters.AddWithValue("@Surname", _user.Surname);
 
                 // Se lo pasamos al ejecutor que ya sabe gestionar la conexión/transacción
                 result = db.ExecNonQuery(cmd);
