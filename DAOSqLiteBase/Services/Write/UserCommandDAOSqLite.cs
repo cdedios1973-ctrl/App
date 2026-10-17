@@ -7,12 +7,14 @@ using App.Infraestructure.CORE.Interfaces.DAOCommands;
 using App.Infraestructure.CORE.Interfaces.Database;
 using App.Infraestructure.CORE.Interfaces.Reader;
 
-// TODO : Write DAO -> diferent folder than Select DAO (File System access permission)
-// TODO : NO, remove ------>Bulk -> in other tables. (List<POCO>) transaction, foreach, commit, rollback, finally->close.
-// TODO : Send List<Items> to SqLiteBase (change constructor).
-// TODO : This sort of class can be the orquestator, and call the database for the foreach.
-
 // TODO : Make summary -> App aim to use native types.
+// UPGRADE : Write DAO -> diferent folder than Select DAO ( For code clarity, and security SELECT / CRUD )
+// TODO : Can make a List<SqliteCommand> here and send to database class.
+// SEARCH BETTER OPTION : List<SqliteCommand>[0] master data.
+// SEARCH BETTER OPTION : List<SqliteCommand>[1] detail data. linked by master_data_id
+// SEARCH BETTER OPTION : Both List<SqliteCommand>[x] to DAOSqliteBase -> directly to transaction (2 foreach, check if second list has items)
+// TODO : Fix return for lastId.
+// UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 
 namespace App.Infraestructure.Services.DAO.SqLite
 {
@@ -41,12 +43,6 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
         #endregion
 
-        // TODO : I can make a List<SqliteCommand> here and send to database class.
-        // TODO : List<SqliteCommand>[0] master data.
-        // TODO : List<SqliteCommand>[1] detail data. linked by master_data_id
-        // TODO : Both List<SqliteCommand>[x] to DAOSqliteBase -> directly to transaction (2 foreach, check if second list has items)
-        // TODO : Fix return for lastId.
-        // TODO : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
         #region Interface Implementation
 
         public int Insert() // Permission needed >= 2

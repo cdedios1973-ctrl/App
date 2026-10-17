@@ -3,14 +3,12 @@ using System.IO;
 
 using App.Infraestructure.CORE.Interfaces.Path;
 
+/// <summary>
+/// Return 'base' directory of the Application configuration file
+/// </summary>
+
 namespace App.Infraestructure.CORE
 {
-
-    /// <summary>
-    /// Return 'base' directory of the Application configuration file
-    /// Open to modification : This class has its own pourpose, look at this directory.
-    /// </summary>
-
     internal sealed class DefaultAppConfigPath : IAppPathProvider
     {
         private readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;

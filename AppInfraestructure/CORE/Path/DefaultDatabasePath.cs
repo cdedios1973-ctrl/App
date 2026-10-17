@@ -1,35 +1,31 @@
 ﻿using System;
 using System.IO;
 
-using App.Definitions.Enums;
-
 using App.Infraestructure.CORE.Interfaces.Path;
+
+/// <summary>
+/// Return 'Application Database path directory'
+/// </summary>
+
+// FIXED : read from app.config key 'databasename'.
+// FIXED : Modify AppXmlReader, implementation param is keyToSearch
+// TODO : remove the enum
+// UPGRADE : create StreamReader -> constructor with filepath, and return searched string.
 
 namespace App.Infraestructure.CORE
 {
-    /// <summary>
-    /// Return 'Application path directory'
-    /// </summary>
-
-    // TODO : Create service to determine "extension" <- 
-
     internal sealed class DefaultDatabasePath : IAppPathProvider
     {
-        private const string LOCAL_DATABASE_NAME = "AppDemoDatabase.";
+        //private const string LOCAL_DATABASE = "DataBase/AppDemoDatabase.";
         private readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        private readonly string _extension;
+        private readonly string _localDatabase;
 
         #region Constructors
 
-        internal DefaultDatabasePath(DataBaseType dbType = DataBaseType.SqLite)
+        internal DefaultDatabasePath(string fileName) // <- Could change for interface
         { 
-            if (!Enum.IsDefined(typeof(DataBaseType), dbType))
-                throw new ArgumentNullException("Extension must be filled.", nameof(dbType));
-
-            if (dbType == DataBaseType.SqlServer)
-                this._extension = "";
-
-            this._extension = (dbType == DataBaseType.SqLite ? "" : "");
+            if(string.IsNullOrEmpty(fileName))
+                throw new ArgumentNullException("Filename can not be empty.", nameof(fileName));
         }
 
         #endregion
@@ -38,7 +34,7 @@ namespace App.Infraestructure.CORE
 
         public string GetPath()
         {
-            string fullpath = Path.Combine(_baseDirectory, LOCAL_DATABASE_NAME + this._extension);
+            string fullpath = Path.Combine(_baseDirectory, this._localDatabase);
 
             if (!File.Exists(fullpath))
             {

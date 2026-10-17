@@ -5,6 +5,21 @@ using Microsoft.Data.Sqlite;
 using App.Infraestructure.CORE.Interfaces.Database;
 using App.Infraestructure.CORE.Interfaces.Reader;
 
+// TODO : This class is a tool..
+// TODO : IConnectionStringService remove, only need to read once (to avoid going to app.config and do the process everytime)
+// SEARCH BETTER OPTION : Can modify Constructor to receive a List of commands and use the foreach at the transaction.
+// TODO : I had solved this before, Bill and Bill<Detail> in the same transaction.
+//        Bill and Billines are linked by BillNumber ... so after saving Bill, search for BillNumber to fill FK_BILLNUMBER, also FK_BILL_ID.
+// TODO : get last id (if proceed for relational tables, if it use FK_ID_RELATED_TABLE)
+// TODO : Register at log at catch (SqliteException ex)
+// UPGRADE : use 'usings'.
+
+/// <summary>
+/// what this class does.......
+/// </summary>
+/// <param name="example">what this does.</param>
+/// <returns>what this class/method return.</returns>
+
 namespace App.Infraestructure.Services.DAO.SqLite
 {
     internal sealed class DAOSqLiteBase : IDbExecutor
@@ -13,30 +28,22 @@ namespace App.Infraestructure.Services.DAO.SqLite
         private readonly IConnectionStringService _connectionString;
         private SqliteCommand _command;
 
-        // TODO : Can modify Constructor to receive a List of commands and use the foreach at the transaction.
-        // TODO : I had solved this before, Bill and Bill<Detail> in the same transaction.
-        //          Save Bill, get last id (searching by billNumber) and ...
-        //          at the same IDAOCommand foreach filling billDetail with last it.
-        //          so, if transaction fail at detail lines, must delete bill table with bill.lastid or with bill.billnumber, and change the bill counter also
         #region Constructors
 
-        internal DAOSqLiteBase(SqliteCommand command, IConnectionStringService connectionString)
+        internal DAOSqLiteBase(SqliteCommand commands, IConnectionStringService connectionString)
         {
-            if (command == null)
-                throw new ArgumentNullException(INCORRECT_PARAMS, nameof(command));
+            if (commands == null)
+                throw new ArgumentNullException(INCORRECT_PARAMS, nameof(commands));
 
             if (connectionString == null)
                 throw new ArgumentNullException(INCORRECT_PARAMS, nameof(connectionString));
 
-            this._command = command;
+            this._command = commands;
             this._connectionString = connectionString;
         }
 
         #endregion
 
-        // TODO : I can use 'usings' and delegate the responsability. I prefer to refresh me how was done before.
-        // TODO : get last id (if proceed for relational tables, if it use FK_ID_RELATED_TABLE)
-        // TODO : Register at log at catch (SqliteException ex)
         #region Interface Implementation
 
         public long ExecuteCrud()
@@ -50,19 +57,16 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
             try
             {
-                connection = new SqliteConnection(_connectionString.GetConnectionString());
+                // TODO : ConnectionString must be know before hand (static class)
+                connection = new SqliteConnection(_connectionString.GetConnectionString()); 
 
                 if (connection.State != ConnectionState.Open)
                     connection.Open();
 
-                this._command.Connection = connection; 
-
                 transaction = connection.BeginTransaction();
-
+                this._command.Connection = connection; 
                 this._command.Transaction = transaction;
-
                 lid = this._command.ExecuteNonQuery();
-
                 flagCommit = true;
 
                 transaction.Commit();
@@ -70,10 +74,15 @@ namespace App.Infraestructure.Services.DAO.SqLite
             }
             catch (SqliteException ex)
             {
-                if (flagCommit == false)
+                try
+                {
                     transaction.Rollback();
-
-                msg = ex.Message;
+                }
+                catch (Exception ex2)
+                {
+                    msg = "Rollback Exception Type: " + ex2.GetType();
+                }
+                msg += ex.Message;
             }
             finally 
             {

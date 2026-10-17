@@ -8,15 +8,18 @@
 
   <ItemGroup>
     <Compile Remove="CORE\DDBB\**" />
-    <Compile Remove="Install - Refactoring\DbType\**" />
+    <Compile Remove="Installation\Deprecated\DbType\**" />
+    <Compile Remove="Installation\Deprecated\DbType\**" />
     <Compile Remove="OLD\**" />
     <Compile Remove="Services\DAO\**" />
     <EmbeddedResource Remove="CORE\DDBB\**" />
-    <EmbeddedResource Remove="Install - Refactoring\DbType\**" />
+    <EmbeddedResource Remove="Installation\Deprecated\DbType\**" />
+    <EmbeddedResource Remove="Installation\Deprecated\DbType\**" />
     <EmbeddedResource Remove="OLD\**" />
     <EmbeddedResource Remove="Services\DAO\**" />
     <None Remove="CORE\DDBB\**" />
-    <None Remove="Install - Refactoring\DbType\**" />
+    <None Remove="Installation\Deprecated\DbType\**" />
+    <None Remove="Installation\Deprecated\DbType\**" />
     <None Remove="OLD\**" />
     <None Remove="Services\DAO\**" />
   </ItemGroup>

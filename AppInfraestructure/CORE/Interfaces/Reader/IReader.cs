@@ -9,6 +9,6 @@ namespace App.Infraestructure.CORE.Interfaces.Reader
 
     public interface IAppXmlReader
     {
-        public string GetValueByKey();
+        public string GetValueByKey(string keyToSearch);
     }
 }
