@@ -1,10 +1,11 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
-//using Microsoft.IdentityModel.Tokens;
+﻿//using Microsoft.IdentityModel.Tokens;
 
 using App.Definitions.Entity;
+using App.Definitions.Interfaces.Config;
 using App.Infraestructure.CORE.Interfaces.DAOCommands;
 using App.Infraestructure.CORE.Interfaces.Database;
+using Microsoft.Data.Sqlite;
+using System;
 
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 
@@ -18,6 +19,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
     /// </remarks>
     public class UserCommandSqliteDAO : ICommandDAO //, IToken
     {
+        private readonly IConnectionStringService _connectionString;
         private const string SQL_INSERT = "INSERT INTO Users (Username, PasswordHash) VALUES (@Name, @Surname);";
         //private const string SQL_LAST_ID = "SELECT last_insert_rowid();";
 
@@ -61,20 +63,22 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// </remarks>
         public bool Insert(IDbExecutor db) // Permission needed >= 2
         {
-            // TODO : IMPORTANT -> don forget try / catch at logic Service.
+
             if (db == null) 
                 throw new ArgumentNullException(nameof(db));
 
             bool result = false;
+
+            // Preparamos el comando nativo de SQLite
             using (var cmd = new SqliteCommand(SQL_INSERT))
             {
                 cmd.Parameters.AddWithValue("@Name", _user.Name);
+                cmd.Parameters.AddWithValue("@Surname", _user.Surname); // hashnoseque
 
-                // NOTA IMPORTANTE: Me tengo q asegurar de guardar el Surname en PasswordHash.
-                cmd.Parameters.AddWithValue("@Surname", _user.Surname);
-
-                result = (db.ExecNonQuery(cmd) > 0);
+                // Se lo pasamos al ejecutor que ya sabe gestionar la conexión/transacción
+                result = db.ExecNonQuery(cmd);
             }
+
             return result;
         }
 

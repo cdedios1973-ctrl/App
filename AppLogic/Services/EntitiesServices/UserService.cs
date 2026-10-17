@@ -1,45 +1,57 @@
 ﻿using System;
-using Microsoft.IdentityModel.Tokens;
 
-using App.Models;
+using App.View.Models;
 using App.Definitions.Entity;
-using App.Definitions.Interfaces.DAOCommands;
+using App.Definitions.Interfaces.Config;
+using App.Infraestructure.Services.DAO.SqLite;
 using App.Logic.Security;
-using App.Definitions.Interfaces;
+//using Microsoft.IdentityModel.Tokens;
 
-// TODO : Necesito aplicar la "seguridad" antes de instanciar a esta clase,
 // TODO : Quitar checkuserpermission del constructor y useraccess.
-// TODO : Microsoft.IdentityModel.Tokens => (estudiar)
-
+// TODO : instanciar el UserService desde controlador pasándole IConnectionStringService
 
 namespace App.Logic.Services.Entities
 {
     internal class UserService
     {
-        private readonly IUserCommandsDAO _userCommandsDao;
-        private ITokenCredential _token;
+        private const string INCORRECT_PARAM = "Incorrect params.";
+        // 1. Declaramos el servicio como un campo de la clase
+        private readonly IConnectionStringService _connectionStringService;
+        private readonly User _user;
 
-        internal UserService(UserAccess user, IUserCommandsDAO userCommandsDao)
+        // 2. Lo pedimos por el constructor para que quien cree el UserService se lo pase
+        internal UserService(UserAccess user, UserDTO dto, IConnectionStringService connectionStringService)
         {
-
-            // 🧪 NOTA DE LABORATORIO PERSONAL:
-            // Sé que acoplar 'UserAccess' aquí rompe SOLID (Inversión de Dependencias) y POO (depender de clases concretas).
-            // En un entorno profesional, esta validación y el manejo de tokens se delegarían 
-            // al framework nativo mediante un Middleware, Claims y un IHttpContextAccessor (Inyección de Dependencias) (falta por aprender).
+            // TODO : prueba de permisos, quitarlo
             if (user.CheckUserPermission("UserService") <= 0)
                 throw new UnauthorizedAccessException("User has no permissions to this module.");
+            //_token = user; // Token temporal para pruebas.
 
-            _token = user; // temporal token, just for testing pourposes.
-            _userCommandsDao = userCommandsDao;
+            if (dto == null || string.IsNullOrEmpty(dto.Name))
+                throw new ArgumentException(nameof(dto), INCORRECT_PARAM);
+
+            if (connectionStringService == null)
+                throw new ArgumentNullException(nameof(connectionStringService));
+
+            this._user = new User(dto.Id, dto.Name, dto.Surname, dto.Address, dto.CountryIdentity);
+            this._connectionStringService = connectionStringService; // Asignamos la cadena
         }
 
-        public long Register(UserDTO dto)
+        public bool Register()
         {
-            User user = new User(dto.Id, dto.Name, dto.Surname, dto.Address, dto.CountryIdentity);
+            string cnnStr = this._connectionStringService.GetConnectionString();
 
-            long lid = _userCommandsDao.Insert(user, _token);
+            // 1. Abres el ejecutor una sola vez
+            using (var db = new DAOSqLiteBase(cnnStr))
+            {
+                // 2. Creas el comando mapeador con los datos del usuario
+                var userCommand = new UserCommandSqliteDAO(this._user);
 
-            return lid;
+                // 3. Lo ejecutas pasándole el motor
+                bool exito = userCommand.Insert(db);
+            }
+
+            return true;
         }
     }
 }

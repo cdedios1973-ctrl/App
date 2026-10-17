@@ -4,6 +4,7 @@
 //using App.Infraestructure.CORE.Interfaces.Path;
 //using App.Infraestructure.CORE.Reader;
 using App.Definitions.Enums;
+using App.Definitions.Interfaces.Config;
 using App.Infraestructure.CORE.Interfaces.Reader;
 
 /// <summary>

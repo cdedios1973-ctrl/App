@@ -17,7 +17,6 @@ namespace App.Infraestructure.CORE.Reader
 
     internal sealed class AppXmlReader : IAppXmlReader
     {
-        //private const string MISSING_KEY    = "Incorrect Database type.";
         private const string MISSING_FILE   = "Config file cannot be found.";
         private const string MISSING_KEY    = "Key to search cannot be empty";
         private const string MISSING_VALUE  = "Key value is empty, verify config file";
@@ -27,22 +26,12 @@ namespace App.Infraestructure.CORE.Reader
 
         #region Constructors
 
-        //internal AppXmlReader(IAppPathProvider pathProvider, DataBaseType dbType) 
         internal AppXmlReader(IAppPathProvider pathProvider) 
         {
-            /*
-            if (!Enum.IsDefined(typeof(DataBaseType), dbType))
-            {
-                throw new ArgumentException(MISSING_KEY, nameof(dbType));
-            }
-            this._key = dbType.ToString();
-            */
-
             if (pathProvider == null)
                 throw new ArgumentNullException(MISSING_FILE + "-", nameof(pathProvider));
 
             this._pathProvider = pathProvider;
-
         }
 
         #endregion
