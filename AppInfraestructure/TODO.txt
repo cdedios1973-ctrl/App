@@ -1,0 +1,13 @@
+﻿Volver a estudiar Auth. de Microsoft.
+
+Actualmente lo tengo con una clase UserAccess de forma temporal.
+
+Implementar los permisos de Lectura y Escritura en la base de datos en la capa Logica.
+A tener en cuenta que cuando un usuario intenta loguear necesita permisos básicos para unas tablas concretas.
+
+Puedo dividir la base de datos general con login en: 
+	- Base de datos principal y 
+	- Base de datos para Login (user,pass,userId)
+
+Para las consultas R (Lectura)   : Requiere nivel de permiso 1 o superior.
+Para las consultas W (Escritura) : Requiere nivel de permiso 2 o superior.

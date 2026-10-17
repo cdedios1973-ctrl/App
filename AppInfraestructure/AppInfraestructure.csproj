@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppDefinitions\AppDefinitions.csproj" />
+    <ProjectReference Include="..\AppViewModel\AppViewModel.csproj" />
   </ItemGroup>
 	
 
