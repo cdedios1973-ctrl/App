@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.View.Models
+namespace App.Definitions.DTO
 {
     [Serializable()]
     internal sealed class TasksDTO
@@ -28,17 +28,14 @@ namespace App.View.Models
         public long Id
         {
             get { return this._id; }
-            private set { }
         }
         public string Name
         {
             get { return this._name; }
-            private set { }
         }
         public string Observation
         {
             get { return this._observation; }
-            private set { }
         }
 
         #endregion

@@ -16,4 +16,13 @@
     <Compile Remove="Interfaces\DAOAttributes.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\Input\" />
+    <Folder Include="DTO\Output\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DTO\UserLoginInputDTO.cs" />
+  </ItemGroup>
+
 </Project>

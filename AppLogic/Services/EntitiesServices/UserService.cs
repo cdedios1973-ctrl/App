@@ -1,50 +1,38 @@
-﻿using System;
+﻿//using Microsoft.IdentityModel.Tokens;
 
-using App.View.Models;
+using App.Definitions.DTO;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
-using App.Infraestructure.Services.DAO.SqLite;
-using App.Logic.Security;
-//using Microsoft.IdentityModel.Tokens;
+using App.Definitions.Interfaces.Entity;
+using App.Infraestructure.CORE.Interfaces.DAOCommands;
 
 // TODO : instanciar el UserService desde controlador pasándole IConnectionStringService
+// TODO : Implementar Update y Delete
 
 namespace App.Logic.Services.Entities
 {
-    internal class UserService
+    internal class UserService : IUserService
     {
-        private const string INCORRECT_PARAM = "Incorrect params.";
+        private const string INCORRECT_PARAM = "Parámetros incorrectos.";
+        private readonly IUserCommandDAO _userDAO;
         private readonly IConnectionStringService _connectionStringService;
-        private readonly User _user;
+        private User _user;
 
-        internal UserService(UserAccess user, UserDTO dto, IConnectionStringService connectionStringService)
+        public UserService(IUserCommandDAO userDAO, IConnectionStringService connectionStringService)
         {
-            // TODO : prueba de permisos, quitarlo despues de ejecutar aplicacion
-            if (user.CheckUserPermission("UserService") <= 0)
-                throw new UnauthorizedAccessException("User has no permissions to this module.");
-
-            if (dto == null || string.IsNullOrEmpty(dto.Name))
-                throw new ArgumentException(nameof(dto), INCORRECT_PARAM);
-
-            if (connectionStringService == null)
-                throw new ArgumentNullException(nameof(connectionStringService));
-
-            this._user = new User(dto.Id, dto.Name, dto.Surname, dto.Address, dto.CountryIdentity);
-            this._connectionStringService = connectionStringService;
+            _userDAO = userDAO;
+            _connectionStringService = connectionStringService;
         }
 
-        public bool Register()
+        public bool AddNewUser(UserDTO user)
         {
-            bool ok = false;
-            string cnnStr = this._connectionStringService.GetConnectionString();
+            if (user == null)
+                throw new ArgumentException(nameof(user), INCORRECT_PARAM);
 
-            using (var db = new DAOSqLiteBase(cnnStr))
-            {
-                var userCommand = new UserCommandSqliteDAO(this._user);
-                ok = userCommand.Insert(db);
-            }
-
-            return ok;
+                // Convertimos el DTO a la entidad de negocio (POCO)
+                var userEntity = new User(user.Id, user.Name, user.Surname, user.Address, user.CountryIdentity);
+                // El DAO se encarga por dentro de abrir la conexión, la transacción y hacer el Rollback si falla.
+                return _userDAO.InsertWithTransaction(userEntity);
         }
     }
 }

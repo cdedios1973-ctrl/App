@@ -6,16 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CORE\DAOSqLiteBase_old.cs" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.3" />
 	</ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="Services\Read\" />
+    <Folder Include="Read\" />
   </ItemGroup>
 	
   <ItemGroup>

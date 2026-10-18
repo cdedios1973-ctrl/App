@@ -1,0 +1,119 @@
+﻿using App.Definitions.DTO;
+//using Microsoft.IdentityModel.Tokens;
+
+using App.Definitions.Entity;
+using App.Definitions.Interfaces.Config;
+using App.Infraestructure.CORE.Interfaces.DAOCommands;
+using Microsoft.Data.Sqlite;
+using System;
+
+// UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
+// TODO : Arreglar la documentacion, voy a crear una clase modelo vacio como ejemplo, con la documentacion alli, para no repetir mucho y dejar el codigo claro
+// TODO : Aprender a hacer hash de campos.
+
+namespace App.Infraestructure.Services.DAO.SqLite
+{
+    /// <summary>
+    /// Proporciona la implementación de comandos SQL de escritura para la entidad <see cref="User"/> en SQLite.
+    /// </summary>
+    /// <remarks>
+    /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
+    /// </remarks>
+    public class UserCommandSqliteDAO : IUserCommandDAO //, IToken
+    {
+        private readonly IConnectionStringService _connectionStringService;
+        private const string SQL_INSERT = "INSERT INTO Users (Username, Surname) VALUES (@Name, @Surname); SELECT last_insert_rowid();";
+        // TODO: Implementar constante sql de modificación y eliminacion
+        //private const string SQL_UPDATE = "";
+        //private const string SQL_DELETE = "";
+
+        #region Constructor
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UserCommandSqliteDAO"/> con el usuario a procesar.
+        /// </summary>
+        /// <param name="user">La entidad de usuario que contiene los datos para las operaciones.</param>
+        /// <exception cref="ArgumentNullException">Se lanza cuando el parámetro <paramref name="user"/> es nulo.</exception>
+        public UserCommandSqliteDAO(IConnectionStringService connectionStringService)
+        {
+            this._connectionStringService = connectionStringService;
+        }
+
+        #endregion
+
+        #region Interface Implementation
+
+        /// <summary>
+        /// Inserta el registro del usuario actual en la base de datos.
+        /// </summary>
+        /// <param name="db">El conector de la base de datos.</param>
+        /// <returns><see langword="true"/> si el registro se insertó correctamente; de lo contrario, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public long InsertTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+
+            long id;
+
+            try
+            {
+                using (var cmd = new SqliteCommand(SQL_INSERT, connection, transaction))
+                {
+                    // Mapeo seguro de parámetros
+                    cmd.Parameters.AddWithValue("@Name", user.Name);
+                    cmd.Parameters.AddWithValue("@PasswordHash", user.Surname);
+
+                    // Ejecuta y devuelve el ID generado por SQLite
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null && long.TryParse(result.ToString(), out long id))
+                    {
+                        //user.Id = id; // Sincronizamos el objeto de negocio con su nuevo ID técnico
+                        return id;
+                    }
+                }
+            }
+            catch (Exception) 
+            { 
+                throw new InvalidOperationException("Error crítico: El motor de base de datos no generó un ID válido."); 
+            }
+
+            return id;
+        }
+    }
+}
+
+    /// <summary>
+    /// Modifica el registro del usuario actual en la base de datos.
+    /// </summary>
+    /// <param name="db">El conector de la base de datos.</param>
+    /// <returns><see langword="true"/> si el registro se modificó correctamente; de lo contrario, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+    /// </remarks>
+    public long UpdateTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Elimina el registro del usuario actual de la base de datos.
+    /// </summary>
+    /// <param name="db">El conector de la base de datos.</param>
+    /// <returns><see langword="true"/> si el registro se eliminó correctamente; de lo contrario, <see langword="false"/>.</returns>
+    /// <remarks>
+    /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+    /// </remarks>
+    public bool DeleteTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+    {
+        throw new NotImplementedException();
+    }
+
+        #endregion
+
+    }
+}

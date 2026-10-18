@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.View.Models
+namespace App.Definitions.DTO
 {
     [Serializable()]
     internal sealed class UserLoginDTO
@@ -39,22 +39,18 @@ namespace App.View.Models
         public long Id
         {
             get { return this._id; }
-            private set { }
         }
         public long UserId
         {
             get { return this._userId; }
-            private set { }
         }
         public string UserName
         {
             get { return this._username; }
-            private set { }
         }
         public string Password
         {
             get { return this._password; }
-            private set { }
         }
 
         #endregion

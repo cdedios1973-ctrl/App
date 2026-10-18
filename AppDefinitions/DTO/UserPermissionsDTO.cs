@@ -1,8 +1,6 @@
 ﻿using System;
 
-// TODO : DONE : change UserAccessType to Int or smallint, check permission only need numbers
-
-namespace App.View.Models
+namespace App.Definitions.DTO
 {
     [Serializable()]
     internal sealed class UserPermissionsDTO
@@ -32,32 +30,26 @@ namespace App.View.Models
         public long Id
         {
             get { return this._id; }
-            private set { }
         }
         public long UserId
         {
             get { return this._userId; }
-            private set { }
         }
         public long PermissionId
         {
             get { return this._permissionId; }
-            private set { }
         }
         public string UserName
         {
             get { return this._userName; }
-            private set { }
         }
         public string PermissionName
         {
             get { return this._permissionName; }
-            private set { }
         }
         public int userAccessType
         {
             get { return this._accessType; }
-            private set { }
         }
 
         #endregion

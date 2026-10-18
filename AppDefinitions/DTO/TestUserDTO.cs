@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.View.Models
+namespace App.Definitions.DTO
 {
     [Serializable()]
     internal sealed class TestUserDTO
@@ -25,22 +25,18 @@ namespace App.View.Models
         public string Description 
         { 
             get { return this._description; }
-            private set { }
         }
         public string ButtonName 
         { 
             get { return this._buttonName;  }
-            private set { }
         }
         public string UserName 
         {
             get { return this._userName; }
-            private set { }
         }
         public string Password 
         {
             get { return this._password; }
-            private set { }
         }
 
         #endregion

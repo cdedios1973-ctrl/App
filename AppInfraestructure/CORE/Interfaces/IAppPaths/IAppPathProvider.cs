@@ -10,7 +10,7 @@ namespace App.Infraestructure.CORE.Interfaces.Path
         /// <summary>
         /// Devuelve la ruta de Acceso.
         /// </summary>
-        /// <returns>Devuelve true si el registro se insertó correctamente; de lo contrario, false.</returns>
+        /// <returns>Devuelve la ruta de acceso, vacio si no existe</returns>
         public string GetPath();
     }
 

@@ -1,13 +1,14 @@
-﻿//using Microsoft.IdentityModel.Tokens;
+﻿
+// Deprecated
 
+/*
+//using Microsoft.IdentityModel.Tokens;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
 using App.Infraestructure.CORE.Interfaces.DAOCommands;
 using App.Infraestructure.CORE.Interfaces.Database;
 using Microsoft.Data.Sqlite;
 using System;
-
-// UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 
 namespace App.Infraestructure.Services.DAO.SqLite
 {
@@ -17,7 +18,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
     /// <remarks>
     /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
     /// </remarks>
-    public class UserCommandSqliteDAO : ICommandDAO //, IToken
+    public class UserCommandSqliteDAO_bk : IUserCommandDAO //, IToken
     {
         private readonly IConnectionStringService _connectionString;
         private const string SQL_INSERT = "INSERT INTO Users (Username, PasswordHash) VALUES (@Name, @Surname);";
@@ -40,7 +41,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// </summary>
         /// <param name="user">La entidad de usuario que contiene los datos para las operaciones.</param>
         /// <exception cref="ArgumentNullException">Se lanza cuando el parámetro <paramref name="user"/> es nulo.</exception>
-        public UserCommandSqliteDAO(User user)
+        public UserCommandSqliteDAO_bk(User user)
         {
             if (user == null) 
                 throw new ArgumentNullException(nameof(user), EMPTY_CONSTRUCTOR); 
@@ -110,3 +111,4 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
     }
 }
+*/
