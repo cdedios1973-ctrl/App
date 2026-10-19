@@ -18,9 +18,9 @@ namespace App.Infraestructure.Services.DAO.SqLite
     /// <remarks>
     /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
     /// </remarks>
-    public class UserCommandSqliteDAO : IUserCommandDAO //, IToken
+    public class SqliteUserDao : IUserDao //, IToken
     {
-        private readonly IConnectionStringService _connectionStringService;
+        //private readonly IConnectionStringService _connectionStringService;
         private const string SQL_INSERT = "INSERT INTO Users (Username, Surname) VALUES (@Name, @Surname); SELECT last_insert_rowid();";
         // TODO: Implementar constante sql de modificación y eliminacion
         //private const string SQL_UPDATE = "";
@@ -29,13 +29,13 @@ namespace App.Infraestructure.Services.DAO.SqLite
         #region Constructor
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UserCommandSqliteDAO"/> con el usuario a procesar.
+        /// Inicializa una nueva instancia de la clase <see cref="SqliteUserDao"/> con el usuario a procesar.
         /// </summary>
         /// <param name="user">La entidad de usuario que contiene los datos para las operaciones.</param>
         /// <exception cref="ArgumentNullException">Se lanza cuando el parámetro <paramref name="user"/> es nulo.</exception>
-        public UserCommandSqliteDAO(IConnectionStringService connectionStringService)
+        public SqliteUserDao()// IConnectionStringService connectionStringService)
         {
-            this._connectionStringService = connectionStringService;
+            //this._connectionStringService = connectionStringService;
         }
 
         #endregion
@@ -50,7 +50,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// <remarks>
         /// **Seguridad:** Requiere nivel de permiso 2 o superior.
         /// </remarks>
-        public long InsertTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+        public long Insert(User user, SqliteConnection connection, SqliteTransaction transaction)
         {
             if (user == null)
                 throw new ArgumentNullException("user");
@@ -89,7 +89,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// <remarks>
         /// **Seguridad:** Requiere nivel de permiso 2 o superior.
         /// </remarks>
-        public long UpdateTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+        public long Update(User user, SqliteConnection connection, SqliteTransaction transaction)
         {
             throw new NotImplementedException();
         }
@@ -102,7 +102,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
     /// <remarks>
     /// **Seguridad:** Requiere nivel de permiso 2 o superior.
     /// </remarks>
-    public bool DeleteTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+    public bool Delete(User user, SqliteConnection connection, SqliteTransaction transaction)
     {
         throw new NotImplementedException();
     }

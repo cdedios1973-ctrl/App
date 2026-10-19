@@ -15,11 +15,11 @@ namespace App.Logic.Services.Entities
     internal class UserService : IUserService
     {
         private const string INCORRECT_PARAM = "Parámetros incorrectos.";
-        private readonly IUserCommandDAO _userDAO;
+        private readonly IUserDao _userDAO;
         private readonly IConnectionStringService _connectionStringService;
         private User _user;
 
-        public UserService(IUserCommandDAO userDAO, IConnectionStringService connectionStringService)
+        public UserService(IUserDao userDAO, IConnectionStringService connectionStringService)
         {
             _userDAO = userDAO;
             _connectionStringService = connectionStringService;
@@ -42,7 +42,7 @@ namespace App.Logic.Services.Entities
                 conn.Open();
                 trans = conn.BeginTransaction();
 
-                long newId = _userDAO.InsertTransactional(userEntity, conn, trans);
+                long newId = _userDAO.Insert(userEntity, conn, trans);
 
                 if (newId > 0)
                 {
