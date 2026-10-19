@@ -1,10 +1,11 @@
 ﻿using System;
 
-using App.View.Models;
-using App.Definitions.Filters;
+using App.Definitions.DTO;
 
-// TODO : DataFilter -> Pendiente de definir y testear. añadirle interfaz
-// TODO : Creo que si como segundo parametro le pongo isSearch a true, puedo usarlo como plantilla del where
+// TODO(NO) : DataFilter -> Pendiente de definir y testear. añadirle interfaz
+// TODO(NO) : Creo que si como segundo parametro le pongo isSearch a true, puedo usarlo como plantilla del where
+// TODO     : Usar "miClaseDTOFilter" desde la vista, creo que con este concepto puedo usar consultas LEFT/RIGHT/INNER basicos, necesitare identificador.
+// TODO     : (El dto de vista ya contiene la combinacion. dejarlo exclusivo para su uso original, no tocar.)
 
 namespace App.Infraestructure.CORE.Interfaces.DAOCommands
 {
@@ -19,7 +20,7 @@ namespace App.Infraestructure.CORE.Interfaces.DAOCommands
         /// <param name="db">El conector de la base de datos.</param>
         /// <param name="filter">El filtro de la consulta a la base de datos.</param>
         /// <returns>Devuelve una lista de usuarios (dto).</returns>
-        List<UserDTO> Select(UserDTO user, DataFilter filter);
+        List<UserDTO> UserQueryDAO(UserDTO user);//, DataFilter filter);
 
     }
 

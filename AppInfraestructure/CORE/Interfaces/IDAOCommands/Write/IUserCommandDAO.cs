@@ -1,6 +1,9 @@
-﻿using App.Definitions.Entity;
+﻿using System;
+
+using App.Definitions.Entity;
 using Microsoft.Data.Sqlite;
-using System;
+
+// TODO : arreglar documentacion
 
 namespace App.Infraestructure.CORE.Interfaces.DAOCommands
 {

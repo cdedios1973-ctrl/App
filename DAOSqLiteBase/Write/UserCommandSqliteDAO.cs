@@ -1,5 +1,4 @@
-﻿using App.Definitions.DTO;
-//using Microsoft.IdentityModel.Tokens;
+﻿//using Microsoft.IdentityModel.Tokens;
 
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
@@ -53,52 +52,47 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// </remarks>
         public long InsertTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
-            if (connection == null) throw new ArgumentNullException(nameof(connection));
-            if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+            if (user == null)
+                throw new ArgumentNullException("user");
 
-            long id;
+            long lid = 0;
+            SqliteCommand cmd = null;
 
             try
             {
-                using (var cmd = new SqliteCommand(SQL_INSERT, connection, transaction))
-                {
-                    // Mapeo seguro de parámetros
-                    cmd.Parameters.AddWithValue("@Name", user.Name);
-                    cmd.Parameters.AddWithValue("@PasswordHash", user.Surname);
+                cmd = new SqliteCommand(SQL_INSERT, connection, transaction);
+                cmd.Parameters.AddWithValue("@Name", user.Name);
+                cmd.Parameters.AddWithValue("@Surname", user.Surname);
 
-                    // Ejecuta y devuelve el ID generado por SQLite
-                    var result = cmd.ExecuteScalar();
+                object result = cmd.ExecuteScalar();
 
-                    if (result != null && long.TryParse(result.ToString(), out long id))
-                    {
-                        //user.Id = id; // Sincronizamos el objeto de negocio con su nuevo ID técnico
-                        return id;
-                    }
-                }
+                if (result != null && result != DBNull.Value)
+                    lid = Convert.ToInt64(result);
             }
-            catch (Exception) 
-            { 
-                throw new InvalidOperationException("Error crítico: El motor de base de datos no generó un ID válido."); 
+            catch (SqliteException)
+            {
+                throw;
             }
-
-            return id;
+            finally
+            {
+                if (cmd != null)
+                    ((IDisposable)cmd).Dispose();
+            }
+            return lid;
         }
-    }
-}
 
-    /// <summary>
-    /// Modifica el registro del usuario actual en la base de datos.
-    /// </summary>
-    /// <param name="db">El conector de la base de datos.</param>
-    /// <returns><see langword="true"/> si el registro se modificó correctamente; de lo contrario, <see langword="false"/>.</returns>
-    /// <remarks>
-    /// **Seguridad:** Requiere nivel de permiso 2 o superior.
-    /// </remarks>
-    public long UpdateTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
-    {
-        throw new NotImplementedException();
-    }
+        /// <summary>
+        /// Modifica el registro del usuario actual en la base de datos.
+        /// </summary>
+        /// <param name="db">El conector de la base de datos.</param>
+        /// <returns><see langword="true"/> si el registro se modificó correctamente; de lo contrario, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public long UpdateTransactional(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
 
     /// <summary>
     /// Elimina el registro del usuario actual de la base de datos.
