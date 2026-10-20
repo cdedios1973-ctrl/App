@@ -8,7 +8,7 @@ using System;
 
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 // TODO : Arreglar la documentacion, voy a crear una clase modelo vacio como ejemplo, con la documentacion alli, para no repetir mucho y dejar el codigo claro
-// TODO : Aprender a hacer hash de campos.
+// TODO : Hash de campos.
 
 namespace App.Infraestructure.Services.DAO.SqLite
 {

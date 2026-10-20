@@ -2,7 +2,7 @@
 using App.Definitions.Enums;
 
 
-namespace App.Definitions.Filters
+namespace AppDefinitions.Deprecated.DataFilters
 {
 
     // first filter = WHERE - HAVING (two classes)
@@ -24,7 +24,7 @@ namespace App.Definitions.Filters
 
         public DataFilterList(SQLClausule clausule, string fieldName, SQLSyntax syntax, string value)
         {
-            this.AddFilter(clausule, fieldName, syntax, value);
+            AddFilter(clausule, fieldName, syntax, value);
         }
 
         #endregion
@@ -33,7 +33,7 @@ namespace App.Definitions.Filters
 
         public List<DataFilter> GetFilter
         {
-            get { return this._filter; }
+            get { return _filter; }
         }
 
         #endregion
@@ -42,12 +42,12 @@ namespace App.Definitions.Filters
 
         public void AddFilter(SQLClausule clausule, string fieldName, SQLSyntax syntax, string value)
         {
-            this._filter.Add(new DataFilter(clausule, fieldName, syntax, value));
+            _filter.Add(new DataFilter(clausule, fieldName, syntax, value));
         }
 
         public void Clear()
         {
-            this._filter.Clear();
+            _filter.Clear();
         }
 
         #endregion

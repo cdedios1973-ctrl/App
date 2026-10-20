@@ -1,7 +1,7 @@
 ﻿using System;
 using App.Definitions.Enums;
 
-namespace App.Definitions.Filters
+namespace AppDefinitions.Deprecated.DataFilters
 {
     /*  Class designed to add parameters to sql queries */
 
@@ -25,10 +25,10 @@ namespace App.Definitions.Filters
                 throw new ArgumentNullException(nameof(value));
             }
 
-            this._fieldName = fieldName;
-            this._syntax = syntax.ToString();
-            this._value = value;
-            this._clausule = clausule.ToString();
+            _fieldName = fieldName;
+            _syntax = syntax.ToString();
+            _value = value;
+            _clausule = clausule.ToString();
         }
 
         #endregion
@@ -37,22 +37,22 @@ namespace App.Definitions.Filters
 
         public string Clausule
         { 
-            get { return this._clausule; } 
+            get { return _clausule; } 
         }
 
         public string FieldName
         { 
-            get { return this._fieldName; } 
+            get { return _fieldName; } 
         }
 
         public string Syntax
         { 
-            get { return this._syntax; } 
+            get { return _syntax; } 
         }
 
         public string Value
         { 
-            get { return this._value; } 
+            get { return _value; } 
         }
 
         #endregion

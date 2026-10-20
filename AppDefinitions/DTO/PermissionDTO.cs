@@ -1,8 +1,9 @@
 ﻿using System;
 
-namespace App.Definitions.Entity
+namespace App.Definitions.DTO
 {
-    public sealed class Permissions
+    [Serializable()]
+    internal sealed class PermissionDTO
     {
         private readonly long _id = 0;
         private readonly string _parent;
@@ -10,8 +11,7 @@ namespace App.Definitions.Entity
         private readonly string _observation;
 
         #region Constructors
-
-        public Permissions(long id, string parent, string name, string observation)
+        internal PermissionDTO(long id, string parent, string name, string observation)
         {
             if (string.IsNullOrWhiteSpace(parent))
             {
@@ -34,22 +34,18 @@ namespace App.Definitions.Entity
         public long Id
         {
             get { return this._id; }
-            private set { }
         }
         public string Parent
         {
             get { return this._parent; }
-            private set { }
         }
         public string Name
         {
             get { return this._name; }
-            private set { }
-        }        
+        }
         public string Observation
         {
             get { return this._observation; }
-            private set { }
         }
 
         #endregion

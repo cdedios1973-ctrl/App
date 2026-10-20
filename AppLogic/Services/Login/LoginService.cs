@@ -1,10 +1,10 @@
 ﻿using System;
 using App.Definitions.Enums;
-using App.Definitions.Filters;
 using App.Models.DTO;
 using App.Logic.Models.POCO;
 
 using App.Infraestructure.DAO;
+using AppDefinitions.Deprecated.DataFilters;
 
 namespace App.Logic.Security
 {

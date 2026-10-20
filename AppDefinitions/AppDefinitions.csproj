@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Input\" />
-    <Folder Include="DTO\Output\" />
+    <Folder Include="DTO\FilterDto\" />
+    <Folder Include="Entity\Services\" />
   </ItemGroup>
 
   <ItemGroup>

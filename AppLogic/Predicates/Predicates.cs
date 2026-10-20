@@ -18,17 +18,17 @@ namespace App.Logic.Predicate
             };
         }
 
-        public static Predicate<Permissions> ByPermissionId(long id)
+        public static Predicate<Permission> ByPermissionId(long id)
         {
-            return delegate (Permissions item)
+            return delegate (Permission item)
             {
                 return item.Id == id;
             };
         }
 
-        public static Predicate<Permissions> ByPermissionName(string moduleName)
+        public static Predicate<Permission> ByPermissionName(string moduleName)
         {
-            return delegate (Permissions item)
+            return delegate (Permission item)
             {
                 return item.Name == moduleName;
             };

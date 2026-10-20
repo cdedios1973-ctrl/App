@@ -1,3 +1,5 @@
 ﻿DTOs Structure for this demo:
 
-Explicit fields (private / private readonly), and Serializable attribute.
+	- Explicit fields (Private / Private Readonly / Properties exposure)
+	- Serializable attribute : parse the output for any view.
+	- Folder FilterDto : (WIP) 

@@ -1,7 +1,7 @@
 ﻿using System;
 
 using App.Definitions.DTO;
-using App.Definitions.Filters;
+using AppDefinitions.Deprecated.DataFilters;
 
 // TODO : DataFilter -> Pendiente de definir y testear. añadirle interfaz
 // TODO : Creo que si le pongo como segundo parametro isSearch a true, puedo usarlo como plantilla del where

@@ -7,9 +7,9 @@ namespace App.Infrastructure.Core.Interfaces.Dao
 {
     public interface IPermissionDao
     {
-        long Insert(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction);
-        long Update(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction);
-        bool Delete(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction);
+        long Insert(Permission permissions, SqliteConnection connection, SqliteTransaction transaction);
+        long Update(Permission permissions, SqliteConnection connection, SqliteTransaction transaction);
+        bool Delete(Permission permissions, SqliteConnection connection, SqliteTransaction transaction);
 
     }
 }

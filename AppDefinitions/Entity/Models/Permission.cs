@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace App.Definitions.DTO
+namespace App.Definitions.Entity
 {
-    [Serializable()]
-    internal sealed class PermissionsDTO
+    public sealed class Permission
     {
         private readonly long _id = 0;
         private readonly string _parent;
@@ -11,7 +10,8 @@ namespace App.Definitions.DTO
         private readonly string _observation;
 
         #region Constructors
-        internal PermissionsDTO(long id, string parent, string name, string observation)
+
+        public Permission(long id, string parent, string name, string observation)
         {
             if (string.IsNullOrWhiteSpace(parent))
             {
@@ -42,7 +42,7 @@ namespace App.Definitions.DTO
         public string Name
         {
             get { return this._name; }
-        }
+        }        
         public string Observation
         {
             get { return this._observation; }

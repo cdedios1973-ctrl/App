@@ -21,7 +21,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
 
         #region Interface Implementation
 
-        public long Insert(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction)
+        public long Insert(Permission permissions, SqliteConnection connection, SqliteTransaction transaction)
         {
             if (permissions == null)
                 throw new ArgumentNullException("permissions");
@@ -52,12 +52,12 @@ namespace App.Infraestructure.Services.DAO.SqLite
             return lid;
         }
 
-        public long Update(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction)
+        public long Update(Permission permissions, SqliteConnection connection, SqliteTransaction transaction)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Permissions permissions, SqliteConnection connection, SqliteTransaction transaction)
+        public bool Delete(Permission permissions, SqliteConnection connection, SqliteTransaction transaction)
         {
             throw new NotImplementedException();
         }
