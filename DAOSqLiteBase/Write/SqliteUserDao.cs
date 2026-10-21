@@ -1,13 +1,13 @@
-﻿//using Microsoft.IdentityModel.Tokens;
+﻿using System;
+using Microsoft.Data.Sqlite;
+
+//using Microsoft.IdentityModel.Tokens;
 
 using App.Definitions.Entity;
-using App.Definitions.Interfaces.Config;
 using App.Infraestructure.CORE.Interfaces.DAOCommands;
-using Microsoft.Data.Sqlite;
-using System;
 
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
-// TODO : Arreglar la documentacion, voy a crear una clase modelo vacio como ejemplo, con la documentacion alli, para no repetir mucho y dejar el codigo claro
+// TODO : Arreglar la documentacion
 // TODO : Hash de campos.
 
 namespace App.Infraestructure.Services.DAO.SqLite

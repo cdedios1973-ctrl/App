@@ -1,56 +1,71 @@
 ﻿using System;
-using App.Definitions.Enums;
-using App.Models.DTO;
-using App.Logic.Models.POCO;
 
-using App.Infraestructure.DAO;
-using AppDefinitions.Deprecated.DataFilters;
+using App.Definitions.Entity;
+using App.Definitions.Interfaces.Config;
+using App.Definitions.Interfaces.Login;
+
+//using App.Definitions.DTO;
+//using App.Definitions.Enums;
+//using App.Infraestructure.CORE.Interfaces.DAOCommands;
+//using App.Infraestructure.DAO;
+//using App.Logic.Models.POCO;
+//using App.Models.DTO;
+//using AppDefinitions.Deprecated.DataFilters;
+
+// TODO : Implementar seguridad de microsoft.
+// TODO : instanciar el LoginService desde controlador pasándole ILoginService.
+// TODO : Recordar que IConnectionStringService se inicializara en el inicio de la aplicacion
 
 namespace App.Logic.Security
 {
-
-    // TODO : IP block, attemps, other security options
-    // TODO : Dirrefent layers. (Microsoft security, or for pure boredoom testing, make my own
-    internal sealed class LoginService
+    internal sealed class LoginService : ILoginService
     {
-        private const string INPUT_FORBIDDEN = "User not found.";
+        //private const string INPUT_FORBIDDEN = "User not found.";
+        //private string _userName;
+        //private string _password;
+        //private UserAccess _userToLogin;
+        //private const string INCORRECT_PARAM = "Parámetros incorrectos.";
 
-        private string _userName;
-        private string _password;
-        private UserAccess _userToLogin;
-
+        private readonly ILoginDao _loginDao;
+        private readonly IConnectionStringService _connectionStringService;
+        
         #region Constructors.
 
-        internal LoginService(UserLoginInput input, UserAccess userToLogin)
+        internal LoginService(ILoginDao userToLogin, IConnectionStringService connectionStringService)
         {
-            this._userName = input.User;
-            this._password = input.Password;
-            this._userToLogin = userToLogin;
+
+            this._loginDao = userToLogin;
+            this._connectionStringService = connectionStringService;
+            //this._userName = input.User;
+            //this._password = input.Password;
+            //this._userToLogin = userToLogin;
         }
 
         #endregion
 
         #region Login -> DAO
+
+        public User Login(UserLogin userToLogin) // <- Implementacion de interfaz
+        {
+            return _loginDao.LoginAction(userToLogin, _connectionStringService);
+        }
+
+
+        // Deprecated
+        /*
         internal bool LoginAction()
         {
             UserDTO user;
             List<UsersPermission> permissions;
-
             try
             {
                 // TODO : Filter class redoo
-
                 DataFilterList filter = new DataFilterList(SQLClausule.WHERE, "UserName", "=", this._userName);
                 filter.AddFilter(" AND ", "Password", "=", this._password);
-
-
                 // TODO : redoo DAO to send class with data.
                 // call could be List<UserLogin> users = new DAOData<UserLogin>(this._userToLogin).GetData;
-
                 // TODO : Remove generic at DAO
-
                 List<UserLogin> users = new DAOData<UserLogin>(this._userToLogin, filter).GetData;
-
                 if (users.Count == 1)
                 {
                     filter.Clear();
@@ -73,9 +88,10 @@ namespace App.Logic.Security
             { 
                 throw new Exception(ex.Message); 
             }
-
             return this._userToLogin.IsUserAuthenticated;
         }
+        */
+
 
         #endregion
     
