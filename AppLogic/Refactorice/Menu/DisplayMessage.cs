@@ -1,8 +1,13 @@
-﻿namespace App.Logic
+﻿using System;
+
+// TODO : Messaging -> es mas facil, ya no hace falta el swicth, con el interfaz la consola puede pintar su menu.
+
+/*
+using App.Enums;
+using App.Events;
+
+namespace App.Logic
 {
-    using System;
-    using App.Enums;
-    using App.Events;
 
     public static class DisplayMessage
     {
@@ -54,3 +59,5 @@
 
     }
 }
+
+*/

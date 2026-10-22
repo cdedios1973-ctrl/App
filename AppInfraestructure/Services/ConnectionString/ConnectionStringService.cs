@@ -1,24 +1,21 @@
 ﻿using System;
 
-//using App.Infraestructure.CORE;
-//using App.Infraestructure.CORE.Interfaces.Path;
-//using App.Infraestructure.CORE.Reader;
 using App.Definitions.Enums;
 using App.Definitions.Interfaces.Config;
-using App.Infraestructure.CORE.Interfaces.Reader;
+using TaskHub.Infrastructure.Reader;
 
 /// <summary>
 /// Class ConnectionStringService : Return the connection string of the indicated database.
 /// </summary>
 
-namespace App.Infraestructure.Services
+namespace TaskHub.Infrastructure.Services
 {
     internal sealed class ConnectionStringService : IConnectionStringService
     {
         private const string DATABASE_TYPE_ERROR    = "Must select Database type.";
         private const string DATABASE_SUFFIX        = "Connection";
-        private readonly string _key;
-        private readonly IAppXmlReader _xmlReader;
+        private readonly string                     _key;
+        private readonly IAppXmlReader              _xmlReader;
 
         #region Constructor
 

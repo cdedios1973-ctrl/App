@@ -1,7 +1,11 @@
-﻿namespace App.Logic.IO
+﻿using System;
+
+// deprecated
+/*
+using AppLogic.Services.Input;
+
+namespace App.Logic.IO
 {
-    using System;
-    using AppLogic.Services.Input;
 
     //TODO : change DS when "s" at setMenuCommandList()
 
@@ -175,3 +179,4 @@
 
     }
 }
+*/

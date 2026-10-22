@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Infrastructure.Reader
+namespace TaskHub.Infrastructure.Reader
 {
     public interface IAppXmlReader
     {

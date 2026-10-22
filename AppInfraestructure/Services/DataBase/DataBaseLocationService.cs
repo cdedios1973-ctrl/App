@@ -1,14 +1,14 @@
-﻿using App.Definitions.Enums;
-using App.Infraestructure.CORE;
-using App.Infraestructure.CORE.Interfaces.Path;
-using App.Infraestructure.CORE.Interfaces.Reader;
-using System;
+﻿using System;
+
+using App.Definitions.Enums;
+using TaskHub.Infrastructure.Path;
+using TaskHub.Infrastructure.Reader;
 
 /// <Summary>
 /// DataBaseFolderService -> Return database full path and filename
 /// </Summary>
 
-namespace App.Infraestructure.Services
+namespace TaskHub.Infrastructure.Services
 {
     internal sealed class DataBaseLocationService //: IDatabaseFolderService
     {

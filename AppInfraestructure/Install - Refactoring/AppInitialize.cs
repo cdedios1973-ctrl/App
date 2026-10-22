@@ -1,13 +1,20 @@
-﻿namespace App.Config.DDBB
-{
-    using App.Definitions.Enums;
-    using App.Definitions.Events;
-    //using App.Logic;
-    //using App.Logic.IO.Handler;
+﻿
+// deprecated
 
+/*
+
+using App.Definitions.Enums;
+using App.Definitions.Events;
+//using App.Logic;
+//using App.Logic.IO.Handler;
+
+
+namespace App.Config.DDBB
+{
     internal class AppInitialize
     {
         // TODO: Split classess : data population (done), ddbb creation, and all clases.... split Actions.
+        // TODO: If user initializr for first time, no permissions needed, else look for admin privilegies (for testing pourposes)
 
         public static AppMessageHandler messageHandler = new AppMessageHandler();
 
@@ -36,14 +43,6 @@
         private DataBaseType                _dbType;
         private DisplaType                  _displayType;
         //private static UserAccess _userAccess;
-
-
-
-        // TODO:
-        // If user initializr for first time, no permissions needed
-        // else look for admin privilegies (for testing pourposes)
-        // not doable and remove this option before production.
-
 
         #region Constructors
 
@@ -81,17 +80,7 @@
             throw new Exception(message);
         }
 
-        /*
-        private void MessageHandler_UpdateStatus(object? sender, EventArgs e)
-        {
-            if (this._displayType == DisplaType.Console)
-            {
-                UpdateStatusEventArgs use = (UpdateStatusEventArgs)e;
-                string output = TASK + use.Message + " -> " + use.Status;
-                Console.WriteLine(output);
-            }
-        }
-        */
+
 
         #endregion
 
@@ -238,3 +227,17 @@
 
     }
 }
+
+ */
+
+/*
+private void MessageHandler_UpdateStatus(object? sender, EventArgs e)
+{
+    if (this._displayType == DisplaType.Console)
+    {
+        UpdateStatusEventArgs use = (UpdateStatusEventArgs)e;
+        string output = TASK + use.Message + " -> " + use.Status;
+        Console.WriteLine(output);
+    }
+}
+*/

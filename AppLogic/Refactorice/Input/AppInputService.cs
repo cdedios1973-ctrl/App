@@ -1,4 +1,7 @@
 ﻿using System;
+
+// deprecated 
+/* Para la consola puedo usar un manejedor alli.
 using App.Definitions.Enums;
 using App.Logic.IO;
 using App.Logic.IO.Handler;
@@ -152,3 +155,5 @@ namespace App.Logic.Services.Input
     
     }
 }
+
+*/

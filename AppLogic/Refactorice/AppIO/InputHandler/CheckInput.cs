@@ -1,5 +1,7 @@
 ﻿using System;
 
+// deprecated
+/*
 namespace App.Logic.IO.Handler
 {
 
@@ -26,18 +28,16 @@ namespace App.Logic.IO.Handler
 
         #endregion
 
-        /* IA Help
         /// <summary>
         /// Evalúa si el texto contiene caracteres o patrones prohibidos.
         /// </summary>
-        public static bool IsDangerous(string input)
-        {
-            if (string.IsNullOrEmpty(input)) return false;
+        //public static bool IsDangerous(string input)
+        //{
+        //    if (string.IsNullOrEmpty(input)) return false;
 
             // Retorna TRUE inmediatamente si encuentra cualquier coincidencia
-            return ForbiddenPatterns.Any(pattern => input.Contains(pattern));
-        }
-        */
-
+        //    return ForbiddenPatterns.Any(pattern => input.Contains(pattern));
+        //}
     }
 }
+*/

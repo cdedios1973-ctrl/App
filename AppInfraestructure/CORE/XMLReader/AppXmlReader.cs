@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Xml;
 
-using App.Infrastructure.Path;
-
-/// <summary>
-/// Fixed usage: Return value of XML node.
-/// </summary>
+using TaskHub.Infrastructure.Path;
 
 // TODO : Apply security (Microsfot security namespace, search & learn)
 // UPGRADE : AT xmlDoc.Load(filePath) -> Could Create streamreader, 
 // FIXED : Add param 'node' to have more flexibility.
 
-namespace App.Infrastructure.Reader
+namespace TaskHub.Infrastructure.Reader
 {
-
+    /// <summary>
+    /// Fixed usage: Return value of XML node.
+    /// </summary>
     internal sealed class AppXmlReader : IAppXmlReader
     {
         private const string MISSING_FILE   = "Config file cannot be found.";

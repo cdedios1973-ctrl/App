@@ -1,12 +1,18 @@
 ﻿using System;
 using System.IO;
 
-/// <summary>
-/// Return 'base' directory of the Application configuration file
-/// </summary>
+using TaskHub.Infrastructure.Path;
 
-namespace App.Infrastructure.Path
+// TODO : Unir los servicios de ruta a uno -> para encontrar la base de datos y para encontrar el archivo de configuracion
+// TODO : Es mas, podria devolver un Dictionary<string, string> con las rutas necesarias para el uso de la aplicacion
+// TODO : Tener en cuenta como se estructuran los directorio en Linux, por si hay que implementar una segunda interfaz de SO.
+// TODO : Ej : (app root/database) (app root/Config)
+
+namespace TaskHub.Infrastructure.Services
 {
+    /// <summary>
+    /// Return 'base' directory of the Application configuration file
+    /// </summary>
     internal sealed class DefaultAppConfigPath : IAppPathProvider
     {
         private readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -28,7 +34,7 @@ namespace App.Infrastructure.Path
 
         #region Interface Implementation
 
-        public string GetPath()
+        public string GetPath() // TODO : cambiar la implementacion del interface para que admita lo que voy a buscar. (base de datos o archivo de configuracion)
         {
             string fullpath = Path.Combine(_baseDirectory, $"{_assemblyName}" + this._extension);
 

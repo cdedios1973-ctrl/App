@@ -1,12 +1,17 @@
-﻿namespace App.Logic.IO
-{
-    using System.Reflection;
+﻿// deprecated
 
-    using App.Models;
-    using App.Enums;
-    using App.Interfaces;
-    using App.DAO;
-    using AppLogic.Services.Input;
+/*
+using System.Reflection;
+
+using App.Models;
+using App.Enums;
+using App.Interfaces;
+using App.DAO;
+using AppLogic.Services.Input;
+
+
+namespace App.Logic.IO
+{
 
     internal static class ConsoleOutput
     {
@@ -140,3 +145,5 @@
 
     }
 }
+
+*/

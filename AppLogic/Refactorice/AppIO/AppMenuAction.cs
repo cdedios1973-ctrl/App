@@ -1,12 +1,22 @@
-﻿namespace App.Logic.IO.Handler
+﻿using System;
+
+
+// deprecated
+
+/*
+
+using App.Models;
+using App.Definitions.Enums;
+using App.Definitions.Interfaces;
+using App.Config.DDBB;
+using App.DAO;
+using AppLogic.Services.Input;
+using AppDefinitions.Deprecated.DataFilters;
+
+
+
+namespace App.Logic.IO.Handler
 {
-    using App.Models;
-    using App.Definitions.Enums;
-    using App.Definitions.Interfaces;
-    using App.Config.DDBB;
-    using App.DAO;
-    using AppLogic.Services.Input;
-    using AppDefinitions.Deprecated.DataFilters;
 
     //TODO: Apply 'pagination' (users like... permissions like... etc)
     public class AppMenuAction
@@ -225,3 +235,4 @@
     
     }
 }
+*/

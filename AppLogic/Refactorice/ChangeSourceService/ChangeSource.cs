@@ -1,4 +1,8 @@
 ﻿using System;
+
+// deprecated
+
+/*
 using App.Definitions.Enums;
 using App.Definitions.Interfaces.Commands;
 
@@ -38,3 +42,4 @@ namespace AppLogic.Refactorice.ChangeSourceService
 
     }
 }
+*/

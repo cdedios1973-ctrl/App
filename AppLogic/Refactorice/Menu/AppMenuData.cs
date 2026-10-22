@@ -1,7 +1,11 @@
-﻿namespace App.Logic.Input
+﻿using System;
+
+// deprecated
+/*
+using App.Models;
+
+namespace App.Logic.Input
 {
-    using System;
-    using App.Models;
 
     public class AppMenuData
     {
@@ -57,3 +61,5 @@
 
     }
 }
+
+*/

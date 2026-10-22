@@ -84,24 +84,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DAO\DAO.csproj">
-      <Project>{FB44566F-8DEF-4455-9C60-FAAE027B6534}</Project>
-      <Name>DAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DbLib\DbLib.csproj">
-      <Project>{7EC07B7A-89E7-48B6-B06E-1A1E8B198611}</Project>
-      <Name>DbLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDAOLib\IDAO.csproj">
-      <Project>{7933F8A8-2FC2-4F4B-922A-34496CB46C05}</Project>
-      <Name>IDAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{FB7B5E01-3D4F-48AE-ACF4-FBF197A62BDF}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

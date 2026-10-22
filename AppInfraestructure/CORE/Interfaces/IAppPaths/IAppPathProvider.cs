@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Infrastructure.Path
+namespace TaskHub.Infrastructure.Path
 {
     /// <summary>
     /// Esta interfaz define las acciones básicas obtener la ruta de acceso.
@@ -12,6 +12,7 @@ namespace App.Infrastructure.Path
         /// </summary>
         /// <returns>Devuelve la ruta de acceso, vacio si no existe</returns>
         public string GetPath();
+    
     }
 
 }

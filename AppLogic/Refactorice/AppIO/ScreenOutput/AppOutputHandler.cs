@@ -1,9 +1,15 @@
-﻿namespace App.Logic.IO
+﻿// deprecated
+
+/*
+using App.Models;
+using App.Enums;
+using App.Interfaces;
+using AppLogic.Services.Input;
+
+
+
+namespace App.Logic.IO
 {
-    using App.Models;
-    using App.Enums;
-    using App.Interfaces;
-    using AppLogic.Services.Input;
 
     public static class AppOutputHandler
     {
@@ -136,3 +142,4 @@
 
     }
 }
+*/
