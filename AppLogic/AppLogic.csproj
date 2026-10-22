@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppInfraestructure\AppInfraestructure.csproj" />
-    <ProjectReference Include="..\DAOSqLiteBase\DAOSqLiteBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

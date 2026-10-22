@@ -1,4 +1,10 @@
 ﻿using System;
+
+
+// Deprecated -> Movido a Infrastructure
+
+/*
+
 //using Microsoft.IdentityModel.Tokens;
 using Microsoft.Data.Sqlite;
 using App.Definitions.Entity;
@@ -108,3 +114,4 @@ namespace App.Infrastructure.Persistence
 
     }
 }
+*/

@@ -1,4 +1,8 @@
 ﻿using System;
+
+// Deprecated -> Movido a infrastructure
+
+/*
 //using Microsoft.IdentityModel.Tokens;
 
 using Microsoft.Data.Sqlite;
@@ -68,3 +72,4 @@ namespace App.Infrastructure.Persistence
         #endregion
     }
 }
+*/

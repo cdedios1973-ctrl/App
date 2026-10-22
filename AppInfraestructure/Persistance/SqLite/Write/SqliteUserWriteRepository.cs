@@ -1,0 +1,165 @@
+﻿using System;
+//using Microsoft.IdentityModel.Tokens;
+using Microsoft.Data.Sqlite;
+using App.Definitions.Entity;
+
+// TODO : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
+// UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
+// TODO : Hash de campos. si fuera necesario. repasar.
+namespace App.Infrastructure.Persistence
+{
+    /// <summary>
+    /// Proporciona la implementación de comandos SQL de escritura para la entidad <see cref="User"/> en SQLite.
+    /// </summary>
+    /// <remarks>
+    /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
+    /// </remarks>
+    public class SqliteUserWriteRepository : IUserWriteRepository //, IToken
+    {
+        private const string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
+        private const string SQL_UPDATE = "UPDATE User SET (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity) WHERE ID = @Id;";
+        private const string SQL_DELETE = "DELETE FROM User WHERE ID = @Id; ";
+        //private readonly IConnectionStringService _connectionStringService;
+
+        #region Constructor
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="SqliteUserWriteRepository"/>.
+        /// </summary>
+
+        public SqliteUserWriteRepository() //IConnectionStringService connectionStringService)
+        {
+            //this._connectionStringService = connectionStringService;
+        }
+
+        #endregion
+
+        #region Interface Implementation
+
+        /// <summary>
+        /// Inserta el registro del usuario actual en la base de datos.
+        /// </summary>
+        /// <param name="user">La entidad User a insertar en la base de datos.</param>
+        /// <param name="connection">El conector de la base de datos.</param>
+        /// <param name="transaction">La transaccion de la conexión.</param>
+        /// <returns><see langword="long"/>Devuelve el ultimo Id insertado en la base de datos.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public long Insert(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            long lid = 0;
+            SqliteCommand cmd = null;
+
+            try
+            {
+                cmd = new SqliteCommand(SQL_INSERT, connection, transaction);
+                cmd.Parameters.Add("@Name", SqliteType.Text).Value = user.Name;
+                cmd.Parameters.Add("@Surname", SqliteType.Text).Value = user.Surname;
+                cmd.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
+                cmd.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                    lid = (long)result;
+            }
+            catch (SqliteException)
+            {
+                throw;
+            }
+            finally
+            {
+                if (cmd != null)
+                    ((IDisposable)cmd).Dispose();
+            }
+            return lid;
+        }
+
+        /// <summary>
+        /// Modifica el registro del usuario actual en la base de datos.
+        /// </summary>
+        /// <param name="user">La entidad User a modificar en la base de datos.</param>
+        /// <param name="connection">El conector de la base de datos.</param>
+        /// <param name="transaction">La transaccion de la conexión.</param>
+        /// <returns><see langword="long"/>Devuelve el Id de usuario si la operación es un éxito, 0 si falla.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public long Update(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            long lid = 0;
+            SqliteCommand cmd = null;
+
+            try
+            {
+                cmd = new SqliteCommand(SQL_UPDATE, connection, transaction);
+                cmd.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
+                cmd.Parameters.Add("@Name", SqliteType.Text).Value = user.Name;
+                cmd.Parameters.Add("@Surname", SqliteType.Text).Value = user.Surname;
+                cmd.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
+                cmd.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
+
+                if (cmd.ExecuteNonQuery() > 0)
+                    lid = user.Id;
+            }
+            catch (SqliteException)
+            {
+                throw;
+            }
+            finally
+            {
+                if (cmd != null)
+                    ((IDisposable)cmd).Dispose();
+            }
+            return lid;
+
+        }
+
+        /// <summary>
+        /// Elimina el registro del usuario actual en la base de datos.
+        /// </summary>
+        /// <param name="user">La entidad User a eliminar de la base de datos.</param>
+        /// <param name="connection">El conector de la base de datos.</param>
+        /// <param name="transaction">La transaccion de la conexión.</param>
+        /// <returns><see langword="bool"/>Devuelve true si se ha procesado correctamente ; false en caso contrario.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public bool Delete(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            int result = 0;
+            SqliteCommand cmd = null;
+
+            try
+            {
+                cmd = new SqliteCommand(SQL_DELETE, connection, transaction);
+                cmd.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
+
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (SqliteException)
+            {
+                throw;
+            }
+            finally
+            {
+                if (cmd != null)
+                    ((IDisposable)cmd).Dispose();
+            }
+            return result > 0;
+        }
+
+        #endregion
+
+    }
+}

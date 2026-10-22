@@ -1,4 +1,10 @@
 ﻿using System;
+
+
+// Deprecated -> Movido a Infrastructure
+
+/*
+
 //using Microsoft.IdentityModel.Tokens;
 using Microsoft.Data.Sqlite;
 using App.Definitions.Entity;
@@ -30,29 +36,6 @@ namespace App.Infrastructure.Persistence
 
             // buscar usuario por user/pass
 
-            /*
-
-            try
-            {
-                cmd = new SqliteCommand(SQL_INSERT, connection, transaction);
-                cmd.Parameters.AddWithValue("@zzzz", permissions.Name);
-                //cmd.Parameters.AddWithValue("@zzzz", permissions.Surname);
-
-                object result = cmd.ExecuteScalar();
-
-                if (result != null && result != DBNull.Value)
-                    lid = Convert.ToInt64(result);
-            }
-            catch (SqliteException)
-            {
-                throw;
-            }
-            finally
-            {
-                if (cmd != null)
-                    ((IDisposable)cmd).Dispose();
-            }
-            */
             return lid;
 
         }
@@ -61,3 +44,4 @@ namespace App.Infrastructure.Persistence
     
     }
 }
+*/
