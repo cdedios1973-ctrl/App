@@ -1,4 +1,6 @@
 ﻿using System;
+
+/* deprecated
 using Microsoft.Data.Sqlite;
 
 namespace App.Infraestructure.CORE.Interfaces.Database
@@ -10,3 +12,4 @@ namespace App.Infraestructure.CORE.Interfaces.Database
     }
 
 }
+*/

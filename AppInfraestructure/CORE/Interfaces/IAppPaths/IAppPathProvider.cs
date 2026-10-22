@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Infraestructure.CORE.Interfaces.Path
+namespace App.Infrastructure.Path
 {
     /// <summary>
     /// Esta interfaz define las acciones básicas obtener la ruta de acceso.

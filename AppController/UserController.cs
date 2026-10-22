@@ -1,13 +1,16 @@
 ﻿using System;
+
 using App.Definitions.DTO;
 using App.Definitions.Interfaces.EntityService;
 
-// Controlador básico, SIN SEGURIDAD, para aplicaciones pequeñas a nivel de red local / intranet, con comentarios de uso y guia.
+// Controlador básico, SIN SEGURIDAD de momento, para aplicaciones pequeñas a nivel de red local / intranet, con comentarios de uso y guia.
 namespace App.UI.Presenters
 {
     public class UserFormPresenter
     {
         private readonly IUserService _userService;
+
+        #region Constructor
 
         // Inyección limpia de dependencias (Fail-Fast de infraestructura)
         public UserFormPresenter(IUserService userService)
@@ -15,9 +18,13 @@ namespace App.UI.Presenters
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
+        #endregion
+
         /// <summary>
         /// Procesa el registro acumulando estados en una lista.
         /// </summary>
+        #region Logic Service Call : Add New User
+
         public List<string> ExecuteRegister(UserDTO userRawData)
         {
             var errors = new List<string>();
@@ -55,5 +62,8 @@ namespace App.UI.Presenters
             }
             return errors;
         }
+
+        #endregion
+    
     }
 }

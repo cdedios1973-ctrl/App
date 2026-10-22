@@ -1,10 +1,11 @@
 ﻿using System;
 using App.Definitions.Enums;
 
+/* Deprecated -> complex
+ * 
 namespace AppDefinitions.Deprecated.DataFilters
 {
-    /*  Class designed to add parameters to sql queries */
-
+    
     public sealed class DataFilter
     {
         private readonly string _clausule;
@@ -60,3 +61,4 @@ namespace AppDefinitions.Deprecated.DataFilters
     }
 
 }
+*/

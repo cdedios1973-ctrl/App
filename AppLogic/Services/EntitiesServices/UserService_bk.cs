@@ -1,6 +1,9 @@
 ﻿using System;
 
-using App.View.Models;
+
+/* - Version de prueba antiguo
+
+using App.Definitions.DTO;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
 using App.Infraestructure.Services.DAO.SqLite;
@@ -48,3 +51,4 @@ namespace App.Logic.Services.Entities
         }
     }
 }
+*/

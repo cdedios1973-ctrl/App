@@ -1,11 +1,11 @@
 ﻿using System;
 
-using App.Definitions.Entity;
 using Microsoft.Data.Sqlite;
+using App.Definitions.Entity;
 
-namespace App.Infrastructure.Core.Interfaces.Dao
+namespace App.Infrastructure.Persistence
 {
-    public interface IPermissionDao
+    public interface IPermissionWriteRepository
     {
         long Insert(Permission permissions, SqliteConnection connection, SqliteTransaction transaction);
         long Update(Permission permissions, SqliteConnection connection, SqliteTransaction transaction);

@@ -8,25 +8,35 @@ using App.Infraestructure.CORE.Interfaces.DAOCommands;
 using Microsoft.Data.Sqlite;
 
 // TODO : Implementar Update y Delete en DAO.
+// TODO : IConnectionStringService -> en app.start -> leer solo una vez (actualmente no esta muy bien optimizado para leer constantemente)
 // TODO : Implementar seguridad de microsoft.
 // TODO : Implementar en App.Start() -> Inicializacion de herramientas.
 
 namespace App.Logic.Services.Entities
 {
-    internal class UserService : IUserService
+    internal sealed class UserService : IUserService
     {
         private const string INCORRECT_PARAM = "Parámetros incorrectos.";
         private readonly IUserDao _userDAO;
         private readonly IConnectionStringService _connectionStringService;
-        //private User _user;
+
+        #region Constructor
 
         public UserService(IUserDao userDAO, IConnectionStringService connectionStringService)
         {
+            if (connectionStringService == null)
+                throw new ArgumentNullException(nameof(connectionStringService));
+
+            if (userDAO == null)
+                throw new ArgumentNullException(nameof(userDAO));
+
             _userDAO = userDAO;
             _connectionStringService = connectionStringService;
         }
 
-        #region Interface Implementation
+        #endregion
+
+        #region Interface Implementation Insert Method
 
         public bool InsertUser(UserDTO user)
         {
@@ -34,7 +44,7 @@ namespace App.Logic.Services.Entities
             if (user == null)
                 throw new ArgumentException("user", INCORRECT_PARAM);
 
-            // 2. Declaración de recursos ("El toque guapo" y limpio arriba)
+            // 2. Declaración de recursos
             SqliteConnection conn = null;
             SqliteTransaction trans = null;
             bool isSuccess = false;
@@ -42,7 +52,7 @@ namespace App.Logic.Services.Entities
             // 3. Mapeo de datos a entidad de dominio
             User userEntity = new User(user.Id, user.Name, user.Surname, user.Address, user.CountryIdentity);
 
-            // 4. Bloque de operaciones críticas (Fontanería bajo el capó)
+            // 4. Bloque de operaciones críticas 
             try
             {
                 // Asignación e inicio de canales de datos
@@ -88,12 +98,17 @@ namespace App.Logic.Services.Entities
             return isSuccess;
         }
 
+        #endregion
+
+        // TODO : Implementar Update en DAO.
+        #region Interface Implementation Update Method
+
         public bool UpdateUser(UserDTO user)
         {
             if (user == null)
                 throw new ArgumentException("user", INCORRECT_PARAM);
 
-            // Mapeo manual a entidad de dominio "old school"
+            // Mapeo manual a entidad de dominio
             User userEntity = new User(user.Id, user.Name, user.Surname, user.Address, user.CountryIdentity);
 
             SqliteConnection conn = null;
@@ -139,6 +154,11 @@ namespace App.Logic.Services.Entities
 
             return isSuccess;
         }
+
+        #endregion
+
+        // TODO : Implementar Delete en DAO.
+        #region Interface Implementation Delete Method
 
         public bool DeleteUser(UserDTO user)
         {

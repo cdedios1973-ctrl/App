@@ -1,11 +1,11 @@
 ﻿using System;
 
-using App.Definitions.Entity;
 using Microsoft.Data.Sqlite;
+using App.Definitions.Entity;
 
-namespace App.Infraestructure.CORE.Interfaces.DAOCommands
+namespace App.Infrastructure.Persistence
 {
-    public interface IModuleDao
+    public interface IModuleWriteRepository
     {
         long Insert(Module module, SqliteConnection connection, SqliteTransaction transaction);
         long Update(Module module, SqliteConnection connection, SqliteTransaction transaction);

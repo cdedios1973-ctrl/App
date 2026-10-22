@@ -1,16 +1,13 @@
 ﻿using System;
-using Microsoft.Data.Sqlite;
-
 //using Microsoft.IdentityModel.Tokens;
-
+using Microsoft.Data.Sqlite;
 using App.Definitions.Entity;
-using App.Infraestructure.CORE.Interfaces.DAOCommands;
 
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 // TODO : Arreglar la documentacion
 // TODO : Hash de campos.
 
-namespace App.Infraestructure.Services.DAO.SqLite
+namespace App.Infrastructure.Persistence
 {
     /// <summary>
     /// Proporciona la implementación de comandos SQL de escritura para la entidad <see cref="User"/> en SQLite.
@@ -18,7 +15,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
     /// <remarks>
     /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
     /// </remarks>
-    public class SqliteUserDao : IUserDao //, IToken
+    public class SqliteUserDao : IUserWriteRepository //, IToken
     {
         //private readonly IConnectionStringService _connectionStringService;
         private const string SQL_INSERT = "INSERT INTO Users (Username, Surname) VALUES (@Name, @Surname); SELECT last_insert_rowid();";
@@ -33,7 +30,7 @@ namespace App.Infraestructure.Services.DAO.SqLite
         /// </summary>
         /// <param name="user">La entidad de usuario que contiene los datos para las operaciones.</param>
         /// <exception cref="ArgumentNullException">Se lanza cuando el parámetro <paramref name="user"/> es nulo.</exception>
-        public SqliteUserDao()// IConnectionStringService connectionStringService)
+        public SqliteUserDao() //IConnectionStringService connectionStringService)
         {
             //this._connectionStringService = connectionStringService;
         }
@@ -94,18 +91,18 @@ namespace App.Infraestructure.Services.DAO.SqLite
             throw new NotImplementedException();
         }
 
-    /// <summary>
-    /// Elimina el registro del usuario actual de la base de datos.
-    /// </summary>
-    /// <param name="db">El conector de la base de datos.</param>
-    /// <returns><see langword="true"/> si el registro se eliminó correctamente; de lo contrario, <see langword="false"/>.</returns>
-    /// <remarks>
-    /// **Seguridad:** Requiere nivel de permiso 2 o superior.
-    /// </remarks>
-    public bool Delete(User user, SqliteConnection connection, SqliteTransaction transaction)
-    {
-        throw new NotImplementedException();
-    }
+        /// <summary>
+        /// Elimina el registro del usuario actual de la base de datos.
+        /// </summary>
+        /// <param name="db">El conector de la base de datos.</param>
+        /// <returns><see langword="true"/> si el registro se eliminó correctamente; de lo contrario, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// **Seguridad:** Requiere nivel de permiso 2 o superior.
+        /// </remarks>
+        public bool Delete(User user, SqliteConnection connection, SqliteTransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 

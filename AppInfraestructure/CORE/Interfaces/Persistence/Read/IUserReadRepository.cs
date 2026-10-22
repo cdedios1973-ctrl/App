@@ -7,12 +7,12 @@ using App.Definitions.DTO;
 // TODO     : Usar "miClaseDTOFilter" desde la vista, creo que con este concepto puedo usar consultas LEFT/RIGHT/INNER basicos, necesitare identificador.
 // TODO     : (El dto de vista ya contiene la combinacion. dejarlo exclusivo para su uso original, no tocar.)
 
-namespace App.Infraestructure.CORE.Interfaces.DAOCommands
+namespace App.Infrastructure.Persistence
 {
     /// <summary>
     /// Esta interfaz define la accion básica para leer datos de la tabla User en la base de datos.
     /// </summary>
-    public interface IUserQueryDAO
+    public interface IUserReadRepository
     {
         /// <summary>
         /// Lee registro de usuario. Requiere nivel de permiso 1 o superior.

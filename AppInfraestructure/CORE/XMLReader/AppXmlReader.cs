@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Xml;
 
-using App.Infraestructure.CORE.Interfaces.Path;
-using App.Infraestructure.CORE.Interfaces.Reader;
+using App.Infrastructure.Path;
 
 /// <summary>
-/// Fixed usage: Return values of XML nodes.
+/// Fixed usage: Return value of XML node.
 /// </summary>
 
 // TODO : Apply security (Microsfot security namespace, search & learn)
 // UPGRADE : AT xmlDoc.Load(filePath) -> Could Create streamreader, 
 // FIXED : Add param 'node' to have more flexibility.
 
-namespace App.Infraestructure.CORE.Reader
+namespace App.Infrastructure.Reader
 {
 
     internal sealed class AppXmlReader : IAppXmlReader

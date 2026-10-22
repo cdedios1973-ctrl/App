@@ -2,7 +2,7 @@
 using App.Definitions.Enums;
 using App.Definitions.Interfaces.Commands;
 
-namespace App.Logic.Services
+namespace AppLogic.Refactorice.ChangeSourceService
 {
 
     internal sealed class ChangeSource

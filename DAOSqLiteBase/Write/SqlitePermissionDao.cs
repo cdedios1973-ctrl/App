@@ -1,13 +1,16 @@
 ﻿using System;
 //using Microsoft.IdentityModel.Tokens;
+
 using Microsoft.Data.Sqlite;
 using App.Definitions.Entity;
-using App.Infrastructure.Core.Interfaces.Dao;
 
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
-namespace App.Infraestructure.Services.DAO.SqLite
+// TODO : Arreglar la documentacion
+// TODO : Hash de campos.
+
+namespace App.Infrastructure.Persistence
 {
-    public class SqlitePermissionDao : IPermissionDao //, IToken
+    public class SqlitePermissionDao : IPermissionWriteRepository //, IToken
     {
         private const string SQL_INSERT = "INSERT INTO zzzzzz (zzzzz, zzzzzz) VALUES (@zzzz, @zzzzz); SELECT last_insert_rowid();";
         // TODO: Implementar constante sql de modificación y eliminacion

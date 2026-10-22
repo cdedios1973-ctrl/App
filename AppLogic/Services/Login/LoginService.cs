@@ -15,7 +15,6 @@ using App.Definitions.Interfaces.Login;
 // TODO : Implementar seguridad de microsoft.
 // TODO : instanciar el LoginService desde controlador pasándole ILoginService.
 // TODO : Recordar que IConnectionStringService se inicializara en el inicio de la aplicacion
-
 namespace App.Logic.Security
 {
     internal sealed class LoginService : ILoginService
@@ -91,7 +90,6 @@ namespace App.Logic.Security
             return this._userToLogin.IsUserAuthenticated;
         }
         */
-
 
         #endregion
     

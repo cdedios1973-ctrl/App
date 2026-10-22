@@ -1,13 +1,11 @@
 ﻿using System;
 using System.IO;
 
-using App.Infraestructure.CORE.Interfaces.Path;
-
 /// <summary>
 /// Return 'base' directory of the Application configuration file
 /// </summary>
 
-namespace App.Infraestructure.CORE
+namespace App.Infrastructure.Path
 {
     internal sealed class DefaultAppConfigPath : IAppPathProvider
     {

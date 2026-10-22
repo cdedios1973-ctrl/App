@@ -1,12 +1,13 @@
 ﻿using System;
 
+// Deprecated class
+/*
+
 //using App.Infraestructure.CORE.Interfaces.Path;
 
 namespace App.Infraestructure.Installation.Database
 {
 
-    // Deprecated class
-    /*
 internal sealed class AppSqLiteSchema //: IAppDatabaseInstallation
 {
 private IAppPathProvider _pathProvider;
@@ -107,6 +108,4 @@ public List<(string, string)> GetTableSchemas()
 }
 
 #endregion
-        */
-}
-}
+*/

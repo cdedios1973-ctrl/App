@@ -11,10 +11,6 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="Read\" />
-  </ItemGroup>
-	
-  <ItemGroup>
     <ProjectReference Include="..\AppInfraestructure\AppInfraestructure.csproj" />
   </ItemGroup>
 

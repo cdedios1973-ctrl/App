@@ -1,16 +1,16 @@
 ﻿using System;
 
-using App.Definitions.Entity;
 using Microsoft.Data.Sqlite;
+using App.Definitions.Entity;
 
 // TODO : arreglar documentacion
 
-namespace App.Infraestructure.CORE.Interfaces.DAOCommands
+namespace App.Infrastructure.Persistence
 {
     /// <summary>
     /// Esta interfaz define las acciones básicas para guardar, cambiar o borrar datos en la base de datos.
     /// </summary>
-    public interface IUserDao
+    public interface IUserWriteRepository
     {
         /// <summary>
         /// Guarda un registro nuevo.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Infraestructure.CORE.Interfaces.Reader
+namespace App.Infrastructure.Reader
 {
     public interface IAppXmlReader
     {

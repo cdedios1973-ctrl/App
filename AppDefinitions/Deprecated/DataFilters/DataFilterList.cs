@@ -1,7 +1,7 @@
 ﻿using System;
 using App.Definitions.Enums;
 
-
+/* Deprecated -> Complex
 namespace AppDefinitions.Deprecated.DataFilters
 {
 
@@ -54,3 +54,5 @@ namespace AppDefinitions.Deprecated.DataFilters
 
     }
 }
+
+*/

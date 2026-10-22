@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 
-using App.Infraestructure.CORE.Interfaces.Path;
 
 /// <summary>
 /// Return 'Application Database path directory'
@@ -12,7 +11,7 @@ using App.Infraestructure.CORE.Interfaces.Path;
 // TODO : remove the enum
 // UPGRADE : create StreamReader -> constructor with filepath, and return searched string.
 
-namespace App.Infraestructure.CORE
+namespace App.Infrastructure.Path
 {
     internal sealed class DefaultDatabasePath : IAppPathProvider
     {
