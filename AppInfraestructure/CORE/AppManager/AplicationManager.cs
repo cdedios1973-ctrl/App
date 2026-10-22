@@ -8,14 +8,14 @@ namespace App.CORE
         internal static AplicationManager manager = null;
         private static readonly object _isObject = new object();
 
-        private DataBaseType _currentDatabase;
+        //private DataBaseType _currentDatabase;
 
         #region Constructor
 
         private AplicationManager()
         {
             // Inicializar base de datos, logs, etc.
-            this._currentDatabase = DataBaseType.SqLite;
+            //this._currentDatabase = DataBaseType.SqLite;
         }
 
         #endregion

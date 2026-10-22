@@ -30,7 +30,7 @@ namespace TaskHub.Infrastructure.Services
 
 
             // Fixed Path, application database files must be there.
-            IAppPathProvider pathProvider = new DefaultDatabasePath(tmp);
+            IPathProvider pathProvider = new DefaultDatabasePath(tmp);
 
             this._dbPath = pathProvider.GetPath();
         }

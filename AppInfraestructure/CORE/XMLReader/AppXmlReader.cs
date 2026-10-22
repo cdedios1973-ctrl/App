@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-using TaskHub.Infrastructure.Path;
+using TaskHub.Infrastructure.Paths;
 
 // TODO : Apply security (Microsfot security namespace, search & learn)
 // UPGRADE : AT xmlDoc.Load(filePath) -> Could Create streamreader, 
@@ -18,12 +18,12 @@ namespace TaskHub.Infrastructure.Reader
         private const string MISSING_KEY    = "Key to search cannot be empty";
         private const string MISSING_VALUE  = "Key value is empty, verify config file";
 
-        private readonly IAppPathProvider _pathProvider;
+        private readonly IPathProvider _pathProvider;
         private string _key;
 
         #region Constructors
 
-        internal AppXmlReader(IAppPathProvider pathProvider) 
+        internal AppXmlReader(IPathProvider pathProvider) 
         {
             if (pathProvider == null)
                 throw new ArgumentNullException(MISSING_FILE + "-", nameof(pathProvider));

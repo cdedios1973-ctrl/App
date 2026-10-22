@@ -1,5 +1,8 @@
 ﻿using System;
 
+// deprecated
+
+/*
 using App.Definitions.Enums;
 
 namespace App.Definitions.Interfaces.Commands
@@ -10,3 +13,4 @@ namespace App.Definitions.Interfaces.Commands
 
     }
 }
+*/

@@ -3,7 +3,7 @@
 namespace App.Definitions.DTO
 {
     [Serializable()]
-    internal sealed class TasksDTO
+    public sealed class TasksDTO
     {
         private readonly long _id = 0;
         private readonly string _name;
