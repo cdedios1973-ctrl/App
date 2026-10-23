@@ -2,9 +2,6 @@ using System;
 
 using App.Definitions.Entity;
 
-
-
-
 namespace App.Logic.Predicate
 {
 

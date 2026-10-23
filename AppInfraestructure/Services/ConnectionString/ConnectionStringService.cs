@@ -8,6 +8,8 @@ using TaskHub.Infrastructure.Reader;
 /// Class ConnectionStringService : Return the connection string of the indicated database.
 /// </summary>
 
+// TODO : eliminar el enum de la base de datos, solo una.
+
 namespace TaskHub.Infrastructure.Services
 {
     internal sealed class ConnectionStringService : IConnectionStringService

@@ -10,12 +10,15 @@
     <Compile Remove="DDBB\**" />
     <Compile Remove="Entity\**" />
     <Compile Remove="Events\**" />
+    <Compile Remove="Predicates\**" />
     <EmbeddedResource Remove="DDBB\**" />
     <EmbeddedResource Remove="Entity\**" />
     <EmbeddedResource Remove="Events\**" />
+    <EmbeddedResource Remove="Predicates\**" />
     <None Remove="DDBB\**" />
     <None Remove="Entity\**" />
     <None Remove="Events\**" />
+    <None Remove="Predicates\**" />
   </ItemGroup>
 
   <ItemGroup>
