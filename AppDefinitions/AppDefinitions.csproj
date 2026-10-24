@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="DTO\UserLoginInputDTO.cs" />
+    <None Include="DTO\UserLoginQueryDTO.cs" />
   </ItemGroup>
 
 </Project>

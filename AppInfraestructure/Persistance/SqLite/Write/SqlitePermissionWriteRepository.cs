@@ -5,7 +5,6 @@ using App.Definitions.Entity;
 
 // TODO : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
-// TODO : Hash de campos. si fuera necesario. repasar.
 // TODO : Implementar update y delete.
 namespace App.Infrastructure.Persistence
 {

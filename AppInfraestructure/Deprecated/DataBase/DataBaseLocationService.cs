@@ -1,13 +1,13 @@
 ﻿using System;
 
+// Deprecated : unificado en el servicio de rutas
+/*
 using App.Definitions.Enums;
 using TaskHub.Infrastructure.Path;
 using TaskHub.Infrastructure.Reader;
-
 /// <Summary>
 /// DataBaseFolderService -> Return database full path and filename
 /// </Summary>
-
 namespace TaskHub.Infrastructure.Services
 {
     internal sealed class DataBaseLocationService //: IDatabaseFolderService
@@ -28,7 +28,6 @@ namespace TaskHub.Infrastructure.Services
             // TODO : remove the enum 
             // TODO : create StreamReader -> constructor with filepath, and return searched string.
 
-
             // Fixed Path, application database files must be there.
             IPathProvider pathProvider = new DefaultDatabasePath(tmp);
 
@@ -41,3 +40,4 @@ namespace TaskHub.Infrastructure.Services
         }
     }
 }
+*/

@@ -20,7 +20,7 @@ namespace App.Infrastructure.Persistence
         /// <param name="db">El conector de la base de datos.</param>
         /// <param name="filter">El filtro de la consulta a la base de datos.</param>
         /// <returns>Devuelve una lista de usuarios (dto).</returns>
-        List<UserDTO> UserQueryDAO(UserDTO user);//, DataFilter filter);
+        List<UserDTO> UserQueryRepository(UserDTO user);//, DataFilter filter);
 
     }
 

@@ -2,17 +2,13 @@
 
 namespace App.Definitions.DTO
 {
-    //[Serializable()]
-    public sealed class UserLoginInputDTO
+    public sealed class UserLoginQueryDTO
     {
         private readonly string _userName;
         private readonly string _password;
 
-        // TODO : prevous version, need to change to match controller input
-        // TODO : Apply service IPreventStringInyection
-
         #region Constructors
-        internal UserLoginInputDTO(string userName, string passsWord) 
+        internal UserLoginQueryDTO(string userName, string passsWord) 
         {
             if (string.IsNullOrWhiteSpace(userName))
             {
@@ -31,14 +27,10 @@ namespace App.Definitions.DTO
 
         #region Properties
         public string UserName
-        { 
-            get { return this._userName; }
-        }
+        { get { return this._userName; } }
 
         public string Password
-        { 
-            get { return this._password; }
-        }
+        { get { return this._password; } }
 
         #endregion
 
