@@ -9,15 +9,13 @@ using TaskHub.Infrastructure.Paths;
 // REFACTORING LOG & ROADMAP
 // ============================================================================
 // DONE : Quitar el enumerado, solo una base de datos a la vez.
-// DONE : Crear una clase propia para añadir (dto PathInfo): key, NombreDeArchivo, Ruta, TipoDeArchivo.
 // DONE : Unir los servicios de ruta a uno -> para encontrar la base de datos y la config.
 // DONE : Tener en cuenta directorios en Linux para soporte multiplataforma.
 //
 // DISCARD: Podria devolver un Dictionary<string, string> con las rutas necesarias para el uso de la aplicacion
 // DISCARD: create StreamReader -> Constructor con ruta de archivo, devolver el string buscado.
 //
-// TODO : Al igual que el servicio de lectura de XML este proceso se tiene que lanzar al inicio de la aplicacion, no hay rutas dinamicas al vuelo, solo se lee una vez
-// TODO : Crear un servicio de verificacion de archivos. "PathValidator" (Pospuesto).
+// TODO : Al igual que el servicio de lectura de XML este proceso se tiene que lanzar al inicio de la aplicacion, solo se lee una vez
 // ============================================================================
 
 namespace TaskHub.Infrastructure.Services
@@ -28,7 +26,7 @@ namespace TaskHub.Infrastructure.Services
     /// </summary>
     internal sealed class AppPathResolver : IPathProvider
     {
-        private readonly string _baseDirectory;
+        private readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         private readonly string _exePath;
         private readonly string _assemblyName;
         private readonly string _dbFolder;

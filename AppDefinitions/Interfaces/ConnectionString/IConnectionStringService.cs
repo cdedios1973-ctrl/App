@@ -4,6 +4,6 @@ namespace App.Definitions.Interfaces.Config
 {
     public interface IConnectionStringService
     {
-        string GetConnectionString();
+        string GetConnectionString(string dbName);
     }
 }

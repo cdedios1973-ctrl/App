@@ -1,4 +1,7 @@
-﻿# 1. Gestión de Transacciones Maestro-Detalle
+﻿# 1. ADR-002: Gestión de Transacciones Maestro-Detalle
+
+## Estado
+Aceptado
 
 ## Contexto
 El DAO original instanciaba internamente el contexto de la base de datos por cada comando,

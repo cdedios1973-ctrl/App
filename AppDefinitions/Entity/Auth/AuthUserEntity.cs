@@ -5,7 +5,7 @@
 
 // NOTA Importante: Esta clase NO es serializabe, es para uso interno de la aplicacion, Auditoria de registros.
 
-namespace App.Definitions.Entity.Auth
+namespace App.Definitions.Auth
 {
     public class AuthUserEntity
     {

@@ -1,11 +1,10 @@
-﻿using App.Definitions.DTO;
+﻿using App.Definitions.Auth;
+using App.Definitions.DTO;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
 using App.Definitions.Interfaces.Login;
 using App.Infrastructure.Persistence;
 using System;
-
-
 
 // DONE : En vez de devolver user, devolver bool -> solo necesita saber si el user esta logado.
 
@@ -18,12 +17,12 @@ namespace App.Logic.Security
 {
     internal sealed class LoginService : ILoginService
     {
-        private readonly IUserLoginReadRepository _userLoginRepository;
+        private readonly IAuthUserReadRepository _userLoginRepository;
         private readonly IConnectionStringService _connectionStringService;
         
         #region Constructors.
 
-        internal LoginService(IUserLoginReadRepository userToLogin, IConnectionStringService connectionStringService)
+        internal LoginService(IAuthUserReadRepository userToLogin, IConnectionStringService connectionStringService)
         {
             this._userLoginRepository = userToLogin;
             this._connectionStringService = connectionStringService;
@@ -31,15 +30,14 @@ namespace App.Logic.Security
 
         #endregion
 
-        #region Login -> DAO
+        #region Login -> Repository
 
         public bool Login(UserLoginQueryDTO userToLogin)
         {
-            // TODO : Guardar el User.Id o User.Name
-            // TODO : Aplicar logica adicional si procede.
-            User user = _userLoginRepository.LoginAction(userToLogin, _connectionStringService.GetConnectionString());
-
-            return user.Id > 0;
+            // TODO : Aplicar logica "de seguridad o acceso" adicional si procede.
+            //AuthUserEntity user = _userLoginRepository.Find(userToLogin).UserId > 0;
+            //return user.UserId > 0;
+            return this._userLoginRepository.Find(userToLogin).UserId > 0;
         }
         #endregion
     
