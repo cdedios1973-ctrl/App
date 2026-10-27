@@ -23,3 +23,6 @@ y sobreingeniería innecesaria para el alcance actual del proyecto.
 * **Trade-off (Principio SRP):** Se viola estrictamente el Principio de Responsabilidad Única (SRP) 
 * al combinar E/S de archivos con análisis sintáctico (parsing) JSON en la misma entidad. 
 * No obstante, el impacto es mínimo debido a la baja probabilidad de cambio de formato.
+
+
+        Redacción: Diseñado por el autor y optimizado con asistencia de IA para formato ADR. 

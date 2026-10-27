@@ -29,3 +29,5 @@ que está fuera del alcance de la fase actual del proyecto, necesito una soluci�
 * **Próximos pasos (Mitigación):** Cuando el proyecto alcance la fase de cumplimiento legal, será obligatorio subcontratar o pedir asesoría a profesionales
 	expertos en VeriFactu/AEAT para diseñar el registro informático de facturación (RIF), el encadenamiento de facturas y la firma digital. En ese momento, 
 	se evaluará también si se migra el Login interno a la autorización de Microsoft (MSAL) para elevar la seguridad.
+
+        Redacción: Diseñado por el autor y optimizado con asistencia de IA para formato ADR. 

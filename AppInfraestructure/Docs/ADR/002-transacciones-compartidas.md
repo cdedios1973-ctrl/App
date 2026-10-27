@@ -17,3 +17,6 @@ compartir el mismo contexto entre múltiples comandos nativos.
 * Inversión de Dependencias y Responsabilidad Única.
 * Eliminación de arrays bidimensionales de comandos en los constructores.
 * Control total del Rollback/Commit desde la capa superior de negocio.
+
+
+        Redacción: Diseñado por el autor y optimizado con asistencia de IA para formato ADR. 

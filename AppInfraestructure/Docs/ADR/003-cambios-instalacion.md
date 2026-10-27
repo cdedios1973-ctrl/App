@@ -15,3 +15,6 @@ embebidos o leídos por la aplicación.
 * **Separación de responsabilidades:** El código de la aplicación se libera de la carga de estructurar la base de datos a nivel de texto plano.
 * **Mantenibilidad:** Modificar el esquema o los datos semilla es más rápido, limpio y legible a través de archivos SQL estándar.
 * **Trazabilidad:** Facilita el control de versiones (Git) de la evolución del esquema de la base de datos.
+
+
+        Redacción: Diseñado por el autor y optimizado con asistencia de IA para formato ADR. 

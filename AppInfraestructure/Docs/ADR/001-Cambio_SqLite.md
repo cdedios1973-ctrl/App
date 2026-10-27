@@ -18,3 +18,6 @@ interactuando con él mediante comandos nativos a través de ADO.Net para maximi
 * **Reducción de complejidad:** Desaparece la necesidad de mantener compatibilidad entre diferentes SGBD.
 * **Control total:** Permite exprimir las características y comandos específicos de SQLite de forma nativa.
 * **Compromiso (Trade-off):** La aplicación queda fuertemente acoplada a SQLite	; migrar a otro SGBD en el futuro requerirá una refactorización de la capa de acceso a datos.
+
+
+        Redacción: Diseñado por el autor y optimizado con asistencia de IA para formato ADR. 
