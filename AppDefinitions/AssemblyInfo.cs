@@ -4,5 +4,7 @@
 /// </summary>
 
 using System.Runtime.CompilerServices;
+
 [assembly: InternalsVisibleTo("AppLogic")]
+[assembly: InternalsVisibleTo("AppInfrastructure")]
 //[assembly: InternalsVisibleTo("Logic, PublicKey= Pendiente de Clave pública")]

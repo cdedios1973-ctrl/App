@@ -1,6 +1,9 @@
+
+/* Ejemplos de predicados, de momento ya no los necesito
+using System;
+
 using App.Definitions.DTO;
 using App.Definitions.Entity;
-using System;
 
 namespace App.Definitions.Predicates
 {
@@ -46,3 +49,4 @@ namespace App.Definitions.Predicates
         }
     }
 }
+*/

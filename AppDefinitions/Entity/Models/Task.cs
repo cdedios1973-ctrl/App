@@ -1,47 +1,27 @@
 ﻿using System;
 
-
-
 /// <summary>
-/// DTO de la tabla maestra 'Task' (Vista).
+/// POCO de la tabla maestra 'Task' (Logic - Persistence).
 /// </summary>
-/// 
+
 namespace App.Definitions.Entity;
-public sealed class Task
+
+internal sealed record class Task
 {
-    private readonly long _id = 0;
-    private readonly string _name;
-    private readonly string _observation;
+    public long Id { get; init; }
+    public string Name { get; init; }
+    public string Observation { get; init; }
 
-    #region Constructors
-
+    /// <summary>
+    /// Inicializa una nueva instancia <see cref="Task"/>.
+    /// </summary>
+    /// <param name="id">Task.Id (PK)</param>
+    /// <param name="name">Task.Name</param>
+    /// <param name="observation">Task.Observation</param>
     public Task(long id, string name, string observation) 
     {
-        this._id = id;
-        this._name = name;
-        this._observation = observation;
+        this.Id = id;
+        this.Name = name;
+        this.Observation = observation;
     }
-
-    #endregion
-
-    #region Properties
-
-    public long Id
-    {
-        get { return this._id; }
-        private set { }
-    }
-    public string Name
-    {
-        get { return this._name; }
-        private set { }
-    }
-    public string Observation
-    {
-        get { return this._observation; }
-        private set { }
-    }
-
-    #endregion
-
 }

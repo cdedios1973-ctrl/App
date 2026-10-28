@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entity\Services\" />
+    <None Include="DTO\Queries\UserLoginQueryDto.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="DTO\Queries\UserLoginQueryDto.cs" />
+    <Folder Include="Interfaces\Services\EntityService\Read\" />
   </ItemGroup>
 
 </Project>

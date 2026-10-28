@@ -7,6 +7,5 @@ namespace App.Definitions.Interfaces.Login
     public interface ILoginService
     {
         bool Login(UserLoginQueryDto userToLogin);
-
     }
 }

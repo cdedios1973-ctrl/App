@@ -7,7 +7,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Data", "DB\Data\Data.sqlpro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConsole", "AppConsole\AppConsole.csproj", "{CE112AB6-0A89-4771-AB53-EB616EB53561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppInfraestructure", "AppInfraestructure\AppInfraestructure.csproj", "{D9EA624E-499E-41CF-91B3-EAF1BAD070B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppInfrastructure", "AppInfraestructure\AppInfrastructure.csproj", "{D9EA624E-499E-41CF-91B3-EAF1BAD070B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
