@@ -2,7 +2,7 @@
 using Microsoft.Data.Sqlite;
 using App.Definitions.DTO;
 using App.Definitions.Auth;
-using App.Definitions.Predicates; // No creo que me haga falta
+//using App.Definitions.Predicates; // No creo que me haga falta
 using TaskHub.Infrastructure.Paths;
 
 namespace App.Infrastructure.Persistence
@@ -24,7 +24,7 @@ namespace App.Infrastructure.Persistence
                 throw new ArgumentNullException(nameof( _provider));
 
 
-            PathInfo info = this._pathProvider.GetAppGlobalPaths().Find(PathInfoFilters.WithKey("db"));
+            //PathInfo info = this._pathProvider.GetAppGlobalPaths().Find(PathInfoFilters.WithKey("db"));
 
 
             this._pathProvider = _provider;
@@ -35,7 +35,7 @@ namespace App.Infrastructure.Persistence
 
         #region Interface Implementation
 
-        public AuthUserEntity Find(UserLoginQueryDTO userToLogin)
+        public AuthUserEntity Find(UserLoginQueryDto userToLogin)
         {
             if (userToLogin == null)
                 throw new ArgumentNullException(nameof(userToLogin));

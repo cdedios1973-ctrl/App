@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Deprecated
+
+/*
+using System;
 
 using App.Logic.IO.Handler;
 using App.Logic.Models.POCO;
@@ -41,3 +44,4 @@ namespace App.Logic.Services.Commands
         }
     }
 }
+*/

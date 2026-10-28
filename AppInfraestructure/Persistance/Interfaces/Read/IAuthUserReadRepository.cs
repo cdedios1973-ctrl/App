@@ -7,7 +7,7 @@ namespace App.Infrastructure.Persistence
 {
     public interface IAuthUserReadRepository
     {
-        AuthUserEntity Find(UserLoginQueryDTO user);
+        AuthUserEntity Find(UserLoginQueryDto user);
 
     }
 

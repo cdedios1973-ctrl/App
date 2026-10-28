@@ -36,9 +36,13 @@ namespace App.Logic.Services.Entities
 
         #endregion
 
+
+        // TODO : Volver a desacoplar a Infraestructure
+        // la logica solo procesa aqui validaciones y tranformacion dt->poco
+
         #region Interface Implementation Insert Method
 
-        public bool InsertUser(UserDTO user)
+        public bool InsertUser(UserDto user)
         {
             // 1. Validaciones defensivas de entrada
             if (user == null)
@@ -108,7 +112,7 @@ namespace App.Logic.Services.Entities
         // TODO : Implementar Update en DAO.
         #region Interface Implementation Update Method
 
-        public bool UpdateUser(UserDTO user)
+        public bool UpdateUser(UserDto user)
         {
             if (user == null)
                 throw new ArgumentException("user", INCORRECT_PARAM);
@@ -163,7 +167,7 @@ namespace App.Logic.Services.Entities
         // TODO : Implementar Delete en DAO.
         #region Interface Implementation Delete Method
 
-        public bool DeleteUser(UserDTO user)
+        public bool DeleteUser(UserDto user)
         {
             if (user == null)
                 throw new ArgumentException("user", INCORRECT_PARAM);

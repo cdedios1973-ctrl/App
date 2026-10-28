@@ -1,4 +1,5 @@
 ﻿Estructura de POCOs:
-Todos los POCOs los mantengo explícitamente con sus campos privados solo lectura manuales (private readonly), 
-exponiendolos mediante sus propiedades (preferencia personal)
+
+- POCO Inmutable por constructor
+- Las validaciones del POCO se delegan a nivel negocio
 

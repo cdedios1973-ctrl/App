@@ -14,21 +14,21 @@ namespace App.Definitions.Interfaces.EntityService
         /// </summary>
         /// <param name="user">Objeto DTO con los datos del usuario a crear.</param>
         /// <returns>Devuelve verdadero si la operación es satisfactoria, falso en caso contrario.</returns>
-        bool InsertUser(UserDTO user);
+        bool InsertUser(UserDto user);
 
         /// <summary>
         /// Modifica un usuario en el sistema tras validar sus datos.
         /// </summary>
         /// <param name="user">Objeto DTO con los datos del usuario a modificar.</param>
         /// <returns>Devuelve verdadero si la operación es satisfactoria, falso en caso contrario.</returns>
-        bool UpdateUser(UserDTO user);
+        bool UpdateUser(UserDto user);
 
         /// <summary>
         /// Elimina un usuario en el sistema tras validar sus datos.
         /// </summary>
-        /// <param name="user">Objeto DTO con los datos del usuario a modificar.</param>
+        /// <param name="user">Objeto DTO con los datos del usuario a eliminar.</param>
         /// <returns>Devuelve verdadero si la operación es satisfactoria, falso en caso contrario.</returns>
-        bool DeleteUser(UserDTO user);
+        bool DeleteUser(UserDto user);
     }
 
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 
-// Ejemplo: una línea con constructor, propiedades readonly e inmutabilidad total
-// public record AuthUserEntity(int Id, string Name);
 
 // NOTA Importante: Esta clase NO es serializabe, es para uso interno de la aplicacion, Auditoria de registros.
 

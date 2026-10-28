@@ -1,17 +1,18 @@
-﻿using App.Definitions.Auth;
+﻿using System;
+
+using App.Definitions.Auth;
 using App.Definitions.DTO;
 using App.Definitions.Entity;
 using App.Definitions.Interfaces.Config;
 using App.Definitions.Interfaces.Login;
 using App.Infrastructure.Persistence;
-using System;
 
 // DONE : En vez de devolver user, devolver bool -> solo necesita saber si el user esta logado.
+// DONE : Para simplicación puedo usar la clase UserLoginQuery de la tabla para la validacion de entrada del usuario.
 
 // TODO : Implementar seguridad de microsoft.
 // TODO : Instanciar el LoginService desde controlador pasándole ILoginService.
 // TODO : Recordar que IConnectionStringService se inicializara en el inicio de la aplicacion
-// UPGRADE : Para simplicación puedo usar la clase UserLoginQuery de la tabla para la validacion de entrada del usuario.
 
 namespace App.Logic.Security
 {
@@ -32,14 +33,15 @@ namespace App.Logic.Security
 
         #region Login -> Repository
 
-        public bool Login(UserLoginQueryDTO userToLogin)
+        public bool Login(UserLoginQueryDto userToLogin)
         {
-            // TODO : Aplicar logica "de seguridad o acceso" adicional si procede.
-            //AuthUserEntity user = _userLoginRepository.Find(userToLogin).UserId > 0;
-            //return user.UserId > 0;
-            return this._userLoginRepository.Find(userToLogin).UserId > 0;
+            // TODO : Cuando aplique la seguridad de microsoft, usar .IsInRole()
+            // y manejar aqui la logica para almacenarlos en memoria.
+            AuthUserEntity user = this._userLoginRepository.Find(userToLogin).UserId > 0;
+
+            return user.UserId > 0;
         }
         #endregion
-    
+
     }
 }

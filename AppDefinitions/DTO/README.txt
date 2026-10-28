@@ -1,5 +1,5 @@
-﻿DTOs Structure for this demo:
+﻿Estructura de DTOs para esta demo:
 
-	- Explicit fields (Private / Private Readonly / Properties exposure)
-	- Serializable attribute : parse the output for any view.
-	- Folder FilterDto : (WIP) 
+- Dto Inmutable por constructor
+- Permitir serializacion de algunas tablas
+- Las validaciones de dto se delegan a nivel negocio

@@ -1,9 +1,14 @@
 ﻿using System;
 
+/// <summary>
+/// Modelo Visual Studio versiones anteriores
+/// DTO de la tabla maestra 'User' (Vista).
+/// </summary>
+
 namespace App.Definitions.DTO
 {
     [Serializable()]
-    public sealed class UserDTO
+    public sealed class UserDto
     {
         private readonly long _id = 0;
         private readonly string _name;
@@ -11,22 +16,18 @@ namespace App.Definitions.DTO
         private readonly string _address;
         private readonly string _countryIdentity;
 
-        #region Constructors
-        public UserDTO(long id, string name, string surname, string address, string countryIdentity) 
-        {
-            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(surname))
-            {
-                throw new ArgumentException("User Name and Surname must be filled");
-            }
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("User Name must be filled");
-            }
-            if (string.IsNullOrWhiteSpace(surname))
-            {
-                throw new ArgumentException("User Surname must be filled");
-            }
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UserDto"/>.
+        /// </summary>
+        /// <param name="id">User.Id (PK)</param>
+        /// <param name="name">User.Name</param>
+        /// <param name="surname">User.Surname</param>
+        /// <param name="address">User.Address</param>
+        /// <param name="countryIdentity">User.CountryIdentity</param>
 
+        #region Constructor
+        public UserDto(long id, string name, string surname, string address, string countryIdentity) 
+        {
             this._id = id;
             this._name = name;
             this._surname = surname;
@@ -36,7 +37,7 @@ namespace App.Definitions.DTO
 
         #endregion
 
-        #region Properties
+        #region Properties { immutable, locked after creation }
         public long Id
         {   
             get { return this._id; }

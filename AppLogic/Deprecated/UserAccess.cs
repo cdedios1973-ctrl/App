@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Deprecated
+
+/*
+using System;
 
 using App.Definitions.Enums;
 using App.Definitions.Interfaces;
@@ -123,3 +126,5 @@ namespace App.Logic.Security
 
     }
 }
+
+*/

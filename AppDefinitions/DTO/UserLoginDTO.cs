@@ -1,59 +1,55 @@
 ﻿using System;
+//using System.Text.Json.Serialization;
 
-namespace App.Definitions.DTO
+namespace App.Definitions.DTO;
+
+/// <summary>
+/// DTO de la tabla maestra 'UserLogin' (Vista).
+/// Implementa una relación 1:1 para desacoplar las credenciales de acceso de los datos personales del usuario.
+/// </summary>
+/// <remarks>
+/// ÁREAS DE CONTROL Y ARQUITECTURA:
+/// - Restricciones de BD: Clave única en UserId y restricción compuesta (UserId, UserName, Password).
+/// - Ámbito: Diseñado inicialmente para entornos de Intranet.
+/// - Seguridad: Autenticación básica. Pendiente de migrar a un sistema basado en Roles/Tokens (Identity).
+/// - Escalabilidad: Permite el particionamiento o separación física de la BD de accesos en el futuro.
+/// </remarks>
+
+[Serializable()] // TODO: Estudiar y cambiar a [JsonSerializable] cuando se migren los serializadores
+
+internal sealed record class UserLoginDto
 {
-    [Serializable()]
-    internal sealed class UserLoginDTO
+
+    #region Properties { immutable, locked after creation }
+
+    public long Id { get; init; }
+
+    public long UserId { get; init; }
+
+    public string UserName { get; init; } = string.Empty;
+
+    public string Password { get; init; } = string.Empty;
+
+    #endregion
+
+    /// <summary>
+    /// Inicializa una nueva instancia de la clase <see cref="UserLoginDto"/>.
+    /// </summary>
+    /// <param name="id">UserLogin.Id (PK)</param>
+    /// <param name="userId">UserLogin.UserId (FK)</param>
+    /// <param name="username">UserLogin.UserName</param>
+    /// <param name="password">UserLogin.Password</param>
+
+    #region Constructor
+
+    public UserLoginDto(long id, long userId, string username, string password)
     {
-        private readonly long _id = 0;
-        private readonly long _userId = 0;
-        private readonly string _username;
-        private readonly string _password;
-
-        #region Constructors
-        internal UserLoginDTO(long id, long userId, string username, string password)
-        {
-            if (userId <= 0)
-            {
-                throw new ArgumentException("User Id is required.");
-            }
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentException("User Name must be filled");
-            }
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentException("Password must be filled");
-            }
-
-            this._id = id;
-            this._userId = userId;
-            this._username = username;
-            this._password = password;
-        }
-
-        #endregion
-
-        #region Properties
-
-        public long Id
-        {
-            get { return this._id; }
-        }
-        public long UserId
-        {
-            get { return this._userId; }
-        }
-        public string UserName
-        {
-            get { return this._username; }
-        }
-        public string Password
-        {
-            get { return this._password; }
-        }
-
-        #endregion
-
+        this.Id = id;
+        this.UserId = userId;
+        this.UserName = username;
+        this.Password = password;
     }
+
+    #endregion
+
 }

@@ -6,7 +6,7 @@ namespace App.Definitions.Interfaces.Login
 {
     public interface ILoginService
     {
-        bool Login(UserLoginQueryDTO userToLogin);
+        bool Login(UserLoginQueryDto userToLogin);
 
     }
 }
