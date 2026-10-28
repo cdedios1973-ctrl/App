@@ -1,52 +1,27 @@
 ﻿using System;
 
-namespace App.Definitions.Entity
+/// <summary>
+/// POCO de la tabla maestra 'UserTasks' (Logic - Persistence).
+/// </summary>
+
+namespace App.Definitions.Entity;
+
+internal sealed record class UserTasks
 {
-    public sealed class UserTasks
+    internal long Id { get; init; }
+    internal long UserId { get; init; }
+    internal long TaskId { get; init; }
+
+    /// <summary>
+    /// Inicializa una nueva instancia <see cref="UserTasks"/>.
+    /// </summary>
+    /// <param name="id">UserTasks.Id (PK)</param>
+    /// <param name="userId">UserTasks.UserId (resticcion combinada con UserTasks.TaskId)</param>
+    /// <param name="taskId">UserTasks.TaskId (resticcion combinada con UserTasks.UserId)</param>
+    internal UserTasks(long id, long userId, long taskId)
     {
-        private readonly long _id = 0;
-        private readonly long _userId = 0;
-        private readonly long _taskId = 0;
-
-        #region Constructors
-
-        public UserTasks(long id, long userId, long taskId)
-        {
-            if (userId <= 0)
-            {
-                throw new ArgumentException("Invalid User Id");
-            }
-            if (taskId <= 0)
-            {
-                throw new ArgumentException("Invalid Task Id");
-            }
-
-            this._id = id;
-            this._userId = userId;
-            this._taskId = taskId;
-        }
-
-        #endregion
-
-        #region Properties
-
-        public long Id
-        {
-            get { return this._id; }
-            private set { }
-        }
-        public long UserId
-        {
-            get { return this._userId; }
-            private set { }
-        }
-        public long TaskId
-        {
-            get { return this._taskId; }
-            private set { }
-        }
-
-        #endregion
-
+        this.Id = id;
+        this.UserId = userId;
+        this.TaskId = taskId;
     }
 }

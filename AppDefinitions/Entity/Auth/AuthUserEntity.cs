@@ -1,34 +1,29 @@
 ﻿using System;
 
+/// <summary>
+/// Sesion de Usuario; uso interno de la aplicacion; Auditoria de registros.
+///<remarks>Esta clase NO es serializabe.</remarks> 
+/// </summary>
 
-// NOTA Importante: Esta clase NO es serializabe, es para uso interno de la aplicacion, Auditoria de registros.
+namespace App.Definitions.Auth;
 
-namespace App.Definitions.Auth
+public sealed record class AuthUserEntity
 {
-    public class AuthUserEntity
+    private long UserId { get; init; }
+    private string UserName { get; init; }
+    public bool IsAuthenticated
     {
-        private readonly long _userId;
-        private readonly string _userName;
+        get { return this.UserId > 0 && !string.IsNullOrEmpty(this.UserName); }
+    }
 
-        #region Constructor
-
-        public AuthUserEntity(long userId, string userName)
-        {
-            this._userId = userId;
-            this._userName = userName;
-        }
-
-        #endregion
-
-        #region Properties
-
-        public long UserId
-        { get { return this._userId; } }
-
-        public string UserName 
-        { get { return this._userName; } }
-
-        #endregion
-    
+    /// <summary>
+    /// Inicializa una nueva instancia <see cref="AuthUserEntity"/>.
+    /// </summary>
+    /// <param name="userId">Id de usuario</param>
+    /// <param name="userName">Nombre de usuario</param>
+    public AuthUserEntity(long userId, string userName)
+    {
+        this.UserId = userId;
+        this.UserName = userName;
     }
 }

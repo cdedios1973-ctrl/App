@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Deprecated
+
+/*
+using System;
 
 namespace App.Definitions.Entity
 {
@@ -36,3 +39,4 @@ namespace App.Definitions.Entity
 
     }
 }
+*/
