@@ -10,7 +10,8 @@ el sistema fallaba de manera genérica. Esto ocultaba problemas críticos del en
 y dificultaba el diagnóstico rápido en producción.
 
 Actualmente dispongo de una carpeta `Installation` dentro del proyecto de infraestructura encargada de testear y desplegar el esquema físico.
-Evaluando si la aplicación operará como una solución monopuesto (cliente único) con autodespligue, y, despliegue controlado (DBA) en un entorno de intranet corporativa.
+Evaluando si la aplicación operará como una solución monopuesto (cliente único) con autodespligue, y, 
+despliegue controlado (DBA) en un entorno de intranet corporativa.
 
 ## Decisión
 Evolucionar la lógica de arranque de la aplicación hacia un enfoque de verificación condicional dual, clasificando el estado del sistema bajo los siguientes criterios:

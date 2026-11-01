@@ -1,7 +1,7 @@
 ﻿# ADR-004: Centralización del Lector de Configuración Exclusivo
 
 ## Estado
-Aceptado
+Aceptado/No ejecutado (hay una solucion mas facil)
 
 ## Contexto
 Se requiere unificar los parámetros de configuración que se encontraban dispersos 
