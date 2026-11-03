@@ -1,13 +1,22 @@
-Estado actual del repositorio: Work in Progress
+# Refactorización (WIP) de Recopilación de ejemplos de Software a Prototipo de ERP Local (.NET / WinForms)
 
-Fase de Refactorización Activa: Este laboratorio se encuentra actualmente en proceso de reestructuración.
-Encontrarás módulos con arquitectura moderna conviviendo con secciones de código origen pendientes de migrar.
-Si ves interfaces donde no toca, no es por desconocimiento.
 
-Estado de Ejecución: El código se expone con fines puramente de evaluación arquitectónica y diseño de capas. 
-Aún no se ha realizado la primera pasada de compilación ni pruebas de ejecución, 
-por lo que el foco actual está en la reescritura lógica y aplicación de patrones, no en la estabilidad del binario.
+Este repositorio contiene la refactorización arquitectónica de un sistema piloto local, rediseñado bajo principios de arquitectura limpia y desarrollo robusto para garantizar el hiperrendimiento en hardware modesto, la mantenibilidad a largo plazo y la compatibilidad nativa con .NET Native AOT.
 
-Objetivo del Proyecto
-El proyecto simula un escenario de mantenimiento de software: una aplicación que originalmente dependía de estructuras acopladas y 
-que está siendo migrada progresivamente hacia una Arquitectura Limpia, aplicando principios SOLID y patrones de diseño modernos.
+
+## Documentación de Arquitectura
+
+
+Para entender las decisiones de diseño, el flujo de datos y la gestión del hardware, consulta los siguientes documentos estratégicos:
+
+*   **[Manual de Arquitectura](./docs/manual-arquitectura.md):** Fundamentos del manejo seguro de archivos (`System.IO`), el JIT y la Inyección de Dependencias (DI) sin penalización en memoria.
+*   **[Registros de Decisión Arquitectónica (ADRs)](./docs/adr/):** El histórico de diseño que justifica las soluciones técnicas aplicadas:
+    *   [ADR-001: SQLite y ADO.NET Nativo para control total](./docs/adr/adr-001.md)
+    *   [ADR-002: Gestión de Transacciones Maestro-Detalle](./docs/adr/adr-002.md)
+    *   [ADR-008: Centralización de Infraestructura mediante DI](./docs/adr/adr-008.md)
+    *   [ADR-009: Flujo de Facturación Concurrente e Inmutabilidad](./docs/adr/adr-009.md)
+
+## Pilares Técnicos del Proyecto y Objetivo a alcanzar (WIP)
+*   **SOLID & Clean Architecture:** Separación absoluta de jurisdicciones. Capa de lógica puramente inmutable.
+*   **Rendimiento en Red Local:** Activación de SQLite en Modo WAL (Write-Ahead Logging) para evitar bloqueos concurrentes.
+*   **Zero-Reflection & Native AOT:** Código estático optimizado con Source Generators para compilar directamente a código máquina nativo.
