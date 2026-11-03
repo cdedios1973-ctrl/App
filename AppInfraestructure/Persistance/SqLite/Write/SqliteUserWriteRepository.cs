@@ -1,11 +1,11 @@
-﻿using App.Definitions.Entity;
-using App.Definitions.Interfaces.Config;
+﻿using System;
 //using Microsoft.IdentityModel.Tokens;
-using Microsoft.Data.Sqlite;
-using System;
-using System.Diagnostics;
 
-// TODO : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
+using App.Definitions.Entity;
+using App.Definitions.Interfaces.Config;
+using Microsoft.Data.Sqlite;
+
+// DONE : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 // TODO : Hash de campos. si fuera necesario. repasar.
 namespace App.Infrastructure.Persistence
@@ -16,48 +16,48 @@ namespace App.Infrastructure.Persistence
     /// <remarks>
     /// Esta clase se enfoca en el uso de tipos primitivos compatibles con el proveedor de datos de SQLite.
     /// </remarks>
-    public class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Seguridad Microsoft
+    internal class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Seguridad Microsoft y Auditoria
     {
-        private const string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
-        private const string SQL_UPDATE = "UPDATE User SET (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity) WHERE ID = @Id;";
-        private const string SQL_DELETE = "DELETE FROM User WHERE ID = @Id; ";
-        private readonly IConnectionStringService _connectionStringService;
+        //private const string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
+        //private const string SQL_UPDATE = "UPDATE User SET (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity) WHERE ID = @Id;";
+        //private const string SQL_DELETE = "UPDATE User SET (Active) VALUES (@Active) WHERE ID = @Id;";
+        //private const string SQL_DELETE = "DELETE FROM User WHERE ID = @Id; ";
 
+        private readonly IConnectionStringService _connectionStringService;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="SqliteUserWriteRepository"/>.
         /// </summary>
         #region Constructor
 
-        public SqliteUserWriteRepository(IConnectionStringService connectionStringService)
+        internal SqliteUserWriteRepository(IConnectionStringService connectionStringService)
         {
             this._connectionStringService = connectionStringService;
         }
 
         #endregion
 
-
-
-        #region Interface Implementation
+        #region Interface Implementation { Insert, Update, Delete Actions }
 
         /// <summary>
-        /// Inserta el registro del usuario actual en la base de datos.
+        /// Inserta el registro del usuario actual en la base de datos. Modelo previo con bloque try/catch/finally
         /// </summary>
         /// <param name="user">La entidad User a insertar en la base de datos.</param>
-        /// <returns><see langword="long"/>Devuelve el ultimo Id insertado en la base de datos.</returns>
+        /// <returns><see langword="bool"/>Devuelve verdadero si la transacción ha sido un éxito, falso si ha courrido un error.</returns>
         /// <remarks>
         /// **Seguridad:** Requiere nivel de permiso 2 o superior.
         /// </remarks>
         public bool Insert(User user)
         {
             if (user == null)
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
 
             // 2. Declaración de recursos
             SqliteConnection connection = null;
             SqliteTransaction transaction = null;
             SqliteCommand command = null;
 
+            string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
             bool isSuccess = false;
             long lid = 0;
 
@@ -92,7 +92,7 @@ namespace App.Infrastructure.Persistence
                 else
                     transaction.Rollback();
             }
-            catch (Exception)
+            catch (SqliteException)
             {
                 // Salvaguarda: Si algo falla, deshacemos cambios inmediatamente
                 if (transaction != null)
@@ -130,34 +130,41 @@ namespace App.Infrastructure.Persistence
         public bool Update(User user)
         {
             if (user == null)
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
 
-            long lid = 0;
-            SqliteCommand cmd = null;
+            string SQL_UPDATE = "UPDATE User SET (Name = @Name, Surname = @Surname, Address = @Address, CountryIdentity = @CountryIdentity) WHERE ID = @Id;";
+            bool isSuccess = false;
 
             try
             {
-                cmd = new SqliteCommand(SQL_UPDATE, connection, transaction);
-                cmd.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
-                cmd.Parameters.Add("@Name", SqliteType.Text).Value = user.Name;
-                cmd.Parameters.Add("@Surname", SqliteType.Text).Value = user.Surname;
-                cmd.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
-                cmd.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
+                // Al declararse con 'using' al inicio, los 3 recursos se liberarán automáticamente EN ORDEN INVERSO al llegar a la llave de cierre del 'try'.
+                using var connection = new SqliteConnection(_connectionStringService.GetConnectionString());
+                connection.Open();
 
-                if (cmd.ExecuteNonQuery() > 0)
-                    lid = user.Id;
+                using var transaction = connection.BeginTransaction();
+                using var command = new SqliteCommand(SQL_UPDATE, connection, transaction);
+
+                command.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
+                command.Parameters.Add("@Name", SqliteType.Text).Value = user.Name;
+                command.Parameters.Add("@Surname", SqliteType.Text).Value = user.Surname;
+                command.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
+                command.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
+
+                isSuccess = command.ExecuteNonQuery() > 0;
+
+                if (isSuccess)
+                    transaction.Commit();
+                else
+                    transaction.Rollback();
             }
             catch (SqliteException)
             {
+                // Nota: Si usas 'using var transaction', no necesitas hacer el Rollback manual en el catch.
+                // Si la transacción no llega al .Commit(), al destruirse hace Rollback automáticamente.
                 throw;
             }
-            finally
-            {
-                if (cmd != null)
-                    ((IDisposable)cmd).Dispose();
-            }
-            return lid > 0;
 
+            return isSuccess;
         }
 
         /// <summary>
@@ -171,28 +178,35 @@ namespace App.Infrastructure.Persistence
         public bool Delete(User user)
         {
             if (user == null)
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
 
-            int result = 0;
-            SqliteCommand cmd = null;
+            string SQL_DELETE = "UPDATE User SET Active = @Active WHERE ID = @Id;";
+            bool isSuccess = false;
 
             try
             {
-                cmd = new SqliteCommand(SQL_DELETE, connection, transaction);
-                cmd.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
+                using var connection = new SqliteConnection(_connectionStringService.GetConnectionString());
+                connection.Open();
 
-                result = cmd.ExecuteNonQuery();
+                using var transaction = connection.BeginTransaction();
+                using var command = new SqliteCommand(SQL_DELETE, connection, transaction);
+
+                command.Parameters.Add("@Id", SqliteType.Integer).Value = user.Id;
+                command.Parameters.Add("@Active", SqliteType.Integer).Value = 0;
+
+                isSuccess = command.ExecuteNonQuery() > 0;
+
+                if (isSuccess == true)
+                    transaction.Commit();
+                else
+                    transaction.Rollback();
+
             }
             catch (SqliteException)
             {
                 throw;
             }
-            finally
-            {
-                if (cmd != null)
-                    ((IDisposable)cmd).Dispose();
-            }
-            return result > 0;
+            return isSuccess;
         }
 
         #endregion
