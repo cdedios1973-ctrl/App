@@ -67,17 +67,13 @@ namespace App.Infrastructure.Persistence
                 // Asignación e inicio de canales de datos
                 connection = new SqliteConnection(_connectionStringService.GetConnectionString());
                 connection.Open();
-
-                // TODO: Comprobar que no existe el usuario (NIF/CIF) o su campo único en tabla
-
+                transaction = connection.BeginTransaction();
 
                 command = new SqliteCommand(SQL_INSERT, connection, transaction);
                 command.Parameters.Add("@Name", SqliteType.Text).Value = user.Name;
                 command.Parameters.Add("@Surname", SqliteType.Text).Value = user.Surname;
                 command.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
                 command.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
-
-                transaction = connection.BeginTransaction();
 
                 object result = command.ExecuteScalar();
 
