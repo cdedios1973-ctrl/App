@@ -16,21 +16,21 @@ namespace App.Infrastructure.Persistence
         /// Guarda un registro nuevo.
         /// </summary>
         /// <param name="user">Procesa la entidad User.</param>
-        /// <returns>Devuelve el Id del registro si el registro se insertó correctamente; de lo contrario, false.</returns>
-        long Insert(User user, SqliteConnection connection, SqliteTransaction transaction);
+        /// <returns>Devuelve true si el registro se insertó correctamente; de lo contrario false.</returns>
+        bool Insert(User user);
 
         /// <summary>
         /// Modifica un registro existente.
         /// </summary>
         /// <param name="user">Procesa la entidad User.</param>
-        /// <returns>Devuelve el Id del registro si se modificó correctamente.</returns>
-        long Update(User user, SqliteConnection connection, SqliteTransaction transaction);
+        /// <returns>Devuelve true si el registro se modificó correctamente; de lo contrario false.</returns>
+        bool Update(User user);
         /// <summary>
         /// Borra un registro.
         /// </summary>
         /// <param name="user">Procesa la entidad User.</param>
-        /// <returns>Devuelve true si el registro se eliminó correctamente; de lo contrario, false.</returns>
-        bool Delete(User user, SqliteConnection connection, SqliteTransaction transaction);
+        /// <returns>Devuelve true si el registro se eliminó correctamente; de lo contrario false.</returns>
+        bool Delete(User user);
 
     }
 }
