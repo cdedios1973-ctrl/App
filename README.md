@@ -1,7 +1,7 @@
 # Refactorización (WIP) de Recopilación de ejemplos de Software a Prototipo de ERP Local (.NET / WinForms)
 
 
-Este repositorio contiene la refactorización arquitectónica de un sistema piloto local, rediseñado bajo principios de arquitectura limpia y desarrollo robusto para garantizar el hiperrendimiento en hardware modesto, la mantenibilidad a largo plazo y la compatibilidad nativa con .NET Native AOT.
+Este repositorio contiene la refactorización arquitectónica de un sistema piloto local, rediseñado bajo principios de arquitectura limpia para evaluar los límites de rendimiento en hardware modesto y la viabilidad de la compilación nativa con .NET Native AOT.
 
 
 ## Documentación de Arquitectura
