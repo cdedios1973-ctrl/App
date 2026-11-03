@@ -25,7 +25,12 @@ namespace App.UI.Presenters
         /// </summary>
         #region Logic Service Call : Add New User
 
-        public List<string> ExecuteRegister(UserDTO userRawData)
+
+
+        // TODO : Mover la validacion a la logica, en la transformacion de dto a poco deberia saltar el error
+        // TODO : Ademas es alli donde hay que aplicar la seguridad de Microsoft para que no instancie a Persistencia si no tiene permisos
+        // TODO : Tambien creo que se aplica mejor alli SOLID, donde se valida la Logica
+        public List<string> ExecuteRegister(UserDto userRawData)
         {
             var errors = new List<string>();
 

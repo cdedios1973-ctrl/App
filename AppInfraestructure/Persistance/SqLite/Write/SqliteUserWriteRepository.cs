@@ -132,7 +132,7 @@ namespace App.Infrastructure.Persistence
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            string SQL_UPDATE = "UPDATE User SET (Name = @Name, Surname = @Surname, Address = @Address, CountryIdentity = @CountryIdentity) WHERE ID = @Id;";
+            string SQL_UPDATE = "UPDATE User SET Name = @Name, Surname = @Surname, Address = @Address, CountryIdentity = @CountryIdentity WHERE ID = @Id;";
             bool isSuccess = false;
 
             try

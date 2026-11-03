@@ -3,11 +3,14 @@
 /// <summary>
 /// Modelo Visual Studio versiones anteriores
 /// DTO de la tabla maestra 'User' (Vista).
+/// Nota de diseño: Se conserva este formato clásico (readonly + get puro con campos privados) como referencia histórica. 
+/// En la refactorización final hacia Native AOT, se migra hacia record class con init para eliminar la necesidad de reflexión dinámica y suprimir el atributo 
+/// [Serializable] obsoleto
 /// </summary>
 
 namespace App.Definitions.DTO
 {
-    [Serializable()]
+    //[Serializable()]
     public sealed class UserDto
     {
         private readonly long _id = 0;
