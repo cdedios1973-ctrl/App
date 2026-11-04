@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\Persistence\Write\" />
     <Folder Include="Interfaces\Services\EntityService\Read\" />
   </ItemGroup>
 

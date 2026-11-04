@@ -12,6 +12,7 @@
     <Compile Remove="Deprecated\Database Instalation\DbType\**" />
     <Compile Remove="Deprecated\Database Instalation\DbType\**" />
     <Compile Remove="Deprecated\Database Instalation\DbType\**" />
+    <Compile Remove="Docs\**" />
     <Compile Remove="OLD\**" />
     <Compile Remove="Services\DAO\**" />
     <EmbeddedResource Remove="Common\DDBB\**" />
@@ -19,6 +20,7 @@
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
+    <EmbeddedResource Remove="Docs\**" />
     <EmbeddedResource Remove="OLD\**" />
     <EmbeddedResource Remove="Services\DAO\**" />
     <None Remove="Common\DDBB\**" />
@@ -26,6 +28,7 @@
     <None Remove="Deprecated\Database Instalation\DbType\**" />
     <None Remove="Deprecated\Database Instalation\DbType\**" />
     <None Remove="Deprecated\Database Instalation\DbType\**" />
+    <None Remove="Docs\**" />
     <None Remove="OLD\**" />
     <None Remove="Services\DAO\**" />
   </ItemGroup>

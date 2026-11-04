@@ -2,12 +2,10 @@
 
 using App.Definitions.Entity;
 
-// TODO : arreglar documentacion
-
-namespace App.Definitions.Interfaces.Persistence;
+namespace App.Infrastructure.Persistencee.Interfaces;
 
 /// <summary>
-/// Esta interfaz define las acciones básicas para guardar, cambiar o borrar datos en la base de datos.
+/// Esta interfaz define las acciones básicas para guardar, cambiar o borrar (soft-delete) registros de la base de datos.
 /// </summary>
 public interface IUserWriteRepository
 {
@@ -28,7 +26,7 @@ public interface IUserWriteRepository
     /// Borra un registro.
     /// </summary>
     /// <param name="user">Procesa la entidad User.</param>
-    /// <returns>Devuelve true si el registro se eliminó correctamente; de lo contrario false.</returns>
+    /// <returns>Devuelve true si el registro se eliminó (soft-delete) correctamente; de lo contrario false.</returns>
     bool Delete(User user);
 
 }

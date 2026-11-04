@@ -6,6 +6,7 @@ namespace TaskHub.Infrastructure.Services
 {
     internal sealed class ConnectionStringService : IConnectionStringService
     {
+
         #region Constructor
 
         internal ConnectionStringService() { }
@@ -14,11 +15,12 @@ namespace TaskHub.Infrastructure.Services
 
         #region Interface Implementation
 
-        public string GetConnectionString(string dbName)
+        public string GetConnectionString()
         {
             return "";
         }
 
         #endregion
+    
     }
 }

@@ -1,15 +1,13 @@
 ﻿using System;
 
-using Microsoft.Data.Sqlite;
 using App.Definitions.Entity;
 
-namespace App.Infrastructure.Persistence
-{
-    public interface IModuleWriteRepository
-    {
-        long Insert(Module module, SqliteConnection connection, SqliteTransaction transaction);
-        long Update(Module module, SqliteConnection connection, SqliteTransaction transaction);
-        bool Delete(Module module, SqliteConnection connection, SqliteTransaction transaction);
+namespace App.Infrastructure.Persistencee.Interfaces;
 
-    }
+public interface IModuleWriteRepository
+{
+    long Insert(Module module);
+    long Update(Module module);
+    bool Delete(Module module);
+
 }
