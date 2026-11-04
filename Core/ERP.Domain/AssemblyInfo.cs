@@ -5,6 +5,6 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("AppLogic")]
-[assembly: InternalsVisibleTo("AppInfrastructure")]
+[assembly: InternalsVisibleTo("ERP.Application")]
+[assembly: InternalsVisibleTo("ERP.Infrastructure")]
 //[assembly: InternalsVisibleTo("Logic, PublicKey= Pendiente de Clave pública")]

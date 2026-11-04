@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F0093EFC-528C-4F30-A3A4-9AF91BB5581A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AppWF</RootNamespace>
-    <AssemblyName>AppWF</AssemblyName>
+    <RootNamespace>ERP.Views.WinForms.UI</RootNamespace>
+    <AssemblyName>ERP.Views.WinForms.UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -74,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
