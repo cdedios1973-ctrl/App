@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Refactorice\AppIO\InputHandler\AppInput_old.cs" />
-    <Compile Remove="Refactorice\Menu\DisplayMessage_old.cs" />
+    <Compile Remove="Deprecated\Refactorice\AppIO\InputHandler\AppInput_old.cs" />
+    <Compile Remove="Deprecated\Refactorice\Menu\DisplayMessage_old.cs" />
     <Compile Remove="PermissionsLogic.cs" />
     <Compile Remove="TaskLogic.cs" />
     <Compile Remove="UserLogic.cs" />

@@ -8,7 +8,7 @@ using ERP.Application.Interfaces.Persistence;
 // DONE : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 // TODO : Hash de campos. si fuera necesario. repasar.
-namespace App.Infrastructure.Persistence;
+namespace App.Infrastructure.Sqlite;
 
 /// <summary>
 /// Proporciona la implementación de comandos SQL de escritura para la entidad <see cref="User"/> en SQLite.
@@ -51,12 +51,11 @@ internal class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Se
             throw new ArgumentNullException(nameof(user));
 
         // 2. Declaración de recursos
+        string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
         SqliteConnection connection = null;
         SqliteTransaction transaction = null;
         SqliteCommand command = null;
 
-        string SQL_INSERT = "INSERT INTO User (Name, Surname, Address, CountryIdentity) VALUES (@Name, @Surname, @Address, @CountryIdentity); SELECT last_insert_rowid();";
-        bool isSuccess = false;
         long lid = 0;
 
         // 4. Bloque de operaciones críticas 
@@ -73,10 +72,7 @@ internal class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Se
             command.Parameters.Add("@Address", SqliteType.Text).Value = user.Address;
             command.Parameters.Add("@CountryIdentity", SqliteType.Text).Value = user.CountryIdentity;
 
-            object result = command.ExecuteScalar();
-
-            if (result != null)
-                lid = (long)result;
+            lid = (long)command.ExecuteScalar();
 
             // Evaluación del resultado y control de la transacción
             if (lid > 0)
@@ -85,7 +81,6 @@ internal class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Se
                 // [MODULARIDAD DE LAS FK] (ejemplo)
                 // Mapeo por constructor 1:1 de la clase detalle, enlazada con el ultimo pk o campo combinado
                 transaction.Commit();
-                isSuccess = true;
             }
             else
                 transaction.Rollback();
@@ -113,8 +108,7 @@ internal class SqliteUserWriteRepository : IUserWriteRepository //, IToken <- Se
                 ((IDisposable)connection).Dispose();
             }
         }
-
-        return isSuccess;
+        return lid > 0;
     }
 
     #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 // TODO : Remove this class ASAP
 
@@ -18,3 +19,4 @@ namespace App.Models
     }
 
 }
+*/
