@@ -5,7 +5,7 @@
 ///<remarks>Esta clase NO es serializabe.</remarks> 
 /// </summary>
 
-namespace App.Definitions.Auth;
+namespace ERP.Domain.Auth;
 
 public sealed record class AuthUserEntity
 {

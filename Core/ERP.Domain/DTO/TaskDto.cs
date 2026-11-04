@@ -5,10 +5,10 @@
 /// DTO de la tabla maestra 'Task' (Vista).
 /// </summary>
 
-namespace App.Definitions.DTO;
+namespace ERP.Domain.DTO;
 
-[Serializable()] // TODO: Estudiar y cambiar a [JsonSerializable] cuando se migren los serializadores
-internal sealed record class TaskDto
+//[Serializable()] // TODO: Estudiar y cambiar a [JsonSerializable] cuando se migren los serializadores
+public sealed record class TaskDto
 {
     public long Id { get; init; }
     public string Name { get; init; }

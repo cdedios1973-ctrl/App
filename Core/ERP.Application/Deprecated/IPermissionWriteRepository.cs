@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 using App.Definitions.Entity;
 
@@ -11,3 +12,4 @@ public interface IPermissionWriteRepository
     bool Delete(Permission permissions);
 
 }
+*/

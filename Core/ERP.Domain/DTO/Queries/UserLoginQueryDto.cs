@@ -4,7 +4,7 @@
 /// DTO de petición para comprobar la existencia de un usuario a través de su nombre de usuario y clave.
 /// </summary>
 
-namespace App.Definitions.DTO;
+namespace ERP.Domain.DTO;
 
 public sealed record class UserLoginQueryDto
 {

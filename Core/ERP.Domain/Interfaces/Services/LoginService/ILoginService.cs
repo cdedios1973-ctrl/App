@@ -1,11 +1,9 @@
 ﻿using System;
+using ERP.Domain.DTO;
 
-using App.Definitions.DTO;
+namespace ERP.Domain.Interfaces.Login;
 
-namespace App.Definitions.Interfaces.Login
+public interface ILoginService
 {
-    public interface ILoginService
-    {
-        bool Login(UserLoginQueryDto userToLogin);
-    }
+    bool Login(UserLoginQueryDto userToLogin);
 }

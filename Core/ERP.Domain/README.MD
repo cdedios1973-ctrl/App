@@ -11,8 +11,6 @@ A continuación se detalla el propósito de cada carpeta en esta refactorizació
 
 * **`Deprecated/`**  
   Código previo, comentado y ya refactorizado. *Revisar el "antes y después" de la solución.*
-* **`Enums/`**  (Deprecated) 
-  Enumerados globales utilizados a lo largo de la aplicación.
 * **`DTO/`**  
   Modelos de Objetos de Transferencia de Datos (Data Transfer Objects).
 * **`DTO/Queries/`**  

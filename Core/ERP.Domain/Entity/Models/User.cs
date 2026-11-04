@@ -5,7 +5,7 @@
 /// Mantenenido en formato previo de Visual Studio
 /// </summary>
 
-namespace App.Definitions.Entity
+namespace ERP.Domain.Entity
 {
     public sealed class User
     {

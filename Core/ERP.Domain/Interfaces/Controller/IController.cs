@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace App.Definitions.Interfaces.Controller
+namespace ERP.Domain.Interfaces.Controller;
+
+internal interface IController
 {
-    internal interface IController
-    {
-    }
 }
+

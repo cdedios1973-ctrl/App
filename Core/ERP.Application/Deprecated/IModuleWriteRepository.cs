@@ -1,8 +1,9 @@
-﻿using System;
+﻿/*
+using System;
 
-using App.Definitions.Entity;
+using ERP.Domain.Entity;
 
-namespace App.Infrastructure.Persistencee.Interfaces;
+namespace ERP.Application.Interfaces.Persistence;
 
 public interface IModuleWriteRepository
 {
@@ -11,3 +12,4 @@ public interface IModuleWriteRepository
     bool Delete(Module module);
 
 }
+*/

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Definitions.Events;
+namespace ERP.Domain.Events;
 
 public class AppMessageHandler
 {

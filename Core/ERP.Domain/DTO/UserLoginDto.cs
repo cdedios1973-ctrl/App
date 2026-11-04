@@ -1,7 +1,7 @@
 ﻿using System;
 //using System.Text.Json.Serialization;
 
-namespace App.Definitions.DTO;
+namespace ERP.Domain.DTO;
 
 /// <summary>
 /// DTO de la tabla maestra 'UserLogin' (Vista).
@@ -16,7 +16,6 @@ namespace App.Definitions.DTO;
 /// </remarks>
 
 [Serializable()] // TODO: Estudiar y cambiar a [JsonSerializable] cuando se migren los serializadores
-
 internal sealed record class UserLoginDto
 {
 

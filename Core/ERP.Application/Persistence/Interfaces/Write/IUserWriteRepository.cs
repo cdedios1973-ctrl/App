@@ -1,8 +1,7 @@
 ﻿using System;
+using ERP.Domain.Entity;
 
-using App.Definitions.Entity;
-
-namespace App.Infrastructure.Persistencee.Interfaces;
+namespace ERP.Application.Interfaces.Persistencee;
 
 /// <summary>
 /// Esta interfaz define las acciones básicas para guardar, cambiar o borrar (soft-delete) registros de la base de datos.

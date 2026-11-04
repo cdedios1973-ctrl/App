@@ -4,7 +4,7 @@
 /// POCO de la tabla maestra 'UserLogin' (Logic - Persistence).
 /// </summary>
 
-namespace App.Definitions.Entity;
+namespace ERP.Domain.Entity;
 
 internal sealed record class UserLogin
 {

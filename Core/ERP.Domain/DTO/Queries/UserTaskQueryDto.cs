@@ -1,7 +1,7 @@
 ﻿using System;
 //using System.Text.Json.Serialization;
 
-namespace App.Definitions.DTO;
+namespace ERP.Domain.DTO;
 
 /// <summary>
 /// DTO resultante del JOIN entre UserTask, User y Task. Es una vista

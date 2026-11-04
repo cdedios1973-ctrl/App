@@ -8,7 +8,7 @@
 /// [Serializable] obsoleto
 /// </summary>
 
-namespace App.Definitions.DTO
+namespace ERP.Domain.DTO
 {
     //[Serializable()]
     public sealed class UserDto
@@ -18,6 +18,30 @@ namespace App.Definitions.DTO
         private readonly string _surname;
         private readonly string _address;
         private readonly string _countryIdentity;
+
+        #region Properties { immutable, locked after creation }
+        public long Id
+        {
+            get { return this._id; }
+        }
+        public string Name
+        {
+            get { return this._name; }
+        }
+        public string Surname
+        {
+            get { return this._surname; }
+        }
+        public string Address
+        {
+            get { return this._address; }
+        }
+        public string CountryIdentity
+        {
+            get { return this._countryIdentity; }
+        }
+
+        #endregion
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UserDto"/>.
@@ -36,30 +60,6 @@ namespace App.Definitions.DTO
             this._surname = surname;
             this._address = address;
             this._countryIdentity = countryIdentity;
-        }
-
-        #endregion
-
-        #region Properties { immutable, locked after creation }
-        public long Id
-        {   
-            get { return this._id; }
-        }
-        public string Name
-        { 
-            get { return this._name; }
-        }
-        public string Surname
-        { 
-            get { return this._surname; }
-        }
-        public string Address
-        { 
-            get { return this._address; }
-        }
-        public string CountryIdentity
-        {
-            get { return this._countryIdentity; }
         }
 
         #endregion
