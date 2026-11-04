@@ -31,27 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppController", "AppControl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHub.UI", "TaskHub.UI\TaskHub.UI.csproj", "{40C5FD1E-2678-427F-B1C1-08FEDFE4F3C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D4556EB8-85EC-4935-9D78-90265DBCC710}"
-	ProjectSection(SolutionItems) = preProject
-		docs\01_JsonConfig.md = docs\01_JsonConfig.md
-		docs\adr\ARCHITECTURE.md = docs\adr\ARCHITECTURE.md
-		docs\Facturacion.txt = docs\Facturacion.txt
-		docs\Factu_Ultimo.odt = docs\Factu_Ultimo.odt
-		docs\Net_AOT.txt = docs\Net_AOT.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{695A2F0F-A639-4EAF-9A7B-9A441633E2E7}"
-	ProjectSection(SolutionItems) = preProject
-		docs\adr\001-Cambio_SqLite.md = docs\adr\001-Cambio_SqLite.md
-		docs\adr\002-transacciones-compartidas.md = docs\adr\002-transacciones-compartidas.md
-		docs\adr\003-cambios-instalacion.md = docs\adr\003-cambios-instalacion.md
-		docs\adr\004-Lector-configuracion.md = docs\adr\004-Lector-configuracion.md
-		docs\adr\005-Despliegue-Base-Datos.md = docs\adr\005-Despliegue-Base-Datos.md
-		docs\adr\006-Autenticación de Usuarios.md = docs\adr\006-Autenticación de Usuarios.md
-		docs\adr\007-Verifactu.md = docs\adr\007-Verifactu.md
-		docs\adr\008-Gestion-Archivos.md = docs\adr\008-Gestion-Archivos.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -310,7 +289,6 @@ Global
 		{D7E53080-B7D9-AE76-AFDD-0EBB8F985B4E} = {7C17AAB3-ECBA-4C75-9A88-7963EDFD1026}
 		{9EC28CCD-2CE6-4949-A5C5-CB9B16093622} = {7C17AAB3-ECBA-4C75-9A88-7963EDFD1026}
 		{40C5FD1E-2678-427F-B1C1-08FEDFE4F3C2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{695A2F0F-A639-4EAF-9A7B-9A441633E2E7} = {D4556EB8-85EC-4935-9D78-90265DBCC710}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0848A9D-E6CF-4577-BD84-7D937F9F7A8E}

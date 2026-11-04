@@ -27,7 +27,7 @@ Hemos decidido desacoplar por completo la infraestructura de persistencia implem
 * Incremento inicial en el volumen de código base debido a la creación explícita de abstracciones, interfaces y cableado de contenedores de servicios en el inicio de la aplicación.
 
 ## Enlaces Relacionados
-* Ver guía completa de implementación en: `infrastructure/docs/01_JsonConfig.md`
+* Ver guía completa de implementación en: `docs/research/01_JsonConfig.md`
 
 
 
