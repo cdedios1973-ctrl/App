@@ -1,28 +1,23 @@
-﻿using System;
-
-// Deprecated -> Movido a infrastructure
-
-/*
+﻿/*
+using System;
 //using Microsoft.IdentityModel.Tokens;
-
 using Microsoft.Data.Sqlite;
-using App.Definitions.Entity;
+using ERP.Domain.Entity;
 
+
+// TODO : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
-// TODO : Arreglar la documentacion
-// TODO : Hash de campos.
-
+// TODO : Implementar update y delete.
 namespace App.Infrastructure.Persistence
 {
-    public class SqlitePermissionDao : IPermissionWriteRepository //, IToken
+    public class SqlitePermissionWriteRepository : IPermissionWriteRepository //, IToken
     {
-        private const string SQL_INSERT = "INSERT INTO zzzzzz (zzzzz, zzzzzz) VALUES (@zzzz, @zzzzz); SELECT last_insert_rowid();";
-        // TODO: Implementar constante sql de modificación y eliminacion
-        //private const string SQL_UPDATE = "";
-        //private const string SQL_DELETE = "";
+        private const string SQL_INSERT = "INSERT INTO Permission (Parent, Name, Observation) VALUES (@Parent, @Name, @Observation); SELECT last_insert_rowid();";
+        private const string SQL_UPDATE = "UPDATE PERMISSION SET (Parent, Name, Observation) VALUES (@Parent, @Name, @Observation) WHERE ID = @ID;";
+        private const string SQL_DELETE = "DELETE FROM PERMISSION WHERE ID = @ID;";
 
         #region Constructor
-        public SqlitePermissionDao() { }
+        public SqlitePermissionWriteRepository() { }
 
         #endregion
 
@@ -39,13 +34,14 @@ namespace App.Infrastructure.Persistence
             try
             {
                 cmd = new SqliteCommand(SQL_INSERT, connection, transaction);
-                cmd.Parameters.AddWithValue("@zzzz", permissions.Name);
-                //cmd.Parameters.AddWithValue("@zzzz", permissions.Surname);
+                cmd.Parameters.Add("@Parent", SqliteType.Text).Value = permissions.Parent;
+                cmd.Parameters.Add("@Name", SqliteType.Text).Value = permissions.Name;
+                cmd.Parameters.Add("@Observation", SqliteType.Text).Value = permissions.Observation;
 
                 object result = cmd.ExecuteScalar();
 
-                if (result != null && result != DBNull.Value)
-                    lid = Convert.ToInt64(result);
+                if (result != null)
+                    lid = (long)result;
             }
             catch (SqliteException)
             {
@@ -70,6 +66,7 @@ namespace App.Infrastructure.Persistence
         }
 
         #endregion
+    
     }
 }
 */

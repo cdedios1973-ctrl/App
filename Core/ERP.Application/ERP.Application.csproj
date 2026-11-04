@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\ERP.Infrastructure.csproj" />
     <ProjectReference Include="..\ERP.Domain\ERP.Domain.csproj" />
   </ItemGroup>
 
