@@ -1,6 +1,6 @@
-﻿using System;
+﻿/* deprecated
+using System;
 
-/* deprecated
 using Microsoft.Data.Sqlite;
 
 namespace App.Infraestructure.CORE.Interfaces.Database

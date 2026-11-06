@@ -1,7 +1,7 @@
-﻿using System;
-
-// Deprecated class
+﻿// Deprecated class
 /*
+
+using System;
 
 //using App.Infraestructure.CORE.Interfaces.Path;
 

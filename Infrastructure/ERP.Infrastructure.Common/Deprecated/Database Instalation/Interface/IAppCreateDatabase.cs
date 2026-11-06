@@ -1,6 +1,6 @@
-﻿using System;
+﻿/*
+using System;
 
-/*
 namespace App.Infraestructure.Installation.Database
 {
 public interface IAppDatabaseInstallation

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Deprecated : Razon -> lector appconfig.json y mapeo de datos a entidad
+/*
+using System;
 using System.IO;
 using System.Collections.Generic;
 
@@ -65,3 +67,4 @@ namespace TaskHub.Infrastructure.Services
 
     }
 }
+*/
