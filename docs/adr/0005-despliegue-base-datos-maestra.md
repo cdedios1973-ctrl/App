@@ -1,7 +1,7 @@
 ﻿# ADR-005: Estrategia de Despliegue de la Base de Datos Maestra
 
 ## Estado
-Propuesto
+Aceptado
 
 ## Contexto
 El sistema ya contaba con una validación para verificar la existencia de la base de datos antes de intentar el despliegue inicial. 

@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Domain", "Core\ERP.Doma
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A9F40150-2C40-47E4-BDA4-44C2E6B8FDB7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs-1", "docs-1", "{F8430072-31EF-48F4-8B72-7E12E19B8CA9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F8430072-31EF-48F4-8B72-7E12E19B8CA9}"
 	ProjectSection(SolutionItems) = preProject
 		Architecture-2.md = Architecture-2.md
 		docs\architecture.md = docs\architecture.md

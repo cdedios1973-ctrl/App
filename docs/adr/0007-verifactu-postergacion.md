@@ -1,4 +1,4 @@
-﻿# ADR 006: Postergación de Cumplimiento VeriFactu
+﻿# ADR 0007: VeriFactu, Postergación de Cumplimiento
 
 ## Estado
 Propuesto

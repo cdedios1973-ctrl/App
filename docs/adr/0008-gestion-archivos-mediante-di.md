@@ -1,7 +1,7 @@
-﻿# ADR-0008: Centralización de Infraestructura y Gestión de Archivos mediante DI
+﻿# ADR-0008: Gestión de Archivos mediante DI (y Centralización de Infraestructura)
 
 ## Estado
-Aceptado
+Aceptado (Reemplaza al ADR-0004)
 
 ## Contexto
 La aplicación requiere interactuar frecuentemente con el sistema de archivos del disco duro (`System.IO`) para leer configuraciones (`appsettings.json`) y registrar trazas de eventos (Logs). 

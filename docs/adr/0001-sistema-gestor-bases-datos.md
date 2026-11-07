@@ -1,4 +1,4 @@
-﻿# ADR-001: Sistema Gestor de Bases de Datos (SGBD)
+﻿# ADR-0001: Sistema Gestor de Bases de Datos (SGBD)
 
 ## Estado
 Aceptado

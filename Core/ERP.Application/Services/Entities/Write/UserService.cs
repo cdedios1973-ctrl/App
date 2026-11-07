@@ -53,6 +53,7 @@ internal sealed class UserService : IUserService
 
         // Mapeo manual a entidad de dominio
         User userEntity = new User(user.Id, user.Name, user.Surname, user.Address, user.CountryIdentity);
+
         return this._userRepository.Update(userEntity);
     }
 

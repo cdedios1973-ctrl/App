@@ -1,4 +1,4 @@
-﻿# 1. ADR-002: Gestión de Transacciones Maestro-Detalle
+﻿# 1. ADR-0002: Gestión de Transacciones Maestro-Detalle
 
 ## Estado
 No ejecutado, Redactando nuevo ADR
