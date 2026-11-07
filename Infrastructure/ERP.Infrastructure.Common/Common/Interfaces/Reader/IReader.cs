@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace TaskHub.Infrastructure.Reader
+namespace ERP.Infrastructure.Reader;
+public interface IAppXmlReader
 {
-    public interface IAppXmlReader
-    {
-        public string GetValueByKey(string keyToSearch);
-    
-    }
+    public string GetValueByKey(string keyToSearch);
+
 }

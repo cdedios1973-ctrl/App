@@ -3,7 +3,6 @@
 /// <summary>
 /// POCO de la tabla maestra 'Task' (Logic - Persistence).
 /// </summary>
-
 namespace ERP.Domain.Entity;
 
 internal sealed record class Task

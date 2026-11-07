@@ -20,6 +20,19 @@ A continuación se detalla el propósito de cada carpeta en esta refactorizació
 * * **`Services/`**  
   Definicion de los servicios que expone este ensamblado (WIP)
 
+
+### Estructura del archivo de configuración 'appsettings.json'
+
+{
+  "ConnectionStrings": { "SqliteConnection": "Data Source=AppDemo.db;" }, Aqui se define la cadena de conexión explicita y completa.
+
+  "DatabaseName":			"AppDemo",								-> Nombre de la base de datos, Debe coincidir con el expuesto en la cadena de conexion.
+  "LocalDatabasePath":		"Database",								-> Nombre de la carpeta contenedora de la base de datos a partir de la ruta del ejecutable
+  "NetworkDatabasePath":	"S:\\ExamplePath\\Database\\",			-> (WIP) Nombre de la carpeta en red local contenedora de la base de datos.
+  "LocalXMLPath":			"XMLDocs"								-> Nombre de la carpeta contenedora de los archivos XML, de configuracion.
+}
+
+
 *** Detalles de estructuras en las que se esta trabajando actualmente:
 ----------------------------------------------------------------------
 `Services/`
