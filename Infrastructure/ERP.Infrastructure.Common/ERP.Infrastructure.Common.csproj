@@ -16,7 +16,7 @@
     <Compile Remove="Docs\**" />
     <Compile Remove="OLD\**" />
     <Compile Remove="Persistance\**" />
-    <Compile Remove="Services\DAO\**" />
+    <Compile Remove="Deprecated\Services\DAO\**" />
     <EmbeddedResource Remove="Common\DDBB\**" />
     <EmbeddedResource Remove="Common\Interfaces\Persistence\**" />
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
@@ -25,7 +25,7 @@
     <EmbeddedResource Remove="Docs\**" />
     <EmbeddedResource Remove="OLD\**" />
     <EmbeddedResource Remove="Persistance\**" />
-    <EmbeddedResource Remove="Services\DAO\**" />
+    <EmbeddedResource Remove="Deprecated\Services\DAO\**" />
     <None Remove="Common\DDBB\**" />
     <None Remove="Common\Interfaces\Persistence\**" />
     <None Remove="Deprecated\Database Instalation\DbType\**" />
@@ -34,7 +34,7 @@
     <None Remove="Docs\**" />
     <None Remove="OLD\**" />
     <None Remove="Persistance\**" />
-    <None Remove="Services\DAO\**" />
+    <None Remove="Deprecated\Services\DAO\**" />
   </ItemGroup>
 
     <ItemGroup>

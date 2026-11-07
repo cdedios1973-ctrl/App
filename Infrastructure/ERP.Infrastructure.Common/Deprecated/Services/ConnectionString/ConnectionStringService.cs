@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Deprecated
+
+/*
+using System;
 using Microsoft.Extensions.Configuration;
 using App.Definitions.Interfaces.Config;
 
@@ -24,3 +27,4 @@ namespace TaskHub.Infrastructure.Services
     
     }
 }
+*/
