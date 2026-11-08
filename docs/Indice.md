@@ -22,8 +22,9 @@ Este documento contiene el registro cronológico de las decisiones de arquitectu
 | 0006	| Diseño del Módulo de Autenticación de Usuarios								| Aceptado	| 2026-10-26 |			|
 | 0007	| VeriFactu, Postergación de Cumplimiento										| Propuesto	| 2026-10-00 |  		|
 | 0008	| Gestión de Archivos mediante DI												| Aceptado	| 2026-10-00 | ADR-0004 |
-| 0009	| Flujo de Facturación Concurrente												| En Estudio| 2026-11-00 |			|
+| 0009	| Flujo de Facturación Concurrente												| Estudio	| 2026-11-00 |			|
 | 0010	| Segregacion de Repositorios de Escritura y Control de Transacciones Nativo	| Aceptado	| 2026-00-00 | ADR-0002 |
+| 0011	| Copias de Seguridad de Base de Datos SQLite									| Aceptado	| 2026-11-08 |			|
 
 ---
 

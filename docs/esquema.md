@@ -61,3 +61,4 @@ Diagrama de dependencias y responsabilidades de los ensamblados en el proyecto.
          ▲
          │  (Inyección de dependencias en tiempo de ejecución)
 [ ERP.Infrastructure.Sqlite ]
+

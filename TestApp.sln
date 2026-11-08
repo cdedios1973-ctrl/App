@@ -25,27 +25,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F8430072-31EF-48F4-8B72-7E12E19B8CA9}"
 	ProjectSection(SolutionItems) = preProject
-		Architecture-2.md = Architecture-2.md
-		docs\architecture.md = docs\architecture.md
+		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
 		docs\esquema.md = docs\esquema.md
+		docs\Indice.md = docs\Indice.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{F1E23E01-AA40-4685-AF3E-107B78048B69}"
 	ProjectSection(SolutionItems) = preProject
-		docs\adr\001-Cambio_SqLite.md = docs\adr\001-Cambio_SqLite.md
-		docs\adr\002-transacciones-compartidas.md = docs\adr\002-transacciones-compartidas.md
-		docs\adr\003-cambios-instalacion.md = docs\adr\003-cambios-instalacion.md
-		docs\adr\004-Lector-configuracion.md = docs\adr\004-Lector-configuracion.md
-		docs\adr\005-Despliegue-Base-Datos.md = docs\adr\005-Despliegue-Base-Datos.md
-		docs\adr\006-Autenticación de Usuarios.md = docs\adr\006-Autenticación de Usuarios.md
-		docs\adr\007-Verifactu.md = docs\adr\007-Verifactu.md
-		docs\adr\008-Gestion-Archivos.md = docs\adr\008-Gestion-Archivos.md
-		docs\adr\009-Facturacion-Concurrente.md = docs\adr\009-Facturacion-Concurrente.md
+		docs\adr\0000-plantilla.md = docs\adr\0000-plantilla.md
+		docs\adr\0001-sistema-gestor-bases-datos.md = docs\adr\0001-sistema-gestor-bases-datos.md
+		docs\adr\0002-transacciones-maestro-detalle.md = docs\adr\0002-transacciones-maestro-detalle.md
+		docs\adr\0003-autodespliegue-base-datos.md = docs\adr\0003-autodespliegue-base-datos.md
+		docs\adr\0004-centralizacion-lector-configuracion-exclusivo.md = docs\adr\0004-centralizacion-lector-configuracion-exclusivo.md
+		docs\adr\0005-despliegue-base-datos-maestra.md = docs\adr\0005-despliegue-base-datos-maestra.md
+		docs\adr\0006-autenticacion-usuarios.md = docs\adr\0006-autenticacion-usuarios.md
+		docs\adr\0007-verifactu-postergacion.md = docs\adr\0007-verifactu-postergacion.md
+		docs\adr\0008-gestion-archivos-mediante-di.md = docs\adr\0008-gestion-archivos-mediante-di.md
+		docs\adr\0009-facturacion-concurrente.md = docs\adr\0009-facturacion-concurrente.md
+		docs\adr\0010-segregacion-comandos-escritura-sqlite.md = docs\adr\0010-segregacion-comandos-escritura-sqlite.md
+		docs\adr\0011-SQLite-Backup.md = docs\adr\0011-SQLite-Backup.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "research", "research", "{2293CF86-01F6-4298-99C1-083DF9A7623D}"
 	ProjectSection(SolutionItems) = preProject
 		docs\research\01_JsonConfig.md = docs\research\01_JsonConfig.md
+		docs\Architecture-2.md = docs\Architecture-2.md
 		docs\research\Facturacion.txt = docs\research\Facturacion.txt
 		docs\research\Factu_Ultimo.odt = docs\research\Factu_Ultimo.odt
 		docs\research\Net_AOT.txt = docs\research\Net_AOT.txt
