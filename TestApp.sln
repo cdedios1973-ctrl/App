@@ -49,10 +49,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "research", "research", "{2293CF86-01F6-4298-99C1-083DF9A7623D}"
 	ProjectSection(SolutionItems) = preProject
 		docs\research\01_JsonConfig.md = docs\research\01_JsonConfig.md
-		docs\Architecture-2.md = docs\Architecture-2.md
-		docs\research\Facturacion.txt = docs\research\Facturacion.txt
-		docs\research\Factu_Ultimo.odt = docs\research\Factu_Ultimo.odt
-		docs\research\Net_AOT.txt = docs\research\Net_AOT.txt
+		docs\research\depuracion.md = docs\research\depuracion.md
+		docs\research\Net_AOT.md = docs\research\Net_AOT.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Infrastructure.Common", "Infrastructure\ERP.Infrastructure.Common\ERP.Infrastructure.Common.csproj", "{5F73D1FE-C8B0-C375-069B-2D2FFF7A1394}"
