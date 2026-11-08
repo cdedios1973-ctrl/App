@@ -1,36 +1,44 @@
+# Modern High-Performance ERP Blueprint
+## An ultra-fast enterprise core architecture built with C# and .NET 9
 
-🚀 Modern High-Performance ERP Blueprint (.NET 9)
+---
 
+## 🧑‍💻 The Strategy Behind This Project
 
-The comeback story of a battle-tested developer.
+This project marks my return to full-scale software engineering after a deliberate career break to focus on other aspects of my life. 
+Rather than just catching up with the current landscape, I built this enterprise-grade blueprint to stress-test the modern .NET ecosystem 
+against the complex architectural problems I’ve solved throughout my career.
 
+This project represents a practical approach to modernizing enterprise experience. It fuses years of battle-tested Object-Oriented 
+Programming (OOP) logic with a strict, decoupled Clean Architecture structure.
 
-🧑‍💻 The Philosophy Behind This Project
+### Engineered for Sub-Millisecond Speed
+To achieve maximum throughput and direct execution control, I deliberately bypassed heavy, modern ORMs. 
+This ERP framework is built for ultra-low memory footprints and blazing-fast data access using native ADO.NET and pure, 
+parameterized SQL/T-SQL—ensuring maximum performance without compromising on security.
 
-After some time away from the industry to focus on my family, I decided it was time to get back to what I love: writing software. 
-I wanted to see how the landscape had changed, especially with all the buzz around AI and modern architectures.
-Instead of just reading about it, I built this.
-I started by taking real-world complex scenarios and problems I’ve solved throughout my career and mapped them out using pure Object-Oriented Programming (OOP). 
-Then, I adapted them into a Clean Architecture structure to keep things modular and separate.
-I deliberately stepped away from the "standard" heavy frameworks and ORMs. 
-I wanted this ERP framework to be blazing fast and ultra-lightweight, using native data access to keep memory usage as low as possible.
+---
 
+## 🛠️ Tech Stack & Architecture
 
-🛠️ What's Inside & Tech Stack
+*   **Language & Runtime:** C# / .NET 9.
+*   **Architecture:** Clean Architecture approach (Domain, Application, Infrastructure, Presentation) ensuring decoupled, testable, and maintainable code.
+*   **Data Access Layer:** High-speed native ADO.NET and optimized SQL/T-SQL for raw performance and direct database control.
+*   **Presentation Layer:** Modernized, high-performance WinForms desktop UI adapted for the modern .NET ecosystem.
 
-• Language & Framework: Built using C# and .NET 9.
-• Architecture: Clean Architecture approach (Domain, Application, Infrastructure, Presentation) to keep the code organized and easy to maintain.
-• High-Speed Data Access: Bypassed heavy modern ORMs. I used native ADO.NET and pure SQL/T-SQL for maximum execution speed and direct control over the database.
-• UI: Practical and fast WinForms presentation layer updated for the modern .NET ecosystem.
 
 ├── 1. Domain         # Core enterprise business logic and models
 ├── 2. Application    # Use Cases and application logic
 ├── 3. Infrastructure # High-speed native ADO.NET and SQL Server integration
 └── 4. Presentation   # The WinForms user interface
 
+---
 
-🤝 Let's Connect
+## 🤝 Let's Connect
 
-I build software that solves real business problems without unnecessary overhead. I am currently looking for an opportunity to relocate and join a development team based in Ireland.
-• LinkedIn: https://www.linkedin.com/in/carlos-de-dios-vergara-823b15351
-• Email: cdedios1973@gmail.com
+No single engineer knows everything, but a deep look into this codebase will show you how I approach architecture, performance, and real-world problem-solving. I am a resilient, battle-tested developer who thrives in collaborative environments, making me an excellent fit to work in tandem with your engineering team.
+
+**I am actively seeking software development opportunities and am fully ready to join a team based in Spain or Ireland (with full availability to relocate).**
+
+*   **LinkedIn:** [Carlos De Dios Vergara](https://linkedin.com)
+*   **Email:** cdedios1973@gmail.com
