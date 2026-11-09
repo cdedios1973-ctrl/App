@@ -43,6 +43,9 @@ namespace App.Infraestructure.Installation.Database
 
 
         // TODO : Create service to create database only if doesn't exist (already got service to find file). filename is static AppDb
+
+        /*
+
         #region SQLite : Create Database
 
         internal bool SQLiteCreate(string fileName)
@@ -122,5 +125,6 @@ namespace App.Infraestructure.Installation.Database
 
         #endregion
 
+        */
     }
 }

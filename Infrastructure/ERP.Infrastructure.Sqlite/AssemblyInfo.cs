@@ -6,4 +6,5 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ERP.Application")]
+[assembly: InternalsVisibleTo("ERP.Views.WinForms.UI")]
 //[assembly: InternalsVisibleTo("ERP.Application, PublicKey= Pendiente de Clave pública")]

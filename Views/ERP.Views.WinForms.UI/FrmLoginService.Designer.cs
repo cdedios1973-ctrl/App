@@ -1,4 +1,4 @@
-﻿namespace AppWF
+﻿namespace ERP.Views.WinForms.UI
 {
     partial class FrmLoginService
     {
@@ -28,147 +28,160 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbLogin = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.gbActions = new System.Windows.Forms.GroupBox();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.pnlTitle = new System.Windows.Forms.Panel();
-            this.btnMinimize = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.gbLogin.SuspendLayout();
-            this.gbActions.SuspendLayout();
-            this.pnlTitle.SuspendLayout();
-            this.SuspendLayout();
+            gbLogin = new GroupBox();
+            txtPass = new TextBox();
+            txtUser = new TextBox();
+            lblPassword = new Label();
+            lblUser = new Label();
+            gbActions = new GroupBox();
+            btnAccept = new Button();
+            pnlTitle = new Panel();
+            btnClose = new Button();
+            btnMinimize = new Button();
+            gbLogin.SuspendLayout();
+            gbActions.SuspendLayout();
+            pnlTitle.SuspendLayout();
+            SuspendLayout();
             // 
             // gbLogin
             // 
-            this.gbLogin.Controls.Add(this.textBox2);
-            this.gbLogin.Controls.Add(this.textBox1);
-            this.gbLogin.Controls.Add(this.lblPassword);
-            this.gbLogin.Controls.Add(this.lblUser);
-            this.gbLogin.Font = new System.Drawing.Font("DejaVu Sans Condensed", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbLogin.Location = new System.Drawing.Point(12, 51);
-            this.gbLogin.Name = "gbLogin";
-            this.gbLogin.Size = new System.Drawing.Size(317, 95);
-            this.gbLogin.TabIndex = 0;
-            this.gbLogin.TabStop = false;
-            this.gbLogin.Text = "Introduzca Usuario y clave";
+            gbLogin.Controls.Add(txtPass);
+            gbLogin.Controls.Add(txtUser);
+            gbLogin.Controls.Add(lblPassword);
+            gbLogin.Controls.Add(lblUser);
+            gbLogin.Font = new Font("DejaVu Sans Condensed", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbLogin.Location = new Point(14, 59);
+            gbLogin.Margin = new Padding(4, 3, 4, 3);
+            gbLogin.Name = "gbLogin";
+            gbLogin.Padding = new Padding(4, 3, 4, 3);
+            gbLogin.Size = new Size(370, 110);
+            gbLogin.TabIndex = 0;
+            gbLogin.TabStop = false;
+            gbLogin.Text = "Introduzca Usuario y clave";
             // 
-            // textBox2
+            // txtPass
             // 
-            this.textBox2.Font = new System.Drawing.Font("DejaVu Sans Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(162, 58);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 25);
-            this.textBox2.TabIndex = 3;
+            txtPass.Font = new Font("DejaVu Sans Condensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPass.Location = new Point(189, 67);
+            txtPass.Margin = new Padding(4, 3, 4, 3);
+            txtPass.Name = "txtPass";
+            txtPass.Size = new Size(173, 25);
+            txtPass.TabIndex = 3;
             // 
-            // textBox1
+            // txtUser
             // 
-            this.textBox1.Font = new System.Drawing.Font("DejaVu Sans Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(162, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 25);
-            this.textBox1.TabIndex = 2;
+            txtUser.Font = new Font("DejaVu Sans Condensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUser.Location = new Point(189, 30);
+            txtUser.Margin = new Padding(4, 3, 4, 3);
+            txtUser.Name = "txtUser";
+            txtUser.Size = new Size(173, 25);
+            txtUser.TabIndex = 2;
             // 
             // lblPassword
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("DejaVu Sans Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(18, 61);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(120, 18);
-            this.lblPassword.TabIndex = 1;
-            this.lblPassword.Text = "Clave de acceso:";
+            lblPassword.AutoSize = true;
+            lblPassword.Font = new Font("DejaVu Sans Condensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPassword.Location = new Point(21, 70);
+            lblPassword.Margin = new Padding(4, 0, 4, 0);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(120, 18);
+            lblPassword.TabIndex = 1;
+            lblPassword.Text = "Clave de acceso:";
             // 
             // lblUser
             // 
-            this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("DejaVu Sans Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.Location = new System.Drawing.Point(18, 33);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(65, 18);
-            this.lblUser.TabIndex = 0;
-            this.lblUser.Text = "Usuario:";
+            lblUser.AutoSize = true;
+            lblUser.Font = new Font("DejaVu Sans Condensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUser.Location = new Point(21, 38);
+            lblUser.Margin = new Padding(4, 0, 4, 0);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(65, 18);
+            lblUser.TabIndex = 0;
+            lblUser.Text = "Usuario:";
             // 
             // gbActions
             // 
-            this.gbActions.Controls.Add(this.btnAccept);
-            this.gbActions.Font = new System.Drawing.Font("DejaVu Sans Condensed", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbActions.Location = new System.Drawing.Point(12, 152);
-            this.gbActions.Name = "gbActions";
-            this.gbActions.Size = new System.Drawing.Size(317, 54);
-            this.gbActions.TabIndex = 1;
-            this.gbActions.TabStop = false;
-            this.gbActions.Text = "Acciones";
+            gbActions.Controls.Add(btnAccept);
+            gbActions.Font = new Font("DejaVu Sans Condensed", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbActions.Location = new Point(14, 175);
+            gbActions.Margin = new Padding(4, 3, 4, 3);
+            gbActions.Name = "gbActions";
+            gbActions.Padding = new Padding(4, 3, 4, 3);
+            gbActions.Size = new Size(370, 62);
+            gbActions.TabIndex = 1;
+            gbActions.TabStop = false;
+            gbActions.Text = "Acciones";
             // 
             // btnAccept
             // 
-            this.btnAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(132)))), ((int)(((byte)(228)))));
-            this.btnAccept.Font = new System.Drawing.Font("DejaVu Sans Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccept.Location = new System.Drawing.Point(202, 19);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(109, 29);
-            this.btnAccept.TabIndex = 0;
-            this.btnAccept.Text = "Continuar";
-            this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            btnAccept.BackColor = Color.FromArgb(53, 132, 228);
+            btnAccept.Font = new Font("DejaVu Sans Condensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAccept.Location = new Point(236, 22);
+            btnAccept.Margin = new Padding(4, 3, 4, 3);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(127, 33);
+            btnAccept.TabIndex = 0;
+            btnAccept.Text = "Continuar";
+            btnAccept.UseVisualStyleBackColor = false;
+            btnAccept.Click += btnAccept_Click;
             // 
             // pnlTitle
             // 
-            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.pnlTitle.Controls.Add(this.btnClose);
-            this.pnlTitle.Controls.Add(this.btnMinimize);
-            this.pnlTitle.Location = new System.Drawing.Point(12, 12);
-            this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(317, 33);
-            this.pnlTitle.TabIndex = 2;
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Marlett", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMinimize.Location = new System.Drawing.Point(268, 3);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(20, 20);
-            this.btnMinimize.TabIndex = 3;
-            this.btnMinimize.Text = "0";
-            this.btnMinimize.UseVisualStyleBackColor = true;
+            pnlTitle.BackColor = Color.FromArgb(45, 45, 45);
+            pnlTitle.Controls.Add(btnClose);
+            pnlTitle.Controls.Add(btnMinimize);
+            pnlTitle.Location = new Point(14, 14);
+            pnlTitle.Margin = new Padding(4, 3, 4, 3);
+            pnlTitle.Name = "pnlTitle";
+            pnlTitle.Size = new Size(370, 38);
+            pnlTitle.TabIndex = 2;
             // 
             // btnClose
             // 
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Marlett", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnClose.Location = new System.Drawing.Point(294, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(20, 20);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "r";
-            this.btnClose.UseVisualStyleBackColor = true;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Font = new Font("Marlett", 9F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            btnClose.Location = new Point(343, 3);
+            btnClose.Margin = new Padding(4, 3, 4, 3);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(23, 23);
+            btnClose.TabIndex = 4;
+            btnClose.Text = "r";
+            btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnMinimize
+            // 
+            btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.Font = new Font("Marlett", 9F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            btnMinimize.Location = new Point(313, 3);
+            btnMinimize.Margin = new Padding(4, 3, 4, 3);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Size = new Size(23, 23);
+            btnMinimize.TabIndex = 3;
+            btnMinimize.Text = "0";
+            btnMinimize.UseVisualStyleBackColor = true;
             // 
             // FrmLoginService
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
-            this.ClientSize = new System.Drawing.Size(340, 215);
-            this.Controls.Add(this.pnlTitle);
-            this.Controls.Add(this.gbActions);
-            this.Controls.Add(this.gbLogin);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmLoginService";
-            this.Text = "Servicio de Acceso a la Aplicación";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmLoginService_FormClosing);
-            this.Load += new System.EventHandler(this.FrmLoginService_Load);
-            this.gbLogin.ResumeLayout(false);
-            this.gbLogin.PerformLayout();
-            this.gbActions.ResumeLayout(false);
-            this.pnlTitle.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(246, 246, 246);
+            ClientSize = new Size(397, 248);
+            Controls.Add(pnlTitle);
+            Controls.Add(gbActions);
+            Controls.Add(gbLogin);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "FrmLoginService";
+            Text = "Servicio de Acceso a la Aplicación";
+            FormClosing += FrmLoginService_FormClosing;
+            Load += FrmLoginService_Load;
+            gbLogin.ResumeLayout(false);
+            gbLogin.PerformLayout();
+            gbActions.ResumeLayout(false);
+            pnlTitle.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 
@@ -179,8 +192,8 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnAccept;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Panel pnlTitle;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Button btnClose;

@@ -1,29 +1,42 @@
-﻿using System;
-
-
-using ERP.Domain.DTO;
+﻿using ERP.Domain.DTO;
+using ERP.Domain.Interfaces.Controller;
+using ERP.Domain.Interfaces.EntityService;
+using ERP.Domain.Interfaces.Login;
+using System;
 
 /// <summary>
 /// Layer responsible for communicating view requests to logic calls
 /// </summary>
 
-namespace App.Controller.Login;
+namespace ERP.Controller.Login;
 
-public class LoginController //: IController
+internal sealed class LoginController : ILoginController
 {
+    private readonly ILoginService _loginService;
 
-    public LoginController(UserLoginQueryDto user) 
-    {
-        if(user == null) 
-            throw new ArgumentNullException("User and pass must be filled");
+    public LoginController(ILoginService loginservice) 
+    { 
+        this._loginService = loginservice;
     }
 
-    // TODO : Call LoginService interface from AppLogic.
-    // TODO : Need to implement ILoginService just because its a different layer (decouples DB/Logic).
+    public List<string> Login(UserLoginQueryDto dto)
+    {
+        var errors = new List<string>();
 
-    // The view calls LoginController directly passing a filled DTO.
-    // Reasons:
-    // a) Controller acts as the entry point for the view into the system.
-    // b) DTO travels freely as a pure data contract between layers.
-
+        // 1. Validaciones en memoria (Fail-Fast de negocio)
+        if (dto == null)
+        {
+            errors.Add("Los datos usuario y password no pueden ser nulos.");
+            return errors;
+        }
+        try
+        {
+            errors = this._loginService.Login(dto);
+        }
+        catch (Exception ex)
+        {
+            errors.Add("Operacion de guardado incorrecto: " + ex.Message);
+        }
+        return errors;
+    }
 }

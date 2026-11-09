@@ -8,7 +8,7 @@ using ERP.Application.Interfaces.Persistence;
 // DONE : Crear la confianza de emsamblados entre Logica e Infraestructura. para poder poner esta clase internal
 // UPGRADE : Token permission, permission needed >= 2 (Search microsoft documentation security roles).
 // TODO : Hash de campos. si fuera necesario. repasar.
-namespace App.Infrastructure.Sqlite;
+namespace ERP.Infrastructure.Sqlite;
 
 /// <summary>
 /// Proporciona la implementación de comandos SQL de escritura para la entidad <see cref="User"/> en SQLite.

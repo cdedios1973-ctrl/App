@@ -10,13 +10,22 @@ using System.Drawing.Drawing2D;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AppWF
+using ERP.Domain.DTO;
+using ERP.Domain.Interfaces.Controller;
+using ERP.Domain.Interfaces.Login;
+using ERP.Controller.Login;
+
+namespace ERP.Views.WinForms.UI
 {
     public partial class FrmLoginService : Form
     {
-        public FrmLoginService()
+        private readonly ILoginController _loginController;
+
+        // El contenedor de .NET 9 inyectará el controlador aquí automáticamente al arrancar
+        public FrmLoginService(ILoginController loginController)
         {
             InitializeComponent();
+            _loginController = loginController ?? throw new ArgumentNullException(nameof(loginController));
         }
 
         private void FrmLoginService_Load(object sender, EventArgs e)
@@ -32,6 +41,8 @@ namespace AppWF
             this.btnMinimize.Click += BtnMinimize_Click;
             this.btnClose.Click += BtnClose_Click;
         }
+
+        #region Buttons Style
 
         // Método mágico para transformar cualquier botón cuadrado en un círculo
         private void ChangeButtonStyleRounded(Button boton)
@@ -56,16 +67,48 @@ namespace AppWF
             btn.ForeColor = Color.White;
         }
 
+        #endregion
+
+        #region Buttons Actions
+
         // Acciones de los botones
-        private void BtnMinimize_Click(object sender, EventArgs e)
+        private void BtnMinimize_Click(object? sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object? sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            // ¡Ya no usas el 'new'! Usas la instancia limpia guardada en el campo privado
+            List<string> errores = _loginController.Login(new UserLoginQueryDto(this.txtUser.Text, this.txtPass.Text));
+
+            if (errores.Count == 0)
+            {
+                // ¡Olé! No hay errores, el usuario es válido
+
+                DialogResult resultado = MessageBox.Show("pues no hay errores", "...",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+                // Si FrmMain también necesitara servicios, lo ideal sería pedirlo al contenedor, 
+                // pero para arrancar, esto te vale perfectamente.
+                //var mainForm = new FrmMain();
+                //mainForm.Show();
+            }
+            else
+            {
+                // Concatenamos los errores y se los mostramos al usuario de golpe
+                string mensajeError = string.Join(Environment.NewLine, errores);
+                MessageBox.Show(mensajeError, "Error de Acceso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #endregion
 
         private void FrmLoginService_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -78,11 +121,6 @@ namespace AppWF
 
             if (resultado == DialogResult.No)
                 e.Cancel = true;
-        }
-
-        private void btnAccept_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
