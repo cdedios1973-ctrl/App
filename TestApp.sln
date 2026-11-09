@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "research", "research", "{22
 	ProjectSection(SolutionItems) = preProject
 		docs\research\01_JsonConfig.md = docs\research\01_JsonConfig.md
 		docs\research\depuracion.md = docs\research\depuracion.md
+		docs\research\guia_winforms_linux_gtk.md = docs\research\guia_winforms_linux_gtk.md
 		docs\research\Net_AOT.md = docs\research\Net_AOT.md
 	EndProjectSection
 EndProject
