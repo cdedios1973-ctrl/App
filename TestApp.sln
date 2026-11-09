@@ -26,7 +26,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F8430072-31EF-48F4-8B72-7E12E19B8CA9}"
 	ProjectSection(SolutionItems) = preProject
 		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
-		backend.md = backend.md
 		docs\esquema.md = docs\esquema.md
 		docs\Indice.md = docs\Indice.md
 	EndProjectSection

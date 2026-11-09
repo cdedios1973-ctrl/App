@@ -1,67 +1,63 @@
 ﻿using System;
 
-namespace App.CORE
+namespace ERP.Infrastructure.Start;
+
+internal class AplicationManager
 {
-    internal class AplicationManager
+    internal static AplicationManager manager = null;
+    private static readonly object _isObject = new object();
+
+    #region Constructor
+
+    private AplicationManager()
     {
-        internal static AplicationManager manager = null;
-        private static readonly object _isObject = new object();
+        // Inicializar base de datos, logs, etc.
+    }
 
-        //private DataBaseType _currentDatabase;
+    #endregion
 
-        #region Constructor
+    #region Singleton Instance
 
-        private AplicationManager()
+    internal static AplicationManager Instance
+    {
+        get
         {
-            // Inicializar base de datos, logs, etc.
-            //this._currentDatabase = DataBaseType.SqLite;
-        }
-
-        #endregion
-
-        #region Singleton Instance
-
-        internal static AplicationManager Instance
-        {
-            get
+            lock (_isObject)
             {
-                lock (_isObject)
+                if (manager == null)
                 {
-                    if (manager == null)
-                    {
-                        manager = new AplicationManager();
-                    }
-                    return manager;
+                    manager = new AplicationManager();
                 }
+                return manager;
             }
         }
+    }
 
-        #endregion
+    #endregion
 
-        // 3. Métodos de negocio (instancia normal, no estáticos)
-        internal void InitializeConfiguration()
-        {
-            // TODO : no need try / catch, already done at program.cs
-            // Capturing events, show information to user at screen
-            //DisplayMessage.messageHandler.UpdateStatus += Program.MessageHandler_UpdateStatus;
-            // Call Service AppGetConnectionString (done, need implement line)
-            //string connstr = new AppConfigConnectionString(this._currentDatabase).GetConnectionString();
+    // 3. Métodos de negocio (instancia normal, no estáticos)
+    internal void InitializeConfiguration()
+    {
+        // TODO : no need try / catch, already done at program.cs
+        // Capturing events, show information to user at screen
+        //DisplayMessage.messageHandler.UpdateStatus += Program.MessageHandler_UpdateStatus;
+        // Call Service AppGetConnectionString (done, need implement line)
+        //string connstr = new AppConfigConnectionString(this._currentDatabase).GetConnectionString();
 
-            // PSEUDO : If (database.open == errror) > create database (done at appinitilize, need refactoring  also, use scripts, remove from code)
-            //AppInitialize.messageHandler.UpdateStatus += MessageHandler_UpdateStatus;
+        // PSEUDO : If (database.open == errror) > create database (done at appinitilize, need refactoring  also, use scripts, remove from code)
+        //AppInitialize.messageHandler.UpdateStatus += MessageHandler_UpdateStatus;
 
-        }
+    }
 
-        internal bool StartMainThread()
-        {
-            //Console.WriteLine("Ejecutando la lógica principal del programa...");
-            return false;
-        }
+    internal bool StartMainThread()
+    {
+        //Console.WriteLine("Ejecutando la lógica principal del programa...");
+        return false;
+    }
 
-        internal void CloseMainThread()
-        {
-            //DisplayMessage.messageHandler.UpdateStatus -= Program.MessageHandler_UpdateStatus;
-            //AppInitialize.messageHandler.UpdateStatus -= MessageHandler_UpdateStatus;
-        }
+    internal void CloseMainThread()
+    {
+        //DisplayMessage.messageHandler.UpdateStatus -= Program.MessageHandler_UpdateStatus;
+        //AppInitialize.messageHandler.UpdateStatus -= MessageHandler_UpdateStatus;
     }
 }

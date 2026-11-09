@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS [UsersPermission] ( 
+﻿CREATE TABLE IF NOT EXISTS [UserPermissions] ( 
     [Id] INTEGER PRIMARY KEY,
     [UserId] INTEGER NOT NULL,
     [PermissionId] INTEGER NOT NULL,
@@ -9,3 +9,5 @@
     CONSTRAINT FK_UsersPermission_Users FOREIGN KEY(UserId)
     REFERENCES Users(Id) 
     );
+
+-- NOTA DE DISEÑO: (Deprecated) Sin uso actualmente.

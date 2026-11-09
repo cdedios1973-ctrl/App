@@ -11,7 +11,7 @@ Hacer llamadas directas a métodos estáticos de archivos o instanciar repetidam
 3. Riesgo de bloqueo de descriptores de archivos en el sistema operativo si no se gestionan correctamente los flujos de datos.
 
 ## Decisión
-Hemos decidido desacoplar por completo la infraestructura de persistencia implementando el patrón de Inyección de Dependencias (DI) bajo los siguientes criterios técnicos:
+He decidido desacoplar por completo la infraestructura de persistencia implementando el patrón de Inyección de Dependencias (DI) bajo los siguientes criterios técnicos:
 1. **Encapsulamiento SOLID:** Toda lógica de acceso a disco (`System.IO`) se aislará detrás de contratos e interfaces claras (ej. `IServicioArchivos`).
 2. **Uso Defensivo de Recursos:** Es obligatorio el uso exclusivo del bloque sintáctico `using` (traducción nativa de `try/finally`) en operaciones como `File.Create` para garantizar la liberación inmediata de flujos de datos en el hardware.
 3. **Frontera de Instanciación en el Main:** El método `Main()` asume la responsabilidad única de ejecutar sentencias `new()` y ensamblar el sistema.

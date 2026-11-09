@@ -4,4 +4,6 @@
     [Name] VARCHAR(60) NOT NULL, 
     [Observation] VARCHAR(500) NULL,
     CONSTRAINT [uq_Permission_Name] UNIQUE ([Name]) 
-    );
+);
+
+-- NOTA DE DISEÑO: (Deprecated) Sin uso actualmente.

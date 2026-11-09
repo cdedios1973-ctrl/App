@@ -45,4 +45,8 @@
       <ProjectReference Include="..\..\Core\ERP.Domain\ERP.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Common\Installation\" />
+    </ItemGroup>
+
 </Project>
