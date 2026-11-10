@@ -20,7 +20,7 @@
 		<ProjectReference Include="..\..\Core\ERP.Application\ERP.Application.csproj" />
 		<ProjectReference Include="..\..\Core\ERP.Domain\ERP.Domain.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\ERP.Infrastructure.Sqlite\ERP.Infrastructure.Sqlite.csproj" />
-		<ProjectReference Include="..\ERP.Views.Controller\ERP.Views.Controller.csproj" />
+		<ProjectReference Include="..\ERP.Views.Presenter\ERP.View.Presenter.csproj" />
 	</ItemGroup>
 
 </Project>

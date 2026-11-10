@@ -17,12 +17,4 @@
     <Compile Remove="Interfaces\DAOAttributes.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="DTO\Queries\UserLoginQueryDto.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\Services\EntityService\Read\" />
-  </ItemGroup>
-
 </Project>

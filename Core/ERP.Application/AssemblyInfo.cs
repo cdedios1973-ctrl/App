@@ -5,5 +5,7 @@
 
 using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ERP.View.Presenter")]
 [assembly: InternalsVisibleTo("ERP.Views.WinForms.UI")]
-//[assembly: InternalsVisibleTo("ERP.Views.WinForms.UI, PublicKey= Pendiente de Clave pública")]
+[assembly: InternalsVisibleTo("ERP.Infrastructure.Sqlite")]
+//[assembly: InternalsVisibleTo("ERP.Views.WinForms.UI, PublicKey= numeros...")]

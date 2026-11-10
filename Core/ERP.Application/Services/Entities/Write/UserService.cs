@@ -1,8 +1,8 @@
 ﻿//using Microsoft.IdentityModel.Tokens;
 using System;
-using ERP.Domain.DTO;
 using ERP.Domain.Entity;
-using ERP.Domain.Interfaces.EntityService;
+using ERP.Application.DTO;
+using ERP.Application.Interfaces.EntityService;
 using ERP.Application.Interfaces.Persistence;
 
 // TODO : Aqui es donde debo implementar la seguridad de microsoft, para que no llegue a la capa de persistencia

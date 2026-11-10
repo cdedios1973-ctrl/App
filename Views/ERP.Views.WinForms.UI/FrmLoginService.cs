@@ -1,25 +1,19 @@
-﻿using ERP.Domain.DTO;
-using ERP.Domain.Interfaces.Controller;
-using ERP.Domain.Interfaces.View;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 //using System.Collections.Generic;
 //using System.ComponentModel;
 //using System.Data;
-//using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
-using System.Windows.Forms;
-//using ERP.Domain.Interfaces.Login;
-//using ERP.Controller.Login;
+using ERP.View.Presenter.Interfaces;
 
 namespace ERP.Views.WinForms.UI;
 
 public partial class FrmLoginService : Form, ILoginView
 {
-    private readonly ILoginController _loginController;
-
     public event EventHandler LoginClick;
     public event EventHandler CerrarClick;
     public event EventHandler MinimizarClick;
@@ -29,10 +23,9 @@ public partial class FrmLoginService : Form, ILoginView
     public string Password => txtPass.Text;
 
     // El contenedor de .NET 9 inyectará el controlador aquí automáticamente al arrancar
-    public FrmLoginService()//ILoginController loginController)
+    public FrmLoginService()
     {
         InitializeComponent();
-        //_loginController = loginController ?? throw new ArgumentNullException(nameof(loginController));
 
         // Conectar los botones de barra de título que ya creaste en el Designer
         btnClose.Click += (s, e) => CerrarClick?.Invoke(this, EventArgs.Empty);
@@ -44,7 +37,6 @@ public partial class FrmLoginService : Form, ILoginView
         this.btnClose.Click += BtnClose_Click;
     }
 
-    // TODO : Todos los eventos se pasan al presenter.
     /*
     private void Old_FrmLoginService_Load(object sender, EventArgs e)
     {

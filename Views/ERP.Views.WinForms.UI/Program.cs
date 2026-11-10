@@ -1,14 +1,17 @@
-﻿using ERP.Application.Interfaces.Persistence;
-using ERP.Application.Services.Security;
-using ERP.Domain.Interfaces.Config;
-using ERP.Domain.Interfaces.Controller;
-using ERP.Domain.Interfaces.Login;
-using ERP.Domain.Interfaces.View;
-using ERP.Infrastructure.Sqlite;
-using ERP.Presenter.Login;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
+
+
+
+using ERP.Domain.Interfaces.Config;
+using ERP.View.Presenter.Login;
+using ERP.View.Presenter.Interfaces;
+using ERP.Application.Services;
+using ERP.Application.Interfaces.Persistence;
+using ERP.Application.Interfaces.LoginService;
+using ERP.Infrastructure.Sqlite;
+
 // using ERP.Infrastructure.Config; // Importa tu implementación del ConnectionString si existe
 
 namespace ERP.Views.WinForms.UI

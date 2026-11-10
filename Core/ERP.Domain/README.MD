@@ -1,27 +1,28 @@
-﻿# AppDefinitions
+﻿# ERP.Domain (AppDefinitions Refactorización)
 
-Este proyecto contiene los **elementos comunes de la aplicación**. 
-*(Nota: De momento, los elementos específicos se mantienen en cada proyecto individual para acotar correctamente las referencias `using`).*
+Este proyecto contiene los **elementos comunes y las reglas de negocio base** de la aplicación.
 
 ---
 
 ## 📂 Estructura del Proyecto
 
-A continuación se detalla el propósito de cada carpeta en esta refactorización:
+Propósito de cada carpeta en esta nueva estructura:
 
 * **`Deprecated/`**  
-  Código previo, comentado y ya refactorizado. *Revisar el "antes y después" de la solución.*
+  Código previo y comentado. Sirve de referencia para revisar el "antes y después" de la refactorización.
 * **`DTO/`**  
-  Modelos de Objetos de Transferencia de Datos (Data Transfer Objects).
-* **`DTO/Queries/`**  
-  Modelos de Objetos de Transferencia de Datos (Data Transfer Objects) para consultas.
-* **`Entity/Models/`**  
-  Modelos POCO (Plain Old CLR Objects) que representan las entidades base.
-* **`Entity/Auth/`**  
-  Modelo específico con los datos básicos del usuario activo en la aplicación.
+  Objetos de Transferencia de Datos (Data Transfer Objects) para el intercambio de información.
+  * **`Queries/`** DTOs específicos estructurados para consultas y reportes.
+* **`Entity/`**  
+  Modelos base del dominio.
+  * **`Models/`** Clases POCO que representan las entidades principales.
+  * **`Auth/`** Datos básicos y estado del usuario activo.
+  * **`AppConfig/`** Configuración global de la aplicación.
 * **`Events/`**  
-  Manejadores internos de la aplicación. Se pueden implementar en el futuro para lanzar mensajes o notificaciones hacia la vista.
-* **`Predicates/`** 
-  Predicados y delegados personalizados para las búsquedas.
+  Manejadores de eventos internos para la comunicación desacoplada del sistema.
+* **`Predicates/`**  
+  Predicados y delegados personalizados para filtros y búsquedas avanzadas.
 * **`Interfaces/`**  
-  Contratos e interfaces generales que definen el comportamiento de la aplicación.
+  Contratos globales que definen el comportamiento de la aplicación (`ConnectionString`, `Controller`, `Services`, `WinForms`).
+
+  

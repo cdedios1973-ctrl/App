@@ -1,35 +1,49 @@
-﻿using System;
-using ERP.Domain.DTO;
-using ERP.Domain.Auth;
-using ERP.Domain.Interfaces.Login;
+﻿using ERP.Application.DTO;      // DTO de la vista/UI
 using ERP.Application.Interfaces.Persistence;
+using ERP.Domain.Queries;       // Tus POCOs de consulta (Read Models)
 
-// DONE : En vez de devolver user, devolver bool -> solo necesita saber si el user esta logado.
-// DONE : Para simplicación puedo usar la clase UserLoginQuery de la tabla para la validacion de entrada del usuario.
-// DONE : Instanciar el LoginService desde controlador/presenter pasándole ILoginService.
-// TODO : Implementar seguridad de microsoft. (Comprobacion que esta en red local o active directory)
+namespace ERP.Application.Services;
 
-namespace ERP.Application.Services.Security;
-
-internal sealed class LoginService : ILoginService
+// 1. Tu Excepción Personalizada de Negocio
+public class BusinessRuleException : Exception
 {
-    private readonly IAuthUserReadRepository _userLoginRepository;
-    
-    internal LoginService(IAuthUserReadRepository userToLogin)
+    // Puedes pasarle una lista de errores o un texto acumulado
+    public BusinessRuleException(string message) : base(message) { }
+}
+
+public class LoginService
+{
+    private readonly IAuthUserReadRepository _authRepository;
+
+    public LoginService(IAuthUserReadRepository authRepository)
     {
-        this._userLoginRepository = userToLogin;
+        _authRepository = authRepository;
     }
 
-    public bool Login(UserLoginQueryDto userToLogin)
+    public void Execute(UserLoginQueryDto dtoFromUi)
     {
-        if (userToLogin == null || string.IsNullOrEmpty(userToLogin.UserName) || string.IsNullOrEmpty(userToLogin.Password))
-            throw new ArgumentException("Datos incorrectos para realizar el login.");
+        // --- SECCIÓN FAIL-FAST ---
+        // Acumular posibles errores antes de tocar la base de datos
+        var errores = new List<string>();
 
-        AuthUserEntity? user = this._userLoginRepository.Find(userToLogin);
+        if (string.IsNullOrWhiteSpace(dtoFromUi.UserName))
+            errores.Add("El campo 'Usuario' es obligatorio.");
 
-        // TODO: Guardar el AuthUserEntity clase estática de sesión en memoria
+        if (string.IsNullOrWhiteSpace(dtoFromUi.Password))
+            errores.Add("El campo 'Contraseña' es obligatorio.");
 
-        return user.IsAuthenticated;
+        // Si falla algo, Custom Exception
+        if (errores.Any())
+        {
+            string mensajeCompleto = string.Join(Environment.NewLine, errores);
+            throw new BusinessRuleException(mensajeCompleto);
+        }
 
+        // --- CONTINÚA EL FLUJO NORMAL ---
+        // Si pasa el Fail-Fast, llamar seguro persistencia
+        var queryResult = _authRepository.Find(dtoFromUi.UserName, dtoFromUi.Password);
+
+        if (queryResult == null)
+            throw new BusinessRuleException("El usuario o la contraseña no son válidos.");
     }
 }
