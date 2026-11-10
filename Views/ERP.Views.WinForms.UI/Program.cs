@@ -1,14 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
-
-using ERP.Controller.Login;
+﻿using ERP.Application.Interfaces.Persistence;
 using ERP.Application.Services.Security;
-using ERP.Application.Interfaces.Persistence;
+using ERP.Domain.Interfaces.Config;
 using ERP.Domain.Interfaces.Controller;
 using ERP.Domain.Interfaces.Login;
-using ERP.Domain.Interfaces.Config;
+using ERP.Domain.Interfaces.View;
 using ERP.Infrastructure.Sqlite;
+using ERP.Presenter.Login;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
 // using ERP.Infrastructure.Config; // Importa tu implementación del ConnectionString si existe
 
 namespace ERP.Views.WinForms.UI
@@ -44,17 +44,29 @@ namespace ERP.Views.WinForms.UI
                 return new LoginService(repo);
             });
 
-            // CONTROLADOR (Presentation Core)
-            services.AddScoped<ILoginController, LoginController>();
+            // CONTROLADOR (Para web / stateless)
+            //services.AddScoped<ILoginController, LoginController>();
+
+            // PRESENTER (Para Windows forms)
+            services.AddTransient<LoginPresenter>();
 
             // VISTAS (Presentation UI) -> Siempre de tipo Transient
+            // Registra la vista tanto por su clase concreta como por su interfaz ILoginView
             services.AddTransient<FrmLoginService>();
+            //services.AddTransient<ILoginView>(provider => provider.GetRequiredService<FrmLoginService>());
+
 
             // 3. Construir el proveedor
             using var serviceProvider = services.BuildServiceProvider();
 
-            // 4. Arrancar la aplicación desde el contenedor
+
+            // 4. Arrancar la aplicación
             var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
+            var loginService = serviceProvider.GetRequiredService<ILoginService>();
+
+            // Creas el Presenter manualmente pasándole exactamente esa instancia de mainForm
+            var loginPresenter = new LoginPresenter(mainForm, loginService);
+
             System.Windows.Forms.Application.Run(mainForm);
         }
     }

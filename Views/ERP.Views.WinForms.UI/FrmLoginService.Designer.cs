@@ -123,7 +123,6 @@
             btnAccept.TabIndex = 0;
             btnAccept.Text = "Continuar";
             btnAccept.UseVisualStyleBackColor = false;
-            btnAccept.Click += btnAccept_Click;
             // 
             // pnlTitle
             // 
@@ -175,8 +174,6 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "FrmLoginService";
             Text = "Servicio de Acceso a la Aplicación";
-            FormClosing += FrmLoginService_FormClosing;
-            Load += FrmLoginService_Load;
             gbLogin.ResumeLayout(false);
             gbLogin.PerformLayout();
             gbActions.ResumeLayout(false);
