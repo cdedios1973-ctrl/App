@@ -47,6 +47,7 @@
 
     <ItemGroup>
       <Folder Include="Common\Installation\" />
+      <Folder Include="Common\Interfaces\" />
     </ItemGroup>
 
 </Project>

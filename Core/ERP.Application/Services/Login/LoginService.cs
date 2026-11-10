@@ -1,4 +1,5 @@
 ﻿using ERP.Application.DTO;      // DTO de la vista/UI
+using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Domain.Queries;       // Tus POCOs de consulta (Read Models)
 
@@ -11,7 +12,7 @@ public class BusinessRuleException : Exception
     public BusinessRuleException(string message) : base(message) { }
 }
 
-public class LoginService
+public class LoginService : ILoginService
 {
     private readonly IAuthUserReadRepository _authRepository;
 

@@ -5,6 +5,6 @@ namespace ERP.Application.Interfaces.LoginService;
 
 public interface ILoginService
 {
-    bool Execute(UserLoginQueryDto userToLogin);
+    void Execute(UserLoginQueryDto userToLogin);
 
 }

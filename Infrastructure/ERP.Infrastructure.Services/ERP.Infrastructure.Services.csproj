@@ -7,4 +7,8 @@
 	<IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\ERP.Domain\ERP.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

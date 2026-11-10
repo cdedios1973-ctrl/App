@@ -26,8 +26,7 @@ namespace ERP.Views.WinForms.UI
             // 1. Crear el contenedor de servicios
             var services = new ServiceCollection();
 
-            // 2. Registrar los componentes (El "Pegamento" del Arquitecto)
-
+            // 2. Registrar los componentes
             // INFRAESTRUCTURA: Necesaria para que los repositorios sepan dónde está la DB
             // TODO: Cambia 'TuImplementacionConnectionStringService' por tu clase real que lee el json
             // services.AddSingleton<IConnectionStringService, TuImplementacionConnectionStringService>();
@@ -38,7 +37,6 @@ namespace ERP.Views.WinForms.UI
 
             // LÓGICA / APLICACIÓN (Logic) -> ¡Esta es la que te faltaba registrar!
             //services.AddScoped<ILoginService, LoginService>();
-            // Cambia la línea del LoginService por esta:
             services.AddScoped<ILoginService, LoginService>(provider =>
             {
                 // Como Program.cs está en el proyecto visual, y tiene el 'InternalsVisibleTo',
@@ -56,18 +54,15 @@ namespace ERP.Views.WinForms.UI
             // VISTAS (Presentation UI) -> Siempre de tipo Transient
             // Registra la vista tanto por su clase concreta como por su interfaz ILoginView
             services.AddTransient<FrmLoginService>();
-            //services.AddTransient<ILoginView>(provider => provider.GetRequiredService<FrmLoginService>());
-
 
             // 3. Construir el proveedor
             using var serviceProvider = services.BuildServiceProvider();
-
 
             // 4. Arrancar la aplicación
             var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
             var loginService = serviceProvider.GetRequiredService<ILoginService>();
 
-            // Creas el Presenter manualmente pasándole exactamente esa instancia de mainForm
+            // 5. Presenter manual pasándole exactamente esa instancia de mainForm
             var loginPresenter = new LoginPresenter(mainForm, loginService);
 
             System.Windows.Forms.Application.Run(mainForm);
