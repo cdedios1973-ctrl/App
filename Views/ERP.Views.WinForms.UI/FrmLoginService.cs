@@ -38,7 +38,7 @@ public partial class FrmLoginService : Form, ILoginView
     }
 
     /*
-    private void Old_FrmLoginService_Load(object sender, EventArgs e)
+    private void FrmLoginService_Load(object sender, EventArgs e)
     {
         this.CenterToScreen();
 
@@ -87,35 +87,7 @@ public partial class FrmLoginService : Form, ILoginView
 
     private void BtnAccept_Click(object? sender, EventArgs e)
     {
-
         LoginClick?.Invoke(this, EventArgs.Empty);
-
-        /*
-
-        // ¡Ya no usas el 'new'! Usas la instancia limpia guardada en el campo privado
-        List<string> errores = _loginController.Login(new UserLoginQueryDto(this.txtUser.Text, this.txtPass.Text));
-
-        if (errores.Count == 0)
-        {
-            // ¡Olé! No hay errores, el usuario es válido
-
-            DialogResult resultado = MessageBox.Show("pues no hay errores", "...",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question);
-
-            // Si FrmMain también necesitara servicios, lo ideal sería pedirlo al contenedor, 
-            // pero para arrancar, esto te vale perfectamente.
-            //var mainForm = new FrmMain();
-            //mainForm.Show();
-        }
-        else
-        {
-            // Concatenamos los errores y se los mostramos al usuario de golpe
-            string mensajeError = string.Join(Environment.NewLine, errores);
-            MessageBox.Show(mensajeError, "Error de Acceso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        */
-
     }
 
     

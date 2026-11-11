@@ -1,24 +1,48 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
-
-
-
-using ERP.Domain.Interfaces.Config;
-using ERP.View.Presenter.Login;
+﻿using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
-using ERP.Application.Services;
-using ERP.Application.Interfaces.Persistence;
-using ERP.Application.Interfaces.LoginService;
-using ERP.Infrastructure.Sqlite;
+using ERP.View.Presenter.Login;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
 
-// using ERP.Infrastructure.Config; // Importa tu implementación del ConnectionString si existe
+//using ERP.Domain.Interfaces.Config;
+//using ERP.Application.Services;
+//using ERP.Application.Interfaces.Persistence;
+//using ERP.Application.Interfaces.LoginService;
+//using ERP.Application.Interfaces.LoginService;
+//using ERP.Infrastructure.Sqlite;
+//using ERP.Infrastructure.Config;
 
 namespace ERP.Views.WinForms.UI
 {
     internal static class Program
     {
         [STAThread]
+        static void Main(string[] args)
+        {
+            ApplicationConfiguration.Initialize(); // ¡No olvides la configuración nativa de WinForms!
+
+            // 1. Crear el contenedor de servicios
+            var services = new ServiceCollection();
+
+            // 2. Tu capa Common registra la conexión, repositorios y el ILoginService
+            new ApplicationStart(services).Initialize();
+
+            // 3. Registramos los componentes de la interfaz de usuario
+            services.AddTransient<LoginPresenter>();
+            services.AddTransient<FrmLoginService>();
+
+            // 4. Construir el proveedor
+            using var serviceProvider = services.BuildServiceProvider();
+
+            // 5. Arrancar la aplicación pidiendo únicamente la pantalla
+            var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
+            var loginPresenter = serviceProvider.GetRequiredService<LoginPresenter>();
+
+            System.Windows.Forms.Application.Run(mainForm);
+        }
+
+        /*
         static void Main()
         {
             ApplicationConfiguration.Initialize();
@@ -67,5 +91,6 @@ namespace ERP.Views.WinForms.UI
 
             System.Windows.Forms.Application.Run(mainForm);
         }
+        */
     }
 }
