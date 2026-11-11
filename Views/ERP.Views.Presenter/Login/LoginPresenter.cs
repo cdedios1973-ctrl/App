@@ -1,9 +1,9 @@
-﻿using ERP.Application.Interfaces.LoginService;
+﻿using System;
+using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Services;
 using ERP.Domain.Queries;
 //using ERP.Domain.Queries;
 using ERP.View.Presenter.Interfaces;
-using System;
 
 /// <summary>
 /// Layer responsible for communicating view requests to logic calls

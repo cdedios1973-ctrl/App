@@ -5,7 +5,6 @@
 /// </summary>
 namespace ERP.Domain.Entity.AppConfig;
 
-// 1. Las interfaces por contexto
 public interface IDatabaseConfig
 {
     public ConnectionStringsConfig ConnectionStrings { get; }
@@ -19,7 +18,6 @@ public interface IStorageConfig
     public string LocalXMLPath { get; }
 }
 
-// 2. Tu POCO las implementa (sigue siendo una clase simple)
 public sealed record class AppConfigEntity : IDatabaseConfig, IStorageConfig
 {
     public ConnectionStringsConfig ConnectionStrings { get; init; }

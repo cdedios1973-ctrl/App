@@ -1,10 +1,9 @@
-﻿using ERP.Infrastructure.Start;
+﻿using System;
+using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
+using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
 using ERP.View.Presenter.Login;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows.Forms;
-
 //using ERP.Domain.Interfaces.Config;
 //using ERP.Application.Services;
 //using ERP.Application.Interfaces.Persistence;
@@ -18,25 +17,30 @@ namespace ERP.Views.WinForms.UI
     internal static class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        //static void Main(string[] args)
+        static void Main()
         {
-            ApplicationConfiguration.Initialize(); // ¡No olvides la configuración nativa de WinForms!
+            ApplicationConfiguration.Initialize();
 
             // 1. Crear el contenedor de servicios
             var services = new ServiceCollection();
 
-            // 2. Tu capa Common registra la conexión, repositorios y el ILoginService
+            // 2. Common registra la conexión, repositorios y el ILoginService
             new ApplicationStart(services).Initialize();
 
-            // 3. Registramos los componentes de la interfaz de usuario
+            // 3. Registrar componentes de la interfaz de usuario
             services.AddTransient<LoginPresenter>();
-            services.AddTransient<FrmLoginService>();
+
+            // Registrar el formulario como Singleton (al ser la ventana principal) y enlazar la interfaz ILoginView para que apunte a esa MISMA instancia:
+            services.AddSingleton<FrmLoginService>();
+            services.AddSingleton<ILoginView>(provider => provider.GetRequiredService<FrmLoginService>());
 
             // 4. Construir el proveedor
             using var serviceProvider = services.BuildServiceProvider();
 
-            // 5. Arrancar la aplicación pidiendo únicamente la pantalla
+            // 5. Arrancar la aplicación
             var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
+            // Al pedir el Presenter, inyectará automáticamente el mismo 'mainForm'
             var loginPresenter = serviceProvider.GetRequiredService<LoginPresenter>();
 
             System.Windows.Forms.Application.Run(mainForm);
@@ -50,31 +54,22 @@ namespace ERP.Views.WinForms.UI
             // 1. Crear el contenedor de servicios
             var services = new ServiceCollection();
 
-            // 2. Registrar los componentes
-            // INFRAESTRUCTURA: Necesaria para que los repositorios sepan dónde está la DB
-            // TODO: Cambia 'TuImplementacionConnectionStringService' por tu clase real que lee el json
-            // services.AddSingleton<IConnectionStringService, TuImplementacionConnectionStringService>();
-
+            // 2. Registrar los componentes: INFRAESTRUCTURA: Necesaria para que los repositorios sepan dónde está la DB
+            // services.AddSingleton<IConnectionStringService, ImplementacionConnectionStringService>();
             // PERSISTENCIA (Infrastructure) -> Mantenemos Scoped/Singleton para reutilizar conexiones
             services.AddScoped<IAuthUserReadRepository, SqliteAuthUserRepository>();
             services.AddScoped<IUserWriteRepository, SqliteUserWriteRepository>();
-
             // LÓGICA / APLICACIÓN (Logic) -> ¡Esta es la que te faltaba registrar!
             //services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ILoginService, LoginService>(provider =>
             {
-                // Como Program.cs está en el proyecto visual, y tiene el 'InternalsVisibleTo',
-                // AQUÍ SÍ puedes hacer el 'new' de tu constructor internal sin problemas.
                 var repo = provider.GetRequiredService<IAuthUserReadRepository>();
                 return new LoginService(repo);
             });
-
             // CONTROLADOR (Para web / stateless)
             //services.AddScoped<ILoginController, LoginController>();
-
             // PRESENTER (Para Windows forms)
             services.AddTransient<LoginPresenter>();
-
             // VISTAS (Presentation UI) -> Siempre de tipo Transient
             // Registra la vista tanto por su clase concreta como por su interfaz ILoginView
             services.AddTransient<FrmLoginService>();

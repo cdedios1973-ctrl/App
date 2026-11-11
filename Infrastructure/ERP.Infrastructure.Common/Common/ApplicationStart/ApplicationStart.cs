@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-using ERP.Domain.Interfaces.Config;
+//using ERP.Domain.Interfaces.Config;
 using ERP.Application.Services;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Application.Interfaces.LoginService;
