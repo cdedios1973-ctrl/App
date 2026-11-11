@@ -33,7 +33,7 @@ internal sealed class LoginPresenter
         {
             _loginService.Execute(dto);
             // Ir a la pantalla principal...
-            MessageBox.Show("Ocurrió un error crítico en el sistema.", "Error Interno", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("Ocurrió un error crítico en el sistema.", "Error Interno", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         catch (BusinessRuleException ex)
         {

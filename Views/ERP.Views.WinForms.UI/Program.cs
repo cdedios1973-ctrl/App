@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using ERP.Infrastructure.Common.Security;
 using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
 using ERP.View.Presenter.Login;
@@ -22,28 +23,31 @@ namespace ERP.Views.WinForms.UI
         {
             ApplicationConfiguration.Initialize();
 
-            // 1. Crear el contenedor de servicios
-            var services = new ServiceCollection();
+            if (!string.IsNullOrWhiteSpace(CurrentWindowsUserIdentity.GetCurrentWindowsUserName()))
+            {
+                // 1. Crear el contenedor de servicios
+                var services = new ServiceCollection();
 
-            // 2. Common registra la conexión, repositorios y el ILoginService
-            new ApplicationStart(services).Initialize();
+                // 2. Common registra la conexión, repositorios y el ILoginService
+                new ApplicationStart(services).Initialize();
 
-            // 3. Registrar componentes de la interfaz de usuario
-            services.AddTransient<LoginPresenter>();
+                // 3. Registrar componentes de la interfaz de usuario
+                services.AddTransient<LoginPresenter>();
 
-            // Registrar el formulario como Singleton (al ser la ventana principal) y enlazar la interfaz ILoginView para que apunte a esa MISMA instancia:
-            services.AddSingleton<FrmLoginService>();
-            services.AddSingleton<ILoginView>(provider => provider.GetRequiredService<FrmLoginService>());
+                // Registrar el formulario como Singleton (al ser la ventana principal) y enlazar la interfaz ILoginView para que apunte a esa MISMA instancia:
+                services.AddSingleton<FrmLoginService>();
+                services.AddSingleton<ILoginView>(provider => provider.GetRequiredService<FrmLoginService>());
 
-            // 4. Construir el proveedor
-            using var serviceProvider = services.BuildServiceProvider();
+                // 4. Construir el proveedor
+                using var serviceProvider = services.BuildServiceProvider();
 
-            // 5. Arrancar la aplicación
-            var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
-            // Al pedir el Presenter, inyectará automáticamente el mismo 'mainForm'
-            var loginPresenter = serviceProvider.GetRequiredService<LoginPresenter>();
+                // 5. Arrancar la aplicación
+                var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();
+                // Al pedir el Presenter, inyectará automáticamente el mismo 'mainForm'
+                var loginPresenter = serviceProvider.GetRequiredService<LoginPresenter>();
 
-            System.Windows.Forms.Application.Run(mainForm);
+                System.Windows.Forms.Application.Run(mainForm);
+            }
         }
 
         /*
