@@ -16,22 +16,20 @@ internal class SqliteAuthUserRepository : IAuthUserReadRepository
     }
 
     // public AuthUserEntity Find(UserLoginQueryDto userToLogin)
-    public UserAuthQueryDto Find(string userName, string password) // (usando tipos primitivos en el parámetro):
+    public UserAuthQueryDto? Find(string userName, string password)
     {
         if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-            throw new ArgumentNullException("SqliteAuthUserRepository: Incorrect arguments");
+            throw new ArgumentNullException(nameof(userName), "SqliteAuthUserRepository: Incorrect arguments");
 
         const string SQL_SELECT = "SELECT [User].[Id], [User].[Name] " +
         "FROM UserLogin INNER JOIN USER ON [UserLogin].[Id] = [User].[ID] " +
         "WHERE [UserLogin].[UserName] = @UserName AND [UserLogin].[Password] = @Password;";
 
-        UserAuthQueryDto loggedUser = null;
+        UserAuthQueryDto? loggedUser = null;
 
         using var connection = new SqliteConnection(this._connectionStringService.GetConnectionString());
         using var cmd = new SqliteCommand(SQL_SELECT, connection);
 
-        // cmd.Parameters.Add("@UserName", SqliteType.Text).Value = userToLogin.UserName;
-        // cmd.Parameters.Add("@Password", SqliteType.Text).Value = userToLogin.Password;
         cmd.Parameters.Add("@UserName", SqliteType.Text).Value = userName;
         cmd.Parameters.Add("@Password", SqliteType.Text).Value = password;
 
@@ -40,9 +38,13 @@ internal class SqliteAuthUserRepository : IAuthUserReadRepository
         using SqliteDataReader reader = cmd.ExecuteReader();
         if (reader.Read())
         {
-            // loggedUser = new AuthUserEntity(Convert.ToInt32(reader["Id"]), reader["Name"].ToString());
-            // Nuevo Read Model
-            loggedUser = new UserAuthQueryDto(Convert.ToInt32(reader["Id"]), reader["Name"].ToString());
+            long id = Convert.ToInt64(reader["Id"]);
+            string name = reader["Name"].ToString() ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(name))
+                name = userName;
+
+            loggedUser = new UserAuthQueryDto(id, name);
 
             if (reader.Read())
                 throw new InvalidOperationException("¡Alerta crítica! Se detectaron múltiples usuarios con las mismas credenciales.");
@@ -50,4 +52,5 @@ internal class SqliteAuthUserRepository : IAuthUserReadRepository
 
         return loggedUser;
     }
+
 }

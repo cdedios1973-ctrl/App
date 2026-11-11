@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using ERP.Domain.Entity.AppConfig;
 using ERP.Infrastructure.Services.Interfaces;
@@ -7,8 +8,7 @@ namespace ERP.Infrastructure.Services;
 
 internal sealed class ApplicationSettings
 {
-    // TODO : la ruta al archivo de configuracion
-    private readonly string _appDirectory = Directory.GetCurrentDirectory();
+    private readonly string _appPath = Path.Combine(AppContext.BaseDirectory, "config");
 
     internal ApplicationSettings(IUserContext currentUser)
     { 
@@ -23,19 +23,29 @@ internal sealed class ApplicationSettings
     internal AppConfigEntity GetValues()
     {
         IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+            .SetBasePath(_appPath)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)// reloadOnChange: true
             .Build();
-        // reloadOnChange: true
 
-        string connection   = config.GetConnectionString("SqliteConnection");
-        string xmlPath      = config["LocalXMLPath"];
-        string dbName       = config["DatabaseName"];
-        string dbPath       = config["LocalDatabasePath"];
-        string dbNetwork    = config["NetworkDatabasePath"];
+        string connection = GetRequiredSetting(config.GetConnectionString("SqliteConnection"), "SqliteConnection");
+        string dbName = GetRequiredSetting(config["DatabaseName"], "DatabaseName");
+        string dbPath = GetRequiredSetting(config["LocalDatabasePath"], "LocalDatabasePath");
+        string dbNetworkPath = GetRequiredSetting(config["NetworkDatabasePath"], "NetworkDatabasePath");
+        string xmlPath = GetRequiredSetting(config["LocalXMLPath"], "LocalXMLPath");
 
-        AppConfigEntity data = new AppConfigEntity(new ConnectionStringsConfig(connection) , dbName,dbPath,dbNetwork, xmlPath);
+        return new AppConfigEntity(
+            new ConnectionStringsConfig(connection),
+            dbName,
+            dbPath,
+            dbNetworkPath,
+            xmlPath);
+    }
 
-        return data;
+    private static string GetRequiredSetting(string? value, string keyName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new InvalidOperationException($"Missing or empty configuration setting: '{keyName}'.");
+
+        return value;
     }
 }

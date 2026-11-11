@@ -5,7 +5,7 @@ namespace ERP.Domain.Events;
 public class AppMessageHandler
 {
     public delegate void UpdateStatusEventHandler(object sender, UpdateStatusEventArgs e);
-    public event EventHandler UpdateStatus;
+    public event EventHandler? UpdateStatus;
 
     public void updateStatus(string sender, string message, string status, bool confirmation = false)
     {
@@ -22,17 +22,17 @@ public class AppMessageHandler
 
     protected virtual void OnUpdateStatus(UpdateStatusEventArgs e)
     {
-        EventHandler handler = UpdateStatus;
+        EventHandler? handler = UpdateStatus;
         handler?.Invoke(this, e);
     }
 }
 
 public class UpdateStatusEventArgs : EventArgs
 {
-    public string Sender { get; set; }
-    public string Message { get; set; }
-    public string Status { get ; set; }
-    public bool Confirmation { get; set; }
+    public string Sender { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+    public string Status { get ; set; } = string.Empty;
+    public bool Confirmation { get; set; } = false;
     public DateTime TimeReached { get; set; }
 
 }

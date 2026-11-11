@@ -40,11 +40,13 @@ public class LoginService : ILoginService
             throw new BusinessRuleException(mensajeCompleto);
         }
 
-        // --- CONTINÚA EL FLUJO NORMAL ---
-        // Si pasa el Fail-Fast, llamar seguro persistencia
         var queryResult = _authRepository.Find(dtoFromUi.UserName, dtoFromUi.Password);
+
+        //TODO : crear sesion del usuario.
 
         if (queryResult == null)
             throw new BusinessRuleException("El usuario o la contraseña no son válidos.");
+
+
     }
 }

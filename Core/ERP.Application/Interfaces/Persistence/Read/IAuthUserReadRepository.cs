@@ -6,6 +6,6 @@ namespace ERP.Application.Interfaces.Persistence;
 
 public interface IAuthUserReadRepository
 {
-    UserAuthQueryDto Find(string userName, string password);
+    UserAuthQueryDto? Find(string userName, string password);
 
 }
