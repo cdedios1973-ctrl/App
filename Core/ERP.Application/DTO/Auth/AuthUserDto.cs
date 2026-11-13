@@ -1,7 +1,7 @@
 ﻿using System;
 
 /// <summary>
-/// Sesion de Usuario; uso interno de la aplicacion; Auditoria de registros.
+/// Dto para inicio de sesion de usuario.
 ///<remarks>Esta clase NO es serializabe.</remarks> 
 /// </summary>
 

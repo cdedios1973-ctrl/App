@@ -9,3 +9,4 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("ERP.Infrastructure.Common")]
 [assembly: InternalsVisibleTo("ERP.Infrastructure.Sqlite")]
 //[assembly: InternalsVisibleTo("ERP.Views.WinForms.UI, PublicKey= numeros...")]
+//[assembly: InternalsVisibleTo("ERP.Tests")]

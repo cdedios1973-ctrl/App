@@ -47,6 +47,5 @@ internal sealed class LoginPresenter
             _view.MostrarErrores(new List<string> { "Error inesperado: " + ex.Message });
         }
 
-
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Security.Principal;
-using ERP.Application.Interfaces.Security;
+using ERP.Domain.Interfaces.Security;
 
 namespace ERP.Infrastructure.Common.Security;
 
-public sealed class WindowsEnvironmentContext : IWindowsEnvironmentContext
+public sealed class WindowsEnvironmentContext : IEnvironmentContext
 {
     //private readonly WindowsPrincipal _principal;
     private readonly WindowsIdentity _windowsIdentity;

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ERP.Application.Interfaces.Security;
+namespace ERP.Domain.Interfaces.Security;
 
-internal interface IWindowsEnvironmentContext
+public interface IEnvironmentContext
 {
     public string? GetMachineIdentity();
     public string? GetCurrentUserIdentity();

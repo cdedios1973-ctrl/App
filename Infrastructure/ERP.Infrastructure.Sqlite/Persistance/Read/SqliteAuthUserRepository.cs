@@ -1,10 +1,10 @@
-﻿using ERP.Application.DTO.Auth;
+﻿using System;
+
+using ERP.Application.DTO.Auth;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Domain.Interfaces.Config;
 using ERP.Domain.Queries;
 using Microsoft.Data.Sqlite;
-using System;
-using System.Xml.Linq;
 
 namespace ERP.Infrastructure.Sqlite;
 
