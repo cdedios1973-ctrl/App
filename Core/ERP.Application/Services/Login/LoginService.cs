@@ -1,14 +1,15 @@
-﻿using ERP.Application.DTO;      // DTO de la vista/UI
+﻿using System;
+using ERP.Application.Security;
 using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Interfaces.Persistence;
-using ERP.Domain.Queries;       // Tus POCOs de consulta (Read Models)
+using ERP.Domain.Queries;
 
 namespace ERP.Application.Services;
 
-// 1. Tu Excepción Personalizada de Negocio
+// 1. Ejemplo de Excepción Personalizada de Negocio
 public class BusinessRuleException : Exception
 {
-    // Puedes pasarle una lista de errores o un texto acumulado
+    // Se Puede pasar una lista de errores o un texto acumulado
     public BusinessRuleException(string message) : base(message) { }
 }
 
@@ -21,32 +22,31 @@ public class LoginService : ILoginService
         _authRepository = authRepository;
     }
 
-    public void Execute(UserLoginQueryDto dtoFromUi)
+    public void Execute(UserLoginQueryDto user)
     {
         // --- SECCIÓN FAIL-FAST ---
         // Acumular posibles errores antes de tocar la base de datos
-        var errores = new List<string>();
+        var errors = new List<string>();
 
-        if (string.IsNullOrWhiteSpace(dtoFromUi.UserName))
-            errores.Add("El campo 'Usuario' es obligatorio.");
+        if (string.IsNullOrWhiteSpace(user.UserName))
+            errors.Add("El campo 'Usuario' es obligatorio.");
 
-        if (string.IsNullOrWhiteSpace(dtoFromUi.Password))
-            errores.Add("El campo 'Contraseña' es obligatorio.");
+        if (string.IsNullOrWhiteSpace(user.Password))
+            errors.Add("El campo 'Contraseña' es obligatorio.");
 
         // Si falla algo, Custom Exception
-        if (errores.Any())
+        if (errors.Any())
         {
-            string mensajeCompleto = string.Join(Environment.NewLine, errores);
-            throw new BusinessRuleException(mensajeCompleto);
+            string msg = string.Join(Environment.NewLine, errors);
+            throw new BusinessRuleException(msg);
         }
 
-        var queryResult = _authRepository.Find(dtoFromUi.UserName, dtoFromUi.Password);
+        var result = _authRepository.Find(user);
 
-        //TODO : crear sesion del usuario.
-
-        if (queryResult == null)
+        if (result == null || !PasswordHasher.Verify(user.Password, result.PasswordHash))
             throw new BusinessRuleException("El usuario o la contraseña no son válidos.");
 
+        //TODO : crear sesion del usuario (aqui ya puedo crear un objeto de sesion sin el PasswordHash).
 
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
-using ERP.Domain.Interfaces.Config;
-using ERP.Domain.Auth;
+﻿using ERP.Application.DTO.Auth;
 using ERP.Application.Interfaces.Persistence;
+using ERP.Domain.Interfaces.Config;
+using ERP.Domain.Queries;
+using Microsoft.Data.Sqlite;
+using System;
+using System.Xml.Linq;
 
 namespace ERP.Infrastructure.Sqlite;
 
@@ -15,36 +17,37 @@ internal class SqliteAuthUserRepository : IAuthUserReadRepository
         this._connectionStringService = connectionStringService;
     }
 
-    // public AuthUserEntity Find(UserLoginQueryDto userToLogin)
-    public UserAuthQueryDto? Find(string userName, string password)
+    public AuthUserDto? Find(UserLoginQueryDto userToLogin)
     {
-        if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-            throw new ArgumentNullException(nameof(userName), "SqliteAuthUserRepository: Incorrect arguments");
+        if (userToLogin == null || string.IsNullOrEmpty(userToLogin.UserName))
+            throw new ArgumentNullException(nameof(userToLogin), "SqliteAuthUserRepository: Incorrect arguments");
 
-        const string SQL_SELECT = "SELECT [User].[Id], [User].[Name] " +
-        "FROM UserLogin INNER JOIN USER ON [UserLogin].[Id] = [User].[ID] " +
-        "WHERE [UserLogin].[UserName] = @UserName AND [UserLogin].[Password] = @Password;";
+        const string SQL_SELECT = "SELECT [User].[Id], [User].[Name], [User].[Password], [User].[MachineName] " +
+        "FROM UserLogin INNER JOIN USER ON [UserLogin].[UserId] = [User].[ID] " +
+        "WHERE [UserLogin].[UserName] = @UserName;";
 
-        UserAuthQueryDto? loggedUser = null;
+        AuthUserDto? loggedUser = null;
 
         using var connection = new SqliteConnection(this._connectionStringService.GetConnectionString());
         using var cmd = new SqliteCommand(SQL_SELECT, connection);
 
-        cmd.Parameters.Add("@UserName", SqliteType.Text).Value = userName;
-        cmd.Parameters.Add("@Password", SqliteType.Text).Value = password;
+        cmd.Parameters.Add("@UserName", SqliteType.Text).Value = userToLogin.UserName;
 
         connection.Open();
 
         using SqliteDataReader reader = cmd.ExecuteReader();
         if (reader.Read())
         {
-            long id = Convert.ToInt64(reader["Id"]);
-            string name = reader["Name"].ToString() ?? string.Empty;
+            int idIndex = reader.GetOrdinal("Id");
+            int nameIndex = reader.GetOrdinal("Name");
+            int passIndex = reader.GetOrdinal("Password");
+            int machineIndex = reader.GetOrdinal("MachineName");
 
-            if (string.IsNullOrWhiteSpace(name))
-                name = userName;
-
-            loggedUser = new UserAuthQueryDto(id, name);
+            loggedUser = new AuthUserDto(
+                userId: reader.GetInt64(idIndex),
+                userName: reader.GetString(nameIndex),
+                passwordHash: reader.GetString(passIndex),
+                machineName: reader.GetString(machineIndex));
 
             if (reader.Read())
                 throw new InvalidOperationException("¡Alerta crítica! Se detectaron múltiples usuarios con las mismas credenciales.");
@@ -52,5 +55,4 @@ internal class SqliteAuthUserRepository : IAuthUserReadRepository
 
         return loggedUser;
     }
-
 }

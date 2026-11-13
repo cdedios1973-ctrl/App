@@ -9,18 +9,15 @@ namespace ERP.Application.DTO;
 /// </summary>
 /// <remarks>
 /// ÁREAS DE CONTROL Y ARQUITECTURA:
-/// - Restricciones de BD: Clave única en UserId y restricción compuesta (UserId, UserName, Password).
+/// - Restricciones de BD: Clave única en UserId (UserId Unique, UserName Unique, MachineName Unique, Password).
 /// - Ámbito: Diseñado inicialmente para entornos de Intranet.
 /// - Seguridad: Autenticación básica. Pendiente de migrar a un sistema basado en Roles/Tokens (Identity).
 /// - Escalabilidad: Permite el particionamiento o separación física de la BD de accesos en el futuro.
 /// </remarks>
 
-[Serializable()] // TODO: Estudiar y cambiar a [JsonSerializable] cuando se migren los serializadores
-internal sealed record class UserLoginDto
+//[Serializable()] // TODO: Cambiar a [JsonSerializable] cuando se migren los serializadores
+public sealed record class UserLoginDto
 {
-
-    #region Properties { immutable, locked after creation }
-
     public long Id { get; init; }
 
     public long UserId { get; init; }
@@ -28,8 +25,6 @@ internal sealed record class UserLoginDto
     public string UserName { get; init; } = string.Empty;
 
     public string Password { get; init; } = string.Empty;
-
-    #endregion
 
     /// <summary>
     /// Inicializa una nueva instancia de la clase <see cref="UserLoginDto"/>.
@@ -39,8 +34,6 @@ internal sealed record class UserLoginDto
     /// <param name="username">UserLogin.UserName</param>
     /// <param name="password">UserLogin.Password</param>
 
-    #region Constructor
-
     public UserLoginDto(long id, long userId, string username, string password)
     {
         this.Id = id;
@@ -48,7 +41,4 @@ internal sealed record class UserLoginDto
         this.UserName = username;
         this.Password = password;
     }
-
-    #endregion
-
 }

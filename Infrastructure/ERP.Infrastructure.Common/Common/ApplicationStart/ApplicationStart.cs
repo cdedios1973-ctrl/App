@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-
-//using ERP.Domain.Interfaces.Config;
-using ERP.Application.Services;
-using ERP.Application.Interfaces.Persistence;
 using ERP.Application.Interfaces.LoginService;
+using ERP.Application.Interfaces.Persistence;
+using ERP.Application.Interfaces.Security;
+using ERP.Application.Services;
+using ERP.Infrastructure.Common.Security;
 using ERP.Infrastructure.Sqlite;
 
 namespace ERP.Infrastructure.Start;
@@ -20,6 +20,8 @@ internal sealed class ApplicationStart
 
     public void Initialize()
     {
+        this._services.AddSingleton<IWindowsEnvironmentContext, WindowsEnvironmentContext>();
+
         // 1. Registrar la conexión
         //this._services.AddSingleton<IConnectionStringService>(new SqliteConnectionStringService("Data Source=app.db;"));
 

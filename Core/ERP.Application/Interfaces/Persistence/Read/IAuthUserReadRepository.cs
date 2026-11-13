@@ -1,11 +1,11 @@
 ﻿using System;
-
-using ERP.Domain.Auth;
+using ERP.Domain.Queries;
+using ERP.Application.DTO.Auth;
 
 namespace ERP.Application.Interfaces.Persistence;
 
 public interface IAuthUserReadRepository
 {
-    UserAuthQueryDto? Find(string userName, string password);
+    public AuthUserDto? Find(UserLoginQueryDto dto);
 
 }

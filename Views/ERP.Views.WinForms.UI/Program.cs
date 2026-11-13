@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ERP.Infrastructure.Common.Security;
 using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
 using ERP.View.Presenter.Login;
@@ -12,6 +11,7 @@ using ERP.View.Presenter.Login;
 //using ERP.Application.Interfaces.LoginService;
 //using ERP.Infrastructure.Sqlite;
 //using ERP.Infrastructure.Config;
+//using ERP.Infrastructure.Common.Security;
 
 namespace ERP.Views.WinForms.UI
 {
@@ -23,7 +23,9 @@ namespace ERP.Views.WinForms.UI
         {
             ApplicationConfiguration.Initialize();
 
-            if (!string.IsNullOrWhiteSpace(CurrentWindowsUserIdentity.GetCurrentWindowsUserName()))
+            // Configuración de servicios, BuildServiceProvider() y Application.Run(mainForm)
+
+            try
             {
                 // 1. Crear el contenedor de servicios
                 var services = new ServiceCollection();
@@ -47,6 +49,15 @@ namespace ERP.Views.WinForms.UI
                 var loginPresenter = serviceProvider.GetRequiredService<LoginPresenter>();
 
                 System.Windows.Forms.Application.Run(mainForm);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Error crítico al iniciar la aplicación:\n{ex.Message}",
+                    "Error de sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
