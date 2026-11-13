@@ -20,7 +20,7 @@ By leveraging native ADO.NET and pure, parameterized SQL/T-SQL, I am testing how
 
 ## 🛠️ Tech Stack & Architecture
 
-* **Language & Runtime: C# / .NET 9.
+* **Language & Runtime:** C# / .NET 9.
 * **Architecture: Clean Architecture approach (Domain, Application, Infrastructure, Presentation) to practice building decoupled, testable, and maintainable code.
 * **Data Access Layer: High-speed native ADO.NET and optimized SQL/T-SQL for raw performance and direct database control.
 * **Presentation Layer: Modernized WinForms desktop UI running on .NET 9, designed for rapid data entry and high-density enterprise layouts.
@@ -40,7 +40,7 @@ By leveraging native ADO.NET and pure, parameterized SQL/T-SQL, I am testing how
 
 Software engineering is a journey of constant learning. A look into this codebase reflects both my foundational experience and my current commitment to growing as an engineer.
 
-I am an adaptable, developer who likes learning from others and thrives in collaborative environments. I am excited to bring my dedication and energy to a great engineering team.
+I am an adaptable developer who likes learning from others and thrives in collaborative environments. I am excited to bring my dedication and energy to a great engineering team.
 
 **I am actively looking to join a team based in Spain (with full availability to relocate).**
 
