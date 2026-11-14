@@ -15,7 +15,6 @@
     <Compile Remove="Docs\**" />
     <Compile Remove="OLD\**" />
     <Compile Remove="Persistance\**" />
-    <Compile Remove="Deprecated\Services\DAO\**" />
     <EmbeddedResource Remove="Common\DDBB\**" />
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
     <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
@@ -23,7 +22,6 @@
     <EmbeddedResource Remove="Docs\**" />
     <EmbeddedResource Remove="OLD\**" />
     <EmbeddedResource Remove="Persistance\**" />
-    <EmbeddedResource Remove="Deprecated\Services\DAO\**" />
     <None Remove="Common\DDBB\**" />
     <None Remove="Deprecated\Database Instalation\DbType\**" />
     <None Remove="Deprecated\Database Instalation\DbType\**" />
@@ -31,7 +29,6 @@
     <None Remove="Docs\**" />
     <None Remove="OLD\**" />
     <None Remove="Persistance\**" />
-    <None Remove="Deprecated\Services\DAO\**" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +40,7 @@
 		<ProjectReference Include="..\..\ERP.Application\ERP.Application.csproj" />
 		<ProjectReference Include="..\..\ERP.Domain\ERP.Domain.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\ERP.Infrastructure.Sqlite\ERP.Infrastructure.Sqlite.csproj" />
+		<ProjectReference Include="..\ERP.Infrastructure.Services\ERP.Infrastructure.Services.csproj" />
 	</ItemGroup>
 
 </Project>

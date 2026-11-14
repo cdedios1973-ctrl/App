@@ -1,9 +1,10 @@
-﻿using System;
-using ERP.Application.Security;
+﻿using ERP.Application.Auth;
 using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Interfaces.Persistence;
+using ERP.Application.Security;
+using ERP.Domain.Interfaces.Security;
 using ERP.Domain.Queries;
-using ERP.Application.Auth;
+using System;
 
 namespace ERP.Application.Services;
 
@@ -17,10 +18,12 @@ public class BusinessRuleException : Exception
 public class LoginService : ILoginService
 {
     private readonly IAuthUserReadRepository _authRepository;
+    private readonly ISessionContext _sessionContext;
 
-    public LoginService(IAuthUserReadRepository authRepository)
+    public LoginService(IAuthUserReadRepository authRepository, ISessionContext sessionContext)
     {
         _authRepository = authRepository;
+        _sessionContext = sessionContext;
     }
 
     public void Execute(UserLoginQueryDto user)
@@ -47,8 +50,8 @@ public class LoginService : ILoginService
         if (result == null || !PasswordHasher.Verify(user.Password, result.PasswordHash))
             throw new BusinessRuleException("El usuario o la contraseña no son válidos.");
 
-        //TODO : Falta patron singleton.
-        new AuthUser(result.UserId, result.UserName, result.MachineName);
-
+        //new AuthUser(result.UserId, result.UserName, result.MachineName);
+        // Guardamos el usuario en el Singleton de sesión
+        _sessionContext.SetUser(result.UserId, result.UserName, result.MachineName);
     }
 }

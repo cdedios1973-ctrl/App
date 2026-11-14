@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
-using Microsoft.Extensions.Configuration;
 using ERP.Domain.Entity.AppConfig;
-using ERP.Infrastructure.Services.Interfaces;
+using ERP.Domain.Interfaces.Security;
+//using ERP.Infrastructure.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace ERP.Infrastructure.Services;
 
@@ -10,12 +11,12 @@ internal sealed class ApplicationSettings
 {
     private readonly string _appPath = Path.Combine(AppContext.BaseDirectory, "config");
 
-    internal ApplicationSettings(IUserContext currentUser)
+    public ApplicationSettings(IEnvironmentContext environmentContext)
     { 
-        if(currentUser == null)
-            throw new ArgumentNullException(nameof(currentUser));
+        if(environmentContext == null)
+            throw new ArgumentNullException(nameof(environmentContext));
         
-        if(string.IsNullOrEmpty(currentUser.GetUserRole()))
+        if(string.IsNullOrEmpty(environmentContext.GetCurrentUserIdentity()))
             throw new UnauthorizedAccessException("Current user has no permission to lauch application");
 
     }

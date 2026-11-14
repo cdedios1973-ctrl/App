@@ -1,6 +1,5 @@
 ﻿using System;
 
-using ERP.Domain.Interfaces.Security;
 /// <summary>
 /// Sesion de Usuario; uso interno de la aplicacion; Auditoria de registros.
 ///<remarks>Esta clase NO es serializabe.</remarks> 
@@ -8,7 +7,7 @@ using ERP.Domain.Interfaces.Security;
 
 namespace ERP.Application.Auth;
 
-public sealed record class AuthUser : ISessionContext
+public sealed record class AuthUser
 {
     internal long UserId { get; init; }
     internal string UserName { get; init; }
@@ -34,20 +33,5 @@ public sealed record class AuthUser : ISessionContext
         UserId = userId;
         UserName = userName;
         MachineName = machineName;
-    }
-
-    public string? GetCurrenMachine()
-    {
-        return this.MachineName;
-    }
-
-    public string? GetCurrenUserName()
-    {
-        return this.UserName;
-    }
-
-    public long GetCurrentUserId()
-    {
-        return this.UserId;
     }
 }

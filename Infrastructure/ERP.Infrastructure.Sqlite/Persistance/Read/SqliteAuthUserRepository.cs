@@ -3,6 +3,7 @@
 using ERP.Application.DTO.Auth;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Domain.Interfaces.Config;
+using ERP.Domain.Interfaces.Security;
 using ERP.Domain.Queries;
 using Microsoft.Data.Sqlite;
 
@@ -11,10 +12,16 @@ namespace ERP.Infrastructure.Sqlite;
 internal class SqliteAuthUserRepository : IAuthUserReadRepository
 {
     private readonly IConnectionStringService _connectionStringService;
+    //private readonly IEnvironmentContext _environmentContext;
 
-    public SqliteAuthUserRepository(IConnectionStringService connectionStringService)
+    public SqliteAuthUserRepository(IConnectionStringService connectionStringService, IEnvironmentContext environmentContext)
     {
         this._connectionStringService = connectionStringService;
+
+        if (environmentContext == null ||
+            string.IsNullOrEmpty(environmentContext.GetMachineIdentity()) ||
+            string.IsNullOrEmpty(environmentContext.GetCurrentUserIdentity()))
+            throw new UnauthorizedAccessException(nameof(environmentContext));
     }
 
     public AuthUserDto? Find(UserLoginQueryDto userToLogin)
