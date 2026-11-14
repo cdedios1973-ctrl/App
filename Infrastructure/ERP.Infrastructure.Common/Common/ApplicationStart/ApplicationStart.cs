@@ -7,6 +7,7 @@ using ERP.Domain.Interfaces.Config;
 using ERP.Domain.Interfaces.Security;
 using ERP.Infrastructure.Common.Security;
 using ERP.Infrastructure.Services;
+using ERP.Infrastructure.Services.Files;
 using ERP.Infrastructure.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -24,37 +25,23 @@ internal sealed class ApplicationStart
 
     public void Initialize()
     {
+        // 1. Herramientas básicas (se crean una vez y viven siempre)
+        this._services.AddSingleton<IFileSystemChecker, LocalFileSystemChecker>();
         this._services.AddSingleton<IEnvironmentContext, WindowsEnvironmentContext>();
         this._services.AddSingleton<ISessionContext, SessionContext>();
 
-        // Registrar el lector de configuración
-        this._services.AddTransient<ApplicationSettings>();
+        // 2. Configuración (lee el JSON una vez)
+        this._services.AddSingleton<ApplicationSettings>();
+        this._services.AddSingleton<IDatabaseConfig>(p => p.GetRequiredService<ApplicationSettings>().GetValues());
+        this._services.AddSingleton<IStorageConfig>(p => p.GetRequiredService<ApplicationSettings>().GetValues());
 
-        // Leer el JSON una sola vez y registrar la misma instancia para ambas interfaces
-        this._services.AddSingleton<AppConfigEntity>(provider =>
-        {
-            var settings = provider.GetRequiredService<ApplicationSettings>();
-            return settings.GetValues();
-        });
-
-        this._services.AddSingleton<IDatabaseConfig>(provider => provider.GetRequiredService<AppConfigEntity>());
-        this._services.AddSingleton<IStorageConfig>(provider => provider.GetRequiredService<AppConfigEntity>());
-
-        // Registrar la conexión
+        // 3. Base de datos y repositorios
         this._services.AddSingleton<IConnectionStringService, SqliteConnectionStringService>();
-
-        // Registrar la Persistencia
         this._services.AddTransient<IAuthUserReadRepository, SqliteAuthUserRepository>();
         this._services.AddTransient<IUserWriteRepository, SqliteUserWriteRepository>();
 
-        // Registrar la Lógica/Aplicación sin errores de variables
+        // 4. Servicios de negocio
         this._services.AddTransient<ILoginService, LoginService>();
-        /*
-        this._services.AddTransient<ILoginService, LoginService>(provider =>
-        {
-            var repo = provider.GetRequiredService<IAuthUserReadRepository>();
-            return new LoginService(repo);
-        });
-        */
     }
+
 }

@@ -12,7 +12,6 @@ namespace ERP.Infrastructure.Sqlite;
 internal class SqliteAuthUserRepository : IAuthUserReadRepository
 {
     private readonly IConnectionStringService _connectionStringService;
-    //private readonly IEnvironmentContext _environmentContext;
 
     public SqliteAuthUserRepository(IConnectionStringService connectionStringService, IEnvironmentContext environmentContext)
     {

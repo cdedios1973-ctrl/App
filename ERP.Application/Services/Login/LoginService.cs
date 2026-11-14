@@ -1,13 +1,12 @@
-﻿using ERP.Application.Auth;
+﻿using System;
+//using ERP.Application.Auth;
 using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Application.Security;
 using ERP.Domain.Interfaces.Security;
 using ERP.Domain.Queries;
-using System;
 
 namespace ERP.Application.Services;
-
 // TODO : Crear carpeta Application/Exceptions // 1. Ejemplo de Excepción Personalizada de Negocio
 public class BusinessRuleException : Exception
 {
@@ -50,8 +49,7 @@ public class LoginService : ILoginService
         if (result == null || !PasswordHasher.Verify(user.Password, result.PasswordHash))
             throw new BusinessRuleException("El usuario o la contraseña no son válidos.");
 
-        //new AuthUser(result.UserId, result.UserName, result.MachineName);
-        // Guardamos el usuario en el Singleton de sesión
+        // Guardar en sesion el usuario activo en la aplicación
         _sessionContext.SetUser(result.UserId, result.UserName, result.MachineName);
     }
 }

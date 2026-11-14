@@ -1,9 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
+﻿using ERP.Domain.Entity.AppConfig;
+using ERP.Infrastructure.Services.Files;
 using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
 using ERP.View.Presenter.Login;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
 //using ERP.Domain.Interfaces.Config;
 //using ERP.Application.Services;
 //using ERP.Application.Interfaces.Persistence;
@@ -42,6 +44,25 @@ namespace ERP.Views.WinForms.UI
 
                 // 4. Construir el proveedor
                 using var serviceProvider = services.BuildServiceProvider();
+
+
+
+
+
+                // 4.5 Verificar que la base de datos existe
+                var fileChecker = serviceProvider.GetRequiredService<IFileSystemChecker>();
+                var dbConfig = serviceProvider.GetRequiredService<IDatabaseConfig>();
+
+                if (!fileChecker.FileExists(dbConfig.LocalDatabasePath, dbConfig.DatabaseName))
+                {
+                    throw new FileNotFoundException(
+                        $"No se encontró la base de datos '{dbConfig.DatabaseName}' en la ruta '{dbConfig.LocalDatabasePath}'.");
+                }
+
+
+
+
+
 
                 // 5. Arrancar la aplicación
                 var mainForm = serviceProvider.GetRequiredService<FrmLoginService>();

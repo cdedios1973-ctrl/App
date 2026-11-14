@@ -9,23 +9,23 @@
 
   <ItemGroup>
     <Compile Remove="Common\DDBB\**" />
-    <Compile Remove="Deprecated\Database Instalation\DbType\**" />
-    <Compile Remove="Deprecated\Database Instalation\DbType\**" />
-    <Compile Remove="Deprecated\Database Instalation\DbType\**" />
+    <Compile Remove="Deprecated\Database Related\DbType\**" />
+    <Compile Remove="Deprecated\Database Related\DbType\**" />
+    <Compile Remove="Deprecated\Database Related\DbType\**" />
     <Compile Remove="Docs\**" />
     <Compile Remove="OLD\**" />
     <Compile Remove="Persistance\**" />
     <EmbeddedResource Remove="Common\DDBB\**" />
-    <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
-    <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
-    <EmbeddedResource Remove="Deprecated\Database Instalation\DbType\**" />
+    <EmbeddedResource Remove="Deprecated\Database Related\DbType\**" />
+    <EmbeddedResource Remove="Deprecated\Database Related\DbType\**" />
+    <EmbeddedResource Remove="Deprecated\Database Related\DbType\**" />
     <EmbeddedResource Remove="Docs\**" />
     <EmbeddedResource Remove="OLD\**" />
     <EmbeddedResource Remove="Persistance\**" />
     <None Remove="Common\DDBB\**" />
-    <None Remove="Deprecated\Database Instalation\DbType\**" />
-    <None Remove="Deprecated\Database Instalation\DbType\**" />
-    <None Remove="Deprecated\Database Instalation\DbType\**" />
+    <None Remove="Deprecated\Database Related\DbType\**" />
+    <None Remove="Deprecated\Database Related\DbType\**" />
+    <None Remove="Deprecated\Database Related\DbType\**" />
     <None Remove="Docs\**" />
     <None Remove="OLD\**" />
     <None Remove="Persistance\**" />

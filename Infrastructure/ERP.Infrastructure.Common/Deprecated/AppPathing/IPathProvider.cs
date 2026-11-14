@@ -1,20 +1,19 @@
 ﻿// Deprecated
 /*
 using System;
-using App.Definitions.DTO;
+using ERP.Domain.Entity.AppConfig;
 
-namespace TaskHub.Infrastructure.Paths;
-
+namespace ERP.Infrastructure.Services.Interfaces;
 /// <summary>
-/// Esta interfaz define la accion básica de obtener las rutas de acceso necesarias para el correcto funcionamiento de la aplicacion.
+/// Esta interfaz define la accion básica de obtener los parametros necesarios para el correcto funcionamiento de la aplicacion.
 /// </summary>
-internal interface IPathProvider
+internal interface IXMLPathProvider
 {
     /// <summary>
-    /// Devuelve todas las rutas de Acceso, App.config, Ruta de Acceso a la base de datos.
+    /// Devuelve la ruta de Acceso en appsettings.json del fichero XML.
     /// </summary>
-    /// <returns>Devuelve las rutas de acceso, vacio si no existen u error</returns>
-    public List<PathInfo> GetAppGlobalPaths();
+    /// <returns>Devuelve la ruta de acceso a traves de la clase AppConfigEntity</returns>
+    public string GetXMLPath();
 
 }
 */

@@ -22,4 +22,14 @@
 		<ProjectReference Include="..\ERP.Views.Presenter\ERP.View.Presenter.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="bin\Debug\net9.0-windows\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
