@@ -1,8 +1,10 @@
 ﻿using ERP.Domain.Entity.AppConfig;
+using ERP.Domain.Events;
 using ERP.Infrastructure.Services.Files;
 using ERP.Infrastructure.Start;
 using ERP.View.Presenter.Interfaces;
 using ERP.View.Presenter.Login;
+using ERP.Views.WinForms.UI.views.Telemetry;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
@@ -45,23 +47,60 @@ namespace ERP.Views.WinForms.UI
                 // 4. Construir el proveedor
                 using var serviceProvider = services.BuildServiceProvider();
 
-
-
-
-
                 // 4.5 Verificar que la base de datos existe
                 var fileChecker = serviceProvider.GetRequiredService<IFileSystemChecker>();
                 var dbConfig = serviceProvider.GetRequiredService<IDatabaseConfig>();
 
                 if (!fileChecker.FileExists(dbConfig.LocalDatabasePath, dbConfig.DatabaseName))
                 {
-                    throw new FileNotFoundException(
-                        $"No se encontró la base de datos '{dbConfig.DatabaseName}' en la ruta '{dbConfig.LocalDatabasePath}'.");
+                    var messageHandler = serviceProvider.GetRequiredService<AppMessageHandler>();
+
+                    // TODO : para sqlite installer
+                    //messageHandler.updateStatus("SQLite", "Creando tabla Usuarios", "OK");
+
+                    using (var frmTelemetry = new FrmTelemetryService(messageHandler))
+                    {
+                        // Le pasamos las trazas estilo MS-DOS antes de mostrarla
+                        frmTelemetry.EscribirLog($" Error de comando : No se encuentra {dbConfig.DatabaseName}");
+                        frmTelemetry.EscribirLog($" Ruta : {dbConfig.LocalDatabasePath}");
+                        frmTelemetry.EscribirLog("");
+                        frmTelemetry.EscribirLog("  [F2] Instalar base de datos    [F3] Salir");
+
+                        // Simulación síncrona paso a paso usando tu AppMessageHandler
+                        frmTelemetry.AccionInstalacion = () =>
+                        {
+                            messageHandler.updateStatus("SETUP", "Creando archivo SQLite...", "OK");
+                            Thread.Sleep(600);
+
+                            messageHandler.updateStatus("SQLite", "Generando tabla Usuarios...", "OK");
+                            Thread.Sleep(700);
+
+                            messageHandler.updateStatus("SQLite", "Generando tabla Configuracion...", "OK");
+                            Thread.Sleep(500);
+
+                            messageHandler.updateStatus("SEED", "Creando usuario ADMIN por defecto...", "OK");
+                            Thread.Sleep(600);
+
+                            messageHandler.updateStatus("SETUP", "Base de datos lista.", "DONE", confirmation: true);
+                        };
+
+
+                        // Abrimos en modal y capturamos el resultado
+                        DialogResult resultado = frmTelemetry.ShowDialog();
+
+                        if (resultado == DialogResult.OK)
+                        {
+                            MessageBox.Show("pruebas....");
+                            // Servicio de creación/migración de SQLite
+                            // dbInitializer.InitializeDatabase();
+                        }
+                        else
+                        {
+                            throw new FileNotFoundException(
+                                $"No se encontró la base de datos '{dbConfig.DatabaseName}' en la ruta '{dbConfig.LocalDatabasePath}'.");
+                        }
+                    }
                 }
-
-
-
-
 
 
                 // 5. Arrancar la aplicación

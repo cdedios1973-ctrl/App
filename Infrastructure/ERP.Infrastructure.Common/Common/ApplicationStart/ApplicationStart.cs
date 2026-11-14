@@ -3,6 +3,7 @@ using ERP.Application.Interfaces.LoginService;
 using ERP.Application.Interfaces.Persistence;
 using ERP.Application.Services;
 using ERP.Domain.Entity.AppConfig;
+using ERP.Domain.Events;
 using ERP.Domain.Interfaces.Config;
 using ERP.Domain.Interfaces.Security;
 using ERP.Infrastructure.Common.Security;
@@ -29,6 +30,7 @@ internal sealed class ApplicationStart
         this._services.AddSingleton<IFileSystemChecker, LocalFileSystemChecker>();
         this._services.AddSingleton<IEnvironmentContext, WindowsEnvironmentContext>();
         this._services.AddSingleton<ISessionContext, SessionContext>();
+        this._services.AddSingleton<AppMessageHandler>();
 
         // 2. Configuración (lee el JSON una vez)
         this._services.AddSingleton<ApplicationSettings>();

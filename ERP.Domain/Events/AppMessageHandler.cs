@@ -4,8 +4,9 @@ namespace ERP.Domain.Events;
 
 public class AppMessageHandler
 {
-    public delegate void UpdateStatusEventHandler(object sender, UpdateStatusEventArgs e);
-    public event EventHandler? UpdateStatus;
+    public event EventHandler<UpdateStatusEventArgs>? UpdateStatus;
+    //public delegate void UpdateStatusEventHandler(object sender, UpdateStatusEventArgs e);
+    //public event EventHandler? UpdateStatus;
 
     public void updateStatus(string sender, string message, string status, bool confirmation = false)
     {
@@ -22,9 +23,15 @@ public class AppMessageHandler
 
     protected virtual void OnUpdateStatus(UpdateStatusEventArgs e)
     {
+        UpdateStatus?.Invoke(this, e);
+    }
+    /*
+    protected virtual void OnUpdateStatus(UpdateStatusEventArgs e)
+    {
         EventHandler? handler = UpdateStatus;
         handler?.Invoke(this, e);
     }
+    */
 }
 
 public class UpdateStatusEventArgs : EventArgs
